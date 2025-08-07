@@ -27,7 +27,6 @@ class CC1 :
             self : "CC1",
             other : "CC1"
         ) -> "CC1" :
-                # a & b for a and b
                 matrice_K = [
                     [1,2,3,4],
                     [1,2,4,3],
@@ -39,7 +38,6 @@ class CC1 :
             self : "CC1",
             other : "CC1"
         ) -> "CC1" :
-                # a >> b for a implies b
                 matrice_C = [
                     [1,4,3,4],
                     [4,1,4,3],
