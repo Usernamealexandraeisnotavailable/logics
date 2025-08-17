@@ -28,6 +28,11 @@ for atom1 in atoms :
         prop = proposition('or',(atom1,('not',atom1)))
         print(prop,"yields",prop.valuation(con))
 print("# CLASSICAL")
+print("## Implication")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = classical('implies',(atom1,atom2))
+                print(prop,"yields",prop.valuation(con))
 print("## Idempotency")
 for atom1 in atoms :
         prop = classical('implies',(atom1,atom1))
@@ -79,6 +84,11 @@ for atom1 in atoms :
                 prop = classical('implies',(('and',(('implies',(atom1,atom2)),('not',atom2))),('not',atom1)))
                 print(prop,"yields",prop.valuation(con))
 print("# EFNS CONNEXIVE")
+print("## Implication")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = efns_connexive('implies',(atom1,atom2))
+                print(prop,"yields",prop.valuation(con))
 print("## Idempotency")
 for atom1 in atoms :
         prop = efns_connexive('implies',(atom1,atom1))
@@ -130,6 +140,11 @@ for atom1 in atoms :
                 prop = efns_connexive('implies',(('and',(('implies',(atom1,atom2)),('not',atom2))),('not',atom1)))
                 print(prop,"yields",prop.valuation(con))
 print("# MIDDLE GROUND")
+print("## Implication")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = middle_ground_connexive('implies',(atom1,atom2))
+                print(prop,"yields",prop.valuation(con))
 print("## Idempotency")
 for atom1 in atoms :
         prop = middle_ground_connexive('implies',(atom1,atom1))
