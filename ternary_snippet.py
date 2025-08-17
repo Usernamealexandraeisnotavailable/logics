@@ -78,7 +78,7 @@ for atom1 in atoms :
         for atom2 in atoms :
                 prop = classical('implies',(('and',(('implies',(atom1,atom2)),('not',atom2))),('not',atom1)))
                 print(prop,"yields",prop.valuation(con))
-print("# CONNEXIVE")
+print("# EFNS CONNEXIVE")
 print("## Idempotency")
 for atom1 in atoms :
         prop = efns_connexive('implies',(atom1,atom1))
