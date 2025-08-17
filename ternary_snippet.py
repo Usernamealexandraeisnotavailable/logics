@@ -23,14 +23,14 @@ print("## Negation")
 for atom1 in atoms :
         prop = proposition('not',atom1)
         print(prop,"yields",prop.valuation(con))
+print("## Law of excluded middle")
+for atom1 in atoms :
+        prop = proposition('or',(atom1,('not',atom1)))
+        print(prop,"yields",prop.valuation(con))
 print("# CLASSICAL")
 print("## Idempotency")
 for atom1 in atoms :
         prop = classical('implies',(atom1,atom1))
-        print(prop,"yields",prop.valuation(con))
-print("## Law of excluded middle")
-for atom1 in atoms :
-        prop = classical('or',(atom1,('not',atom1)))
         print(prop,"yields",prop.valuation(con))
 print("## Aristotle's theses")
 for atom1 in atoms :
@@ -83,10 +83,6 @@ print("## Idempotency")
 for atom1 in atoms :
         prop = efns_connexive('implies',(atom1,atom1))
         print(prop,"yields",prop.valuation(con))
-print("## Law of excluded middle")
-for atom1 in atoms :
-        prop = efns_connexive('or',(atom1,('not',atom1)))
-        print(prop,"yields",prop.valuation(con))
 print("## Aristotle's theses")
 for atom1 in atoms :
         prop = efns_connexive('not',(('implies',(atom1,('not',atom1))),))
@@ -137,10 +133,6 @@ print("# MIDDLE GROUND")
 print("## Idempotency")
 for atom1 in atoms :
         prop = middle_ground_connexive('implies',(atom1,atom1))
-        print(prop,"yields",prop.valuation(con))
-print("## Law of excluded middle")
-for atom1 in atoms :
-        prop = middle_ground_connexive('or',(atom1,('not',atom1)))
         print(prop,"yields",prop.valuation(con))
 print("## Aristotle's theses")
 for atom1 in atoms :
