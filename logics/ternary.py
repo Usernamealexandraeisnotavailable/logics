@@ -203,9 +203,6 @@ class proposition :
             a : "proposition",
             b : "proposition"
         ) -> "ternary" :
-                inter = [mod for mod in a.submodels(context) if mod in b.submodels(context)]
-                if len(inter) == 0 :
-                        return ternary.false
                 subs = context.atom_completions()
                 value = a.valuation(subs[0]) & b.valuation(subs[0])
                 for mod in subs[1:] :
@@ -218,12 +215,6 @@ class proposition :
             a : "proposition",
             b : "proposition"
         ) -> "ternary" :
-                unn = []
-                for mod in (a.submodels(context) + b.submodels(context)) :
-                        if mod not in unn :
-                                unn.append(mod)
-                if len(unn) == 0 :
-                        return ternary.false
                 subs = context.atom_completions()
                 value = a.valuation(subs[0]) | b.valuation(subs[0])
                 for mod in subs[1:] :
@@ -235,9 +226,6 @@ class proposition :
             context : "model",
             a : "proposition"
         ) -> "ternary" :
-                subs = a.submodels(context)
-                if len(subs) == 0 :
-                        return ternary.true
                 subs = context.atom_completions()
                 value = -a.valuation(subs[0])
                 for mod in subs[1:] :
