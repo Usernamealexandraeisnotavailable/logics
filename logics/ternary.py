@@ -266,12 +266,12 @@ class efns_connexive(proposition) :
                                 return ternary.zero
                 return value
 
-class middle_ground_connexive(proposition) :
+class middle_ground(proposition) :
         def valuation_implies (
-            self : "middle_ground_connexive",
+            self : "middle_ground",
             context : "model",
-            a : "middle_ground_connexive",
-            b : "middle_ground_connexive"
+            a : "middle_ground",
+            b : "middle_ground"
         ) -> "ternary" :
                 subs = a.submodels(context)
                 if len(subs) == 0 :
