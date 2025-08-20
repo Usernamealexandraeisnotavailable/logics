@@ -175,7 +175,7 @@ for atom1 in atoms :
 
 
 
-print('\n',"# EFNS MONOTONIC")
+print('\n',"# EFNS NON-MONOTONIC")
 print('\n',"## Implication")
 for atom1 in atoms :
         for atom2 in atoms :
