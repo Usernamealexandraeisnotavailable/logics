@@ -1,8 +1,8 @@
 import sys
 
-class ternary :
+class three_valued :
         def __init__ (
-            self : "ternary",
+            self : "three_valued",
             argument : "bool|NoneType"
         ) -> "NoneType" :
                 if not (isinstance(argument, bool) or argument is None) :
@@ -10,64 +10,64 @@ class ternary :
                             f"Initialization arguments need to be of type {bool}|{type(None)}",
                             f"type {type(argument)} given."
                         ]))
-                self.value = [-1,1][int(argument)] if isinstance(argument, bool) else 0
+                self.value = [0,1][int(argument)] if isinstance(argument, bool) else .5
         def __repr__ (
-            self : "ternary"
+            self : "three_valued"
         ) -> "str" :
                 return f"{self.value}"
         def __int__ (
-            self : "ternary"
+            self : "three_valued"
         ) -> "int" :
                 return self.value
         def __str__ (
-            self : "ternary"
+            self : "three_valued"
         ) -> "str" :
                 return f"{self.value}"
         def __le__ (
-            self : "ternary",
-            other : "ternary"
+            self : "three_valued",
+            other : "three_valued"
         ) -> "bool" :
                 return self.value <= other.value
         def __lt__ (
-            self : "ternary",
-            other : "ternary"
+            self : "three_valued",
+            other : "three_valued"
         ) -> "bool" :
                 return self.value < other.value
         def __eq__ (
-            self : "ternary",
-            other : "ternary"
+            self : "three_valued",
+            other : "three_valued"
         ) -> "bool" :
                 return self.value == other.value
         def __and__ (
-            self : "ternary",
-            other : "ternary"
-        ) -> "ternary" :
+            self : "three_valued",
+            other : "three_valued"
+        ) -> "three_valued" :
                 if self.value <= other.value :
                         return self
                 return other
         def __or__ (
-            self : "ternary",
-            other : "ternary"
-        ) -> "ternary" :
+            self : "three_valued",
+            other : "three_valued"
+        ) -> "three_valued" :
                 if self.value >= other.value :
                         return self
                 return other
         def __neg__ (
-            self : "ternary"
-        ) -> "ternary" :
+            self : "three_valued"
+        ) -> "three_valued" :
                 return [
-                    ternary.true,
-                    ternary.zero,
-                    ternary.false
-                ][self.value+1]
-ternary.false = ternary(False)
-ternary.zero = ternary(None)
-ternary.true = ternary(True)
+                    three_valued.true,
+                    three_valued.zero,
+                    three_valued.false
+                ][int(self.value*2)]
+three_valued.false = three_valued(False)
+three_valued.zero = three_valued(None)
+three_valued.true = three_valued(True)
 
 class model :
         def __init__ (
             self : "model",
-            data_type : "type" = ternary,
+            data_type : "type" = three_valued,
             **kwargs : "dict"
         ) -> "NoneType" :
                 for key in kwargs :
@@ -149,7 +149,7 @@ class proposition :
         def valuation (
             self : "proposition",
             context : "model",
-        ) -> "ternary" :
+        ) -> "three_valued" :
                 def to_tuple (
                     data : "any"
                 ) -> "tuple" :
@@ -190,11 +190,11 @@ class proposition :
         def submodels (
             self : "proposition",
             context : "model"
-        ) -> "ternary" :
+        ) -> "three_valued" :
                 submods = context.atom_completions()
                 output = []
                 for submod in submods :
-                        if self.valuation(submod) == ternary.true :
+                        if self.valuation(submod) == three_valued.true :
                                 output.append(submod)
                 return output
         def valuation_and (
@@ -202,35 +202,35 @@ class proposition :
             context : "model",
             a : "proposition",
             b : "proposition"
-        ) -> "ternary" :
+        ) -> "three_valued" :
                 subs = context.atom_completions()
                 value = a.valuation(subs[0]) & b.valuation(subs[0])
                 for mod in subs[1:] :
                         if value != a.valuation(mod) & b.valuation(mod) :
-                                return ternary.zero
+                                return three_valued.zero
                 return value
         def valuation_or (
             self : "proposition",
             context : "model",
             a : "proposition",
             b : "proposition"
-        ) -> "ternary" :
+        ) -> "three_valued" :
                 subs = context.atom_completions()
                 value = a.valuation(subs[0]) | b.valuation(subs[0])
                 for mod in subs[1:] :
                         if value != a.valuation(mod) | b.valuation(mod) :
-                                return ternary.zero
+                                return three_valued.zero
                 return value
         def valuation_not (
             self : "proposition",
             context : "model",
             a : "proposition"
-        ) -> "ternary" :
+        ) -> "three_valued" :
                 subs = context.atom_completions()
                 value = -a.valuation(subs[0])
                 for mod in subs[1:] :
                         if value != -a.valuation(mod) :
-                                return ternary.zero
+                                return three_valued.zero
                 return value
 
 class classical(proposition) :
@@ -239,14 +239,14 @@ class classical(proposition) :
             context : "model",
             a : "classical",
             b : "classical"
-        ) -> "ternary" :
+        ) -> "three_valued" :
                 subs = a.submodels(context)
                 if len(subs) == 0 :
-                        return ternary.true
+                        return three_valued.true
                 value = b.valuation(subs[0])
                 for mod in subs[1:] :
                         if value != b.valuation(mod) :
-                                return ternary.zero
+                                return three_valued.zero
                 return value
 
 class efns_connexive(proposition) :
@@ -255,15 +255,15 @@ class efns_connexive(proposition) :
             context : "model",
             a : "efns_connexive",
             b : "efns_connexive"
-        ) -> "ternary" :
+        ) -> "three_valued" :
                 subs = a.submodels(context)
                 if len(subs) == 0 :
-                        return ternary.false
+                        return three_valued.false
                         # EFNS stands for "ex falso nihil sequitur"
-                value = b.valuation(subs[0])
+                value = a.valuation(context) & b.valuation(subs[0])
                 for mod in subs[1:] :
-                        if value != b.valuation(mod) :
-                                return ternary.zero
+                        if value != a.valuation(context) & b.valuation(mod) :
+                                return three_valued.zero
                 return value
 
 class middle_ground(proposition) :
@@ -272,12 +272,12 @@ class middle_ground(proposition) :
             context : "model",
             a : "middle_ground",
             b : "middle_ground"
-        ) -> "ternary" :
+        ) -> "three_valued" :
                 subs = a.submodels(context)
                 if len(subs) == 0 :
-                        return ternary.zero
-                value = b.valuation(subs[0])
+                        return three_valued.zero
+                value = a.valuation(context) & b.valuation(subs[0])
                 for mod in subs[1:] :
-                        if value != b.valuation(mod) :
-                                return ternary.zero
+                        if value != a.valuation(context) & b.valuation(mod) :
+                                return three_valued.zero
                 return value
