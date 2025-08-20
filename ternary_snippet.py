@@ -381,3 +381,7 @@ for atom1 in atoms :
         for atom2 in atoms :
                 prop = mrsp('implies',(('and',(('implies',(atom1,atom2)),('not',atom2))),('not',atom1)))
                 print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Law of excluded middle")
+for atom1 in atoms :
+        prop = mrsp('or',(atom1,('not',atom1)))
+        print('\n',prop,"yields",prop.valuation(mod))
