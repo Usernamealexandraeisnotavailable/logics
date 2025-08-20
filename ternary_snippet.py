@@ -1,10 +1,10 @@
 from logics.ternary import *
 
 mod = model (
-    onePlusOneIsTwo = ternary.true,
-    goldbachConjecture = ternary.zero,
-    riemannHypothesis = ternary.zero,
-    moonMadeOfCheese = ternary.false
+    onePlusOneIsTwo = three_valued.true,
+    goldbachConjecture = three_valued.zero,
+    riemannHypothesis = three_valued.zero,
+    moonMadeOfCheese = three_valued.false
 )
 print('\n',f"**MODEL :** {mod}")
 atoms = list(mod.context)
@@ -90,7 +90,7 @@ for atom1 in atoms :
 print('\n',"## Actual modus ponens")
 for atom1 in atoms :
         for atom2 in atoms :
-                if classical('and',(('implies',(atom1,atom2)),atom1)).valuation(mod) == ternary.true :
+                if classical('and',(('implies',(atom1,atom2)),atom1)).valuation(mod) == three_valued.true :
                         prop = classical(atom2)
                         print('\n',classical('and',(('implies',(atom1,atom2)),atom1)),"yields",prop,"being",prop.valuation(mod))
                 else :
@@ -105,71 +105,141 @@ for atom1 in atoms :
 
 
 
-print('\n',"# EFNS CONNEXIVE")
+print('\n',"# EFNS MONOTONIC")
 print('\n',"## Implication")
 for atom1 in atoms :
         for atom2 in atoms :
-                prop = efns_connexive('implies',(atom1,atom2))
+                prop = efns_connexive_monotonic('implies',(atom1,atom2))
                 print('\n',prop,"yields",prop.valuation(mod))
 print('\n',"## Biconditional")
 for atom1 in atoms :
         for atom2 in atoms :
-                prop = efns_connexive('and',(('implies',(atom1,atom2)),('implies',(atom2,atom1))))
+                prop = efns_connexive_monotonic('and',(('implies',(atom1,atom2)),('implies',(atom2,atom1))))
                 print('\n',prop,"yields",prop.valuation(mod))
 print('\n',"## Equivalence")
 for atom1 in atoms :
         for atom2 in atoms :
-                prop = efns_connexive('or',(('and',(atom1,atom2)),('and',(('not',atom1),('not',atom2)))))
+                prop = efns_connexive_monotonic('or',(('and',(atom1,atom2)),('and',(('not',atom1),('not',atom2)))))
                 print('\n',prop,"yields",prop.valuation(mod))
 print('\n',"## Idempotency")
 for atom1 in atoms :
-        prop = efns_connexive('implies',(atom1,atom1))
+        prop = efns_connexive_monotonic('implies',(atom1,atom1))
         print('\n',prop,"yields",prop.valuation(mod))
 print('\n',"## Aristotle's theses")
 for atom1 in atoms :
-        prop = efns_connexive('not',(('implies',(atom1,('not',atom1))),))
+        prop = efns_connexive_monotonic('not',(('implies',(atom1,('not',atom1))),))
         print('\n',prop,"yields",prop.valuation(mod))
-        prop = efns_connexive('not',(('implies',(('not',atom1),atom1)),))
+        prop = efns_connexive_monotonic('not',(('implies',(('not',atom1),atom1)),))
         print('\n',prop,"yields",prop.valuation(mod))
 print('\n',"## Boethius' theses")
 for atom1 in atoms :
         for atom2 in atoms :
-                prop = efns_connexive('not',(('implies',(('implies',(atom1,atom2)),('implies',(atom1,('not',atom2))))),))
+                prop = efns_connexive_monotonic('not',(('implies',(('implies',(atom1,atom2)),('implies',(atom1,('not',atom2))))),))
                 print('\n',prop,"yields",prop.valuation(mod))
-                prop = efns_connexive('not',(('implies',(('implies',(atom1,('not',atom2))),('implies',(atom1,atom2)))),))
+                prop = efns_connexive_monotonic('not',(('implies',(('implies',(atom1,('not',atom2))),('implies',(atom1,atom2)))),))
                 print('\n',prop,"yields",prop.valuation(mod))
 print('\n',"## Abelard's theses")
 for atom1 in atoms :
         for atom2 in atoms :
-                prop = efns_connexive('not',(('and',(('implies',(atom1,atom2)),('implies',(atom1,('not',atom2))))),))
+                prop = efns_connexive_monotonic('not',(('and',(('implies',(atom1,atom2)),('implies',(atom1,('not',atom2))))),))
                 print('\n',prop,"yields",prop.valuation(mod))
-                prop = efns_connexive('not',(('and',(('implies',(atom1,atom2)),('implies',(('not',atom1),atom2)))),))
+                prop = efns_connexive_monotonic('not',(('and',(('implies',(atom1,atom2)),('implies',(('not',atom1),atom2)))),))
                 print('\n',prop,"yields",prop.valuation(mod))
 print('\n',"## Non-symmetric implication")
 for atom1 in atoms :
         for atom2 in atoms :
-                prop1 = efns_connexive('implies',(('and',(atom1,atom2)),atom1))
-                prop2 = efns_connexive('implies',(atom1,('and',(atom1,atom2))))
+                prop1 = efns_connexive_monotonic('implies',(('and',(atom1,atom2)),atom1))
+                prop2 = efns_connexive_monotonic('implies',(atom1,('and',(atom1,atom2))))
                 if prop1.valuation(mod) != prop2.valuation(mod) :
                         print('\n',prop1,"and",prop2,"yield",prop1.valuation(mod),"and",prop2.valuation(mod),"respectively")
 print('\n',"## Propositionally internalized modus ponens")
 for atom1 in atoms :
         for atom2 in atoms :
-                prop = efns_connexive('implies',(('and',(('implies',(atom1,atom2)),atom1)),atom2))
+                prop = efns_connexive_monotonic('implies',(('and',(('implies',(atom1,atom2)),atom1)),atom2))
                 print('\n',prop,"yields",prop.valuation(mod))
 print('\n',"## Actual modus ponens")
 for atom1 in atoms :
         for atom2 in atoms :
-                if efns_connexive('and',(('implies',(atom1,atom2)),atom1)).valuation(mod) == ternary.true :
-                        prop = efns_connexive(atom2)
-                        print('\n',efns_connexive('and',(('implies',(atom1,atom2)),atom1)),"yields",prop,"being",prop.valuation(mod))
+                if efns_connexive_monotonic('and',(('implies',(atom1,atom2)),atom1)).valuation(mod) == three_valued.true :
+                        prop = efns_connexive_monotonic(atom2)
+                        print('\n',efns_connexive_monotonic('and',(('implies',(atom1,atom2)),atom1)),"yields",prop,"being",prop.valuation(mod))
                 else :
-                        prop = efns_connexive('and',(('implies',(atom1,atom2)),atom1))
+                        prop = efns_connexive_monotonic('and',(('implies',(atom1,atom2)),atom1))
                         print('\n','>',prop,"yields",prop.valuation(mod),"so it's irrelevant")
 print('\n',"## Propositionally internalized contraposition")
 for atom1 in atoms :
         for atom2 in atoms :
-                prop = efns_connexive('implies',(('and',(('implies',(atom1,atom2)),('not',atom2))),('not',atom1)))
+                prop = efns_connexive_monotonic('implies',(('and',(('implies',(atom1,atom2)),('not',atom2))),('not',atom1)))
+                print('\n',prop,"yields",prop.valuation(mod))
+
+
+
+
+print('\n',"# EFNS MONOTONIC")
+print('\n',"## Implication")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = efns_connexive_nonmonotonic('implies',(atom1,atom2))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Biconditional")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = efns_connexive_nonmonotonic('and',(('implies',(atom1,atom2)),('implies',(atom2,atom1))))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Equivalence")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = efns_connexive_nonmonotonic('or',(('and',(atom1,atom2)),('and',(('not',atom1),('not',atom2)))))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Idempotency")
+for atom1 in atoms :
+        prop = efns_connexive_nonmonotonic('implies',(atom1,atom1))
+        print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Aristotle's theses")
+for atom1 in atoms :
+        prop = efns_connexive_nonmonotonic('not',(('implies',(atom1,('not',atom1))),))
+        print('\n',prop,"yields",prop.valuation(mod))
+        prop = efns_connexive_nonmonotonic('not',(('implies',(('not',atom1),atom1)),))
+        print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Boethius' theses")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = efns_connexive_nonmonotonic('not',(('implies',(('implies',(atom1,atom2)),('implies',(atom1,('not',atom2))))),))
+                print('\n',prop,"yields",prop.valuation(mod))
+                prop = efns_connexive_nonmonotonic('not',(('implies',(('implies',(atom1,('not',atom2))),('implies',(atom1,atom2)))),))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Abelard's theses")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = efns_connexive_nonmonotonic('not',(('and',(('implies',(atom1,atom2)),('implies',(atom1,('not',atom2))))),))
+                print('\n',prop,"yields",prop.valuation(mod))
+                prop = efns_connexive_nonmonotonic('not',(('and',(('implies',(atom1,atom2)),('implies',(('not',atom1),atom2)))),))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Non-symmetric implication")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop1 = efns_connexive_nonmonotonic('implies',(('and',(atom1,atom2)),atom1))
+                prop2 = efns_connexive_nonmonotonic('implies',(atom1,('and',(atom1,atom2))))
+                if prop1.valuation(mod) != prop2.valuation(mod) :
+                        print('\n',prop1,"and",prop2,"yield",prop1.valuation(mod),"and",prop2.valuation(mod),"respectively")
+print('\n',"## Propositionally internalized modus ponens")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = efns_connexive_nonmonotonic('implies',(('and',(('implies',(atom1,atom2)),atom1)),atom2))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Actual modus ponens")
+for atom1 in atoms :
+        for atom2 in atoms :
+                if efns_connexive_nonmonotonic('and',(('implies',(atom1,atom2)),atom1)).valuation(mod) == three_valued.true :
+                        prop = efns_connexive_nonmonotonic(atom2)
+                        print('\n',efns_connexive_nonmonotonic('and',(('implies',(atom1,atom2)),atom1)),"yields",prop,"being",prop.valuation(mod))
+                else :
+                        prop = efns_connexive_nonmonotonic('and',(('implies',(atom1,atom2)),atom1))
+                        print('\n','>',prop,"yields",prop.valuation(mod),"so it's irrelevant")
+print('\n',"## Propositionally internalized contraposition")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = efns_connexive_nonmonotonic('implies',(('and',(('implies',(atom1,atom2)),('not',atom2))),('not',atom1)))
                 print('\n',prop,"yields",prop.valuation(mod))
 
 
@@ -230,7 +300,7 @@ for atom1 in atoms :
 print('\n',"## Actual modus ponens")
 for atom1 in atoms :
         for atom2 in atoms :
-                if middle_ground('and',(('implies',(atom1,atom2)),atom1)).valuation(mod) == ternary.true :
+                if middle_ground('and',(('implies',(atom1,atom2)),atom1)).valuation(mod) == three_valued.true :
                         prop = middle_ground(atom2)
                         print('\n',middle_ground('and',(('implies',(atom1,atom2)),atom1)),"yields",prop,"being",prop.valuation(mod))
                 else :
