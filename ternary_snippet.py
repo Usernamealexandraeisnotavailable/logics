@@ -311,3 +311,73 @@ for atom1 in atoms :
         for atom2 in atoms :
                 prop = middle_ground('implies',(('and',(('implies',(atom1,atom2)),('not',atom2))),('not',atom1)))
                 print('\n',prop,"yields",prop.valuation(mod))
+
+
+
+
+print('\n',"# MRS^P")
+print('\n',"## Implication")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = mrsp('implies',(atom1,atom2))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Biconditional")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = mrsp('and',(('implies',(atom1,atom2)),('implies',(atom2,atom1))))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Equivalence")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = mrsp('or',(('and',(atom1,atom2)),('and',(('not',atom1),('not',atom2)))))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Idempotency")
+for atom1 in atoms :
+        prop = mrsp('implies',(atom1,atom1))
+        print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Aristotle's theses")
+for atom1 in atoms :
+        prop = mrsp('not',(('implies',(atom1,('not',atom1))),))
+        print('\n',prop,"yields",prop.valuation(mod))
+        prop = mrsp('not',(('implies',(('not',atom1),atom1)),))
+        print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Boethius' theses")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = mrsp('not',(('implies',(('implies',(atom1,atom2)),('implies',(atom1,('not',atom2))))),))
+                print('\n',prop,"yields",prop.valuation(mod))
+                prop = mrsp('not',(('implies',(('implies',(atom1,('not',atom2))),('implies',(atom1,atom2)))),))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Abelard's theses")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = mrsp('not',(('and',(('implies',(atom1,atom2)),('implies',(atom1,('not',atom2))))),))
+                print('\n',prop,"yields",prop.valuation(mod))
+                prop = mrsp('not',(('and',(('implies',(atom1,atom2)),('implies',(('not',atom1),atom2)))),))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Non-symmetric implication")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop1 = mrsp('implies',(('and',(atom1,atom2)),atom1))
+                prop2 = mrsp('implies',(atom1,('and',(atom1,atom2))))
+                if prop1.valuation(mod) != prop2.valuation(mod) :
+                        print('\n',prop1,"and",prop2,"yield",prop1.valuation(mod),"and",prop2.valuation(mod),"respectively")
+print('\n',"## Propositionally internalized modus ponens")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = mrsp('implies',(('and',(('implies',(atom1,atom2)),atom1)),atom2))
+                print('\n',prop,"yields",prop.valuation(mod))
+print('\n',"## Actual modus ponens")
+for atom1 in atoms :
+        for atom2 in atoms :
+                if mrsp('and',(('implies',(atom1,atom2)),atom1)).valuation(mod) == three_valued.true :
+                        prop = mrsp(atom2)
+                        print('\n',mrsp('and',(('implies',(atom1,atom2)),atom1)),"yields",prop,"being",prop.valuation(mod))
+                else :
+                        prop = mrsp('and',(('implies',(atom1,atom2)),atom1))
+                        print('\n','>',prop,"yields",prop.valuation(mod),"so it's irrelevant")
+print('\n',"## Propositionally internalized contraposition")
+for atom1 in atoms :
+        for atom2 in atoms :
+                prop = mrsp('implies',(('and',(('implies',(atom1,atom2)),('not',atom2))),('not',atom1)))
+                print('\n',prop,"yields",prop.valuation(mod))
