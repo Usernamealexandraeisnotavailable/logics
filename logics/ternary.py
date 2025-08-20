@@ -249,7 +249,7 @@ class classical(proposition) :
                                 return three_valued.zero
                 return value
 
-class efns_connexive(proposition) :
+class efns_connexive_monotonic(proposition) :
         def valuation_implies (
             self : "efns_connexive",
             context : "model",
@@ -263,6 +263,23 @@ class efns_connexive(proposition) :
                 value = a.valuation(context) & b.valuation(subs[0])
                 for mod in subs[1:] :
                         if value != a.valuation(context) & b.valuation(mod) :
+                                return three_valued.zero
+                return value
+                
+class efns_connexive_nonmonotonic(proposition) :
+        def valuation_implies (
+            self : "efns_connexive",
+            context : "model",
+            a : "efns_connexive",
+            b : "efns_connexive"
+        ) -> "three_valued" :
+                subs = a.submodels(context)
+                if len(subs) == 0 :
+                        return three_valued.false
+                        # EFNS stands for "ex falso nihil sequitur"
+                value = b.valuation(subs[0])
+                for mod in subs[1:] :
+                        if value != b.valuation(mod) :
                                 return three_valued.zero
                 return value
 
