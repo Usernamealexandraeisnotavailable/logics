@@ -293,8 +293,10 @@ class middle_ground(proposition) :
                 subs = a.submodels(context)
                 if len(subs) == 0 :
                         return three_valued.zero
-                value = a.valuation(context) & b.valuation(subs[0])
+                if a.valuation(context) :
+                        return three_valued.zero
+                value = b.valuation(subs[0])
                 for mod in subs[1:] :
-                        if value != a.valuation(context) & b.valuation(mod) :
+                        if value != b.valuation(mod) :
                                 return three_valued.zero
                 return value
