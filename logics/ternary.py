@@ -251,10 +251,10 @@ class classical(proposition) :
 
 class efns_connexive_monotonic(proposition) :
         def valuation_implies (
-            self : "efns_connexive",
+            self : "efns_connexive_monotonic",
             context : "model",
-            a : "efns_connexive",
-            b : "efns_connexive"
+            a : "efns_connexive_monotonic",
+            b : "efns_connexive_monotonic"
         ) -> "three_valued" :
                 subs = a.submodels(context)
                 if len(subs) == 0 :
@@ -268,10 +268,10 @@ class efns_connexive_monotonic(proposition) :
                 
 class efns_connexive_nonmonotonic(proposition) :
         def valuation_implies (
-            self : "efns_connexive",
+            self : "efns_connexive_nonmonotonic",
             context : "model",
-            a : "efns_connexive",
-            b : "efns_connexive"
+            a : "efns_connexive_nonmonotonic",
+            b : "efns_connexive_nonmonotonic"
         ) -> "three_valued" :
                 subs = a.submodels(context)
                 if len(subs) == 0 :
@@ -298,5 +298,26 @@ class middle_ground(proposition) :
                 value = b.valuation(subs[0])
                 for mod in subs[1:] :
                         if value != b.valuation(mod) :
+                                return three_valued.zero
+                return value
+
+class mrsp(middle_ground) :
+        def valuation_not (
+            self : "middle_ground",
+            context : "model",
+            a : "middle_ground"
+        ) -> "three_valued" :
+                subs = context.atom_completions()
+                value = [
+                    three_valued.true,
+                    three_valued.true,
+                    three_valued.false
+                ][int(2*a.valuation(subs[0]).value)]
+                for mod in subs[1:] :
+                        if value != [
+                            three_valued.true,
+                            three_valued.true,
+                            three_valued.false
+                        ][int(2*a.valuation(mod).value)] :
                                 return three_valued.zero
                 return value
