@@ -9,9 +9,13 @@ $max_n = 14;
 
 $nope = False;
 
+function hack ($str) {
+	return str_replace(['"',"'","<"], ['',''], $str) != $str;
+}
+
 if (isset($_GET["description"])) {
 	$description = $_GET["description"];
-	if ($_GET["description"] != str_replace(["\"","'","<"],["",""],$_GET["description"])) {
+	if (hack($_GET["description"])) {
 		$nope = True;
 		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 	}
@@ -20,26 +24,29 @@ if (isset($_GET["description"])) {
 }
 
 if (isset($_GET["inf_c0"])) {
-	if (intval($_GET["inf_np"]) < 0 or intval($_GET["inf_np"]) > 5
+	if (hack($_GET["inf_np"])
+	or hack($_GET["inf_nc"])
+	or hack($_GET["inf_nv"])
+	or intval($_GET["inf_np"]) < 0 or intval($_GET["inf_np"]) > 5
 	or intval($_GET["inf_nc"]) < 1 or intval($_GET["inf_nc"]) > 5
 	or intval($_GET["inf_nv"]) < 1 or intval($_GET["inf_nv"]) > 5) {
 		$nope = True;
 		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 	}
 	for ($i = 0; $i < $_GET["inf_np"]; $i++)
-	if ("" != str_replace(["and(","or(","implies(","not(",",","A","B","C","D","E",")"," "],[""],$_GET["inf_p$i"])) {
+	if (hack($_GET["inf_p$i"]) or "" != str_replace(["and(","or(","implies(","not(",",","A","B","C","D","E",")"," "],[""],$_GET["inf_p$i"])) {
 		$nope = True;
 		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 	}
 	for ($i = 0; $i < $_GET["inf_nc"]; $i++)
-	if ("" != str_replace(["and(","or(","implies(","not(",",","A","B","C","D","E",")"," "],[""],$_GET["inf_c$i"])) {
+	if (hack($_GET["inf_c$i"]) or "" != str_replace(["and(","or(","implies(","not(",",","A","B","C","D","E",")"," "],[""],$_GET["inf_c$i"])) {
 		$nope = True;
 		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 	}
 }
 
 if (isset($_GET["n"])) {
-	if ($_GET["n"] < $min_n or $_GET["n"] > $max_n) {
+	if (hack($_GET["n"]) or $_GET["n"] < $min_n or $_GET["n"] > $max_n) {
 		$nope = True;
 		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 	}
@@ -51,7 +58,7 @@ if (isset($_GET["v0"])) {
 			$nope = True;
 			print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 		}
-		if ($_GET["v$i"] != str_replace(["\"","'"],["",""],$_GET["v$i"])) {
+		if (hack($_GET["v$i"]) or hack($_GET["d$i"])) {
 			$nope = True;
 			print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 		}
@@ -217,7 +224,7 @@ for ($i = 0; $i < $n; $i++) {
 }
 ?></ul>
 <b>description :</b><br>
-<textarea name="description" style="width: 100%; height: 100px"><?=$description;?></textarea><br>
+<textarea name="description" style="width: 100%; height: 100px; font-family: Times New Roman"><?=$description;?></textarea><br>
 <input type='submit' value='submit'></form>
 </table>
 <?php if (isset($_GET["v0"])) { ?>
@@ -337,7 +344,7 @@ for ($i = 0; $i < $n; $i++) {
 }
 ?>
 <center><b>custom inference test</b></center>
-<hr width="25%">
+<hr>
 <b>number of variables&nbsp;:</b> <input type="number" name="inf_nv" min="1" max="5" value="<?=$_GET["inf_nv"];?>"><br>
 <b>number of premises&nbsp;:</b> <input type="number" name="inf_np" min="0" max="5" value="<?=$_GET["inf_np"];?>"><br>
 <b>number of conclusions&nbsp;:</b> <input type="number" name="inf_nc" min="1" max="5" value="<?=$_GET["inf_nc"];?>"><br>
@@ -617,9 +624,9 @@ for ($i = 0; $i < $n; $i++) {
 	}
 }
 ?>
-<hr width="25%">
+<hr>
 <b>number of variables&nbsp;:</b> <input type="number" name="inf_nv" min="1" max="5"><br>
-<b>number of premises&nbsp;:</b> <input type="number" name="inf_np" min="1" max="5"><br>
+<b>number of premises&nbsp;:</b> <input type="number" name="inf_np" min="0" max="5"><br>
 <b>number of conclusions&nbsp;:</b> <input type="number" name="inf_nc" min="1" max="5"><br>
 <input type="submit" value="submit">
 </form>
