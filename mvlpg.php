@@ -11,7 +11,7 @@ $nope = False;
 
 if (isset($_GET["description"])) {
 	$description = $_GET["description"];
-	if ($_GET["description"] != str_replace(["\"","'"],["",""],$_GET["description"])) {
+	if ($_GET["description"] != str_replace(["\"","'","<"],["",""],$_GET["description"])) {
 		$nope = True;
 		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 	}
