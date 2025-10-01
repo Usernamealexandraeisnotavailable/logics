@@ -368,10 +368,10 @@ for ($i = 0; $i < $n; $i++) {
 <?php
 for ($i = 0; $i < $n; $i++) {
 	for ($j = 0; $j < $n; $j++) {
-		print "<input type='hidden' name='N$i' value='".$_GET["N$i"]."'>\n";
-		print "<input type='hidden' name='C$i;$j' value='".$_GET["C$i;$j"]."'>\n";
-		print "<input type='hidden' name='K$i;$j' value='".$_GET["K$i;$j"]."'>\n";
-		print "<input type='hidden' name='A$i;$j' value='".$_GET["A$i;$j"]."'>\n";
+		print "<input type='hidden' name='N$i' value='".$N[$v[$i]]."'>\n";
+		print "<input type='hidden' name='C$i;$j' value='".$C[$v[$i]][$v[$j]]."'>\n";
+		print "<input type='hidden' name='K$i;$j' value='".$K[$v[$i]][$v[$j]]."'>\n";
+		print "<input type='hidden' name='A$i;$j' value='".$A[$v[$i]][$v[$j]]."'>\n";
 	}
 }
 ?>
@@ -609,10 +609,10 @@ for ($i = 0; $i < $n; $i++) {
 <?php
 for ($i = 0; $i < $n; $i++) {
 	for ($j = 0; $j < $n; $j++) {
-		print "<input type='hidden' name='N$i' value='".$_GET["N$i"]."'>\n";
-		print "<input type='hidden' name='C$i;$j' value='".$_GET["C$i;$j"]."'>\n";
-		print "<input type='hidden' name='K$i;$j' value='".$_GET["K$i;$j"]."'>\n";
-		print "<input type='hidden' name='A$i;$j' value='".$_GET["A$i;$j"]."'>\n";
+		print "<input type='hidden' name='N$i' value='".$N[$v[$i]]."'>\n";
+		print "<input type='hidden' name='C$i;$j' value='".$C[$v[$i]][$v[$j]]."'>\n";
+		print "<input type='hidden' name='K$i;$j' value='".$K[$v[$i]][$v[$j]]."'>\n";
+		print "<input type='hidden' name='A$i;$j' value='".$A[$v[$i]][$v[$j]]."'>\n";
 	}
 }
 ?>
