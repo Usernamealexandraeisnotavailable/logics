@@ -20,9 +20,9 @@ if (isset($_GET["description"])) {
 }
 
 if (isset($_GET["inf_c0"])) {
-	if ($_GET["inf_np"] < 0 or $_GET["inf_np"] > 5
-	or $_GET["inf_nc"] < 1 or $_GET["inf_nc"] > 5
-	or $_GET["inf_nv"] < 1 or $_GET["inf_nv"] > 5) {
+	if (intval($_GET["inf_np"]) < 0 or intval($_GET["inf_np"]) > 5
+	or intval($_GET["inf_nc"]) < 1 or intval($_GET["inf_nc"]) > 5
+	or intval($_GET["inf_nv"]) < 1 or intval($_GET["inf_nv"]) > 5) {
 		$nope = True;
 		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 	}
@@ -196,7 +196,7 @@ if (isset($_GET["n"])) {
 		<li><a href="?n=4&v0=1&d0=y&v1=2&d1=y&v2=3&d2=n&v3=4&d3=n&N0=4&N1=3&N2=2&N3=1&K0%3B0=1&K0%3B1=2&K0%3B2=3&K0%3B3=4&K1%3B0=1&K1%3B1=2&K1%3B2=4&K1%3B3=3&K2%3B0=3&K2%3B1=3&K2%3B2=3&K2%3B3=4&K3%3B0=4&K3%3B1=3&K3%3B2=4&K3%3B3=3&A0%3B0=2&A0%3B1=1&A0%3B2=2&A0%3B3=1&A1%3B0=1&A1%3B1=2&A1%3B2=2&A1%3B3=2&A2%3B0=2&A2%3B1=1&A2%3B2=3&A2%3B3=4&A3%3B0=1&A3%3B1=2&A3%3B2=3&A3%3B3=4&C0%3B0=1&C0%3B1=4&C0%3B2=3&C0%3B3=4&C1%3B0=4&C1%3B1=1&C1%3B2=4&C1%3B3=3&C2%3B0=1&C2%3B1=4&C2%3B2=1&C2%3B3=4&C3%3B0=4&C3%3B1=1&C3%3B2=4&C3%3B3=1&description=cc1+%28angell%2C+1962+%3B+mccall%2C+1966%29"><b>cc1</b></a> (angell, 1962&nbsp;; mccall, 1966)
 		<li><a href="?n=3&v0=T&d0=y&v1=F&d1=n&v2=--&d2=y&N0=F&N1=T&N2=--&K0%3B0=T&K0%3B1=F&K0%3B2=--&K1%3B0=F&K1%3B1=F&K1%3B2=F&K2%3B0=--&K2%3B1=F&K2%3B2=--&A0%3B0=T&A0%3B1=T&A0%3B2=T&A1%3B0=T&A1%3B1=F&A1%3B2=--&A2%3B0=T&A2%3B1=--&A2%3B2=--&C0%3B0=T&C0%3B1=F&C0%3B2=--&C1%3B0=--&C1%3B1=--&C1%3B2=--&C2%3B0=T&C2%3B1=F&C2%3B2=--&description=cn+%28cantwell%2C+2008%29%2C+aka.+mc+%28wansing%2C+2005%29%0D%0A%0D%0Acn+stands+for+conditional+negation"><b>cn</b></a> (cantwell, 2008), aka. <b>mc</b> (wansing, 2005)
 		<li><a href="?n=3&v0=1&d0=y&v1=2&d1=n&v2=3&d2=n&N0=3&N1=1&N2=1&K0%3B0=1&K0%3B1=2&K0%3B2=3&K1%3B0=2&K1%3B1=2&K1%3B2=3&K2%3B0=3&K2%3B1=3&K2%3B2=3&A0%3B0=1&A0%3B1=1&A0%3B2=1&A1%3B0=1&A1%3B1=2&A1%3B2=2&A2%3B0=1&A2%3B1=2&A2%3B2=3&C0%3B0=1&C0%3B1=2&C0%3B2=3&C1%3B0=2&C1%3B1=2&C1%3B2=2&C2%3B0=2&C2%3B1=2&C2%3B2=2&description=mrs%5Ep+%28estrada-gonzález%2C+2008%29"><b>mrs<sup><i>p</i></sup></b></a> (estrada-gonzález, 2008)
-		<li><a href="?n=4&v0=true&d0=y&v1=both&d1=y&v2=neither&d2=n&v3=false&d3=n&description=N%2FA&N0=false&N1=both&N2=neither&N3=true&K0%3B0=true&K0%3B1=both&K0%3B2=neither&K0%3B3=false&K1%3B0=both&K1%3B1=both&K1%3B2=false&K1%3B3=false&K2%3B0=neither&K2%3B1=false&K2%3B2=neither&K2%3B3=false&K3%3B0=false&K3%3B1=false&K3%3B2=false&K3%3B3=false&A0%3B0=true&A0%3B1=true&A0%3B2=true&A0%3B3=true&A1%3B0=true&A1%3B1=both&A1%3B2=true&A1%3B3=both&A2%3B0=true&A2%3B1=true&A2%3B2=neither&A2%3B3=neither&A3%3B0=true&A3%3B1=both&A3%3B2=neither&A3%3B3=false&C0%3B0=true&C0%3B1=both&C0%3B2=neither&C0%3B3=false&C1%3B0=true&C1%3B1=true&C1%3B2=neither&C1%3B3=neither&C2%3B0=true&C2%3B1=both&C2%3B2=true&C2%3B3=both&C3%3B0=true&C3%3B1=true&C3%3B2=true&C3%3B3=true&description=fde+%28dunn%2C+1976+%3B+belnap%2C+1977%29%0D%0A%0D%0Afde+has+no+⊃%2C+so+i+just+put+the+4-valued+boolean+conditional%2C+since+they+essentially+have+the+same+matrices%2C+but+while+the+boolean+one+only+has+one+designated+value+%28ie.+true%29%2C+fde+has+two+%28ie.+true%2C+both%29%2C+including+a+glut+%28ie.+both%29."><b>fde</b></a> (dunn, 1976&nbsp;; belnap, 1977)
+		<li><a href="?n=4&v0=true&d0=y&v1=both&d1=y&v2=neither&d2=n&v3=false&d3=n&description=N%2FA&N0=false&N1=both&N2=neither&N3=true&K0%3B0=true&K0%3B1=both&K0%3B2=neither&K0%3B3=false&K1%3B0=both&K1%3B1=both&K1%3B2=false&K1%3B3=false&K2%3B0=neither&K2%3B1=false&K2%3B2=neither&K2%3B3=false&K3%3B0=false&K3%3B1=false&K3%3B2=false&K3%3B3=false&A0%3B0=true&A0%3B1=true&A0%3B2=true&A0%3B3=true&A1%3B0=true&A1%3B1=both&A1%3B2=true&A1%3B3=both&A2%3B0=true&A2%3B1=true&A2%3B2=neither&A2%3B3=neither&A3%3B0=true&A3%3B1=both&A3%3B2=neither&A3%3B3=false&C0%3B0=true&C0%3B1=both&C0%3B2=neither&C0%3B3=false&C1%3B0=true&C1%3B1=true&C1%3B2=neither&C1%3B3=neither&C2%3B0=true&C2%3B1=both&C2%3B2=true&C2%3B3=both&C3%3B0=true&C3%3B1=true&C3%3B2=true&C3%3B3=true&description=fde+%28dunn%2C+1976+%3B+belnap%2C+1977%29%0D%0A%0D%0Afde+has+no+⊃%2C+so+i+just+put+the+4-valued+boolean+conditional."><b>fde</b></a> (dunn, 1976&nbsp;; belnap, 1977)
 		<li><a href="?n=3&v0=T&d0=y&v1=*&d1=y&v2=F&d2=n&N0=F&N1=*&N2=T&K0%3B0=T&K0%3B1=*&K0%3B2=F&K1%3B0=*&K1%3B1=*&K1%3B2=F&K2%3B0=F&K2%3B1=F&K2%3B2=F&A0%3B0=T&A0%3B1=T&A0%3B2=T&A1%3B0=T&A1%3B1=*&A1%3B2=*&A2%3B0=T&A2%3B1=*&A2%3B2=F&C0%3B0=*&C0%3B1=F&C0%3B2=F&C1%3B0=*&C1%3B1=*&C1%3B2=F&C2%3B0=*&C2%3B1=*&C2%3B2=*&description=m3v+%28mortensen%2C+1984+%3B+mccall%2C+2012%29%0D%0A%0D%0Amortensen’s+3-valued+logic"><b>m3v</b></a> (mortensen, 1984&nbsp;; mccall, 2012)
 	  </ul>
 	</li>
@@ -306,8 +306,10 @@ for ($i = 0; $i < $n; $i++) {
 		</table>
 <tr><td><input type='submit' value='submit'>
 </table>
+</form>
 <hr>
 <table cellspacing="20px">
+<tr><td colspan='2' align='center'>
 
 
 
@@ -596,6 +598,24 @@ if (\$bool) {
 <?php } else { ?>
 <form method="get">
 <center><b>custom inference test</b></center>
+<input type="hidden" name="n" value="<?=$n;?>">
+<?php
+for ($i = 0; $i < $n; $i++) {
+	print "<input type='hidden' name='v$i' value='".$_GET["v$i"]."'>\n";
+	print "<input type='hidden' name='d$i' value='".$_GET["d$i"]."'>\n";
+}
+?>
+<input type="hidden" name="description" value="<?=$description;?>">
+<?php
+for ($i = 0; $i < $n; $i++) {
+	for ($j = 0; $j < $n; $j++) {
+		print "<input type='hidden' name='N$i' value='".$_GET["N$i"]."'>\n";
+		print "<input type='hidden' name='C$i;$j' value='".$_GET["C$i;$j"]."'>\n";
+		print "<input type='hidden' name='K$i;$j' value='".$_GET["K$i;$j"]."'>\n";
+		print "<input type='hidden' name='A$i;$j' value='".$_GET["A$i;$j"]."'>\n";
+	}
+}
+?>
 <hr width="25%">
 <b>number of variables&nbsp;:</b> <input type="number" name="inf_nv" min="1" max="5"><br>
 <b>number of premises&nbsp;:</b> <input type="number" name="inf_np" min="1" max="5"><br>
