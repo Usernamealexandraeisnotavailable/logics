@@ -206,6 +206,7 @@ if (isset($_GET["n"])) {
 		<li><a href="?n=4&v0=true&d0=y&v1=both&d1=y&v2=neither&d2=n&v3=false&d3=n&description=N%2FA&N0=false&N1=both&N2=neither&N3=true&K0%3B0=true&K0%3B1=both&K0%3B2=neither&K0%3B3=false&K1%3B0=both&K1%3B1=both&K1%3B2=false&K1%3B3=false&K2%3B0=neither&K2%3B1=false&K2%3B2=neither&K2%3B3=false&K3%3B0=false&K3%3B1=false&K3%3B2=false&K3%3B3=false&A0%3B0=true&A0%3B1=true&A0%3B2=true&A0%3B3=true&A1%3B0=true&A1%3B1=both&A1%3B2=true&A1%3B3=both&A2%3B0=true&A2%3B1=true&A2%3B2=neither&A2%3B3=neither&A3%3B0=true&A3%3B1=both&A3%3B2=neither&A3%3B3=false&C0%3B0=true&C0%3B1=both&C0%3B2=neither&C0%3B3=false&C1%3B0=true&C1%3B1=true&C1%3B2=neither&C1%3B3=neither&C2%3B0=true&C2%3B1=both&C2%3B2=true&C2%3B3=both&C3%3B0=true&C3%3B1=true&C3%3B2=true&C3%3B3=true&description=fde+%28dunn%2C+1976+%3B+belnap%2C+1977%29%0D%0A%0D%0Afde+has+no+⊃%2C+so+i+just+put+the+4-valued+boolean+conditional."><b>fde</b></a> (dunn, 1976&nbsp;; belnap, 1977)
 		<li><a href="?n=3&v0=T&d0=y&v1=*&d1=y&v2=F&d2=n&N0=F&N1=*&N2=T&K0%3B0=T&K0%3B1=*&K0%3B2=F&K1%3B0=*&K1%3B1=*&K1%3B2=F&K2%3B0=F&K2%3B1=F&K2%3B2=F&A0%3B0=T&A0%3B1=T&A0%3B2=T&A1%3B0=T&A1%3B1=*&A1%3B2=*&A2%3B0=T&A2%3B1=*&A2%3B2=F&C0%3B0=*&C0%3B1=F&C0%3B2=F&C1%3B0=*&C1%3B1=*&C1%3B2=F&C2%3B0=*&C2%3B1=*&C2%3B2=*&description=m3v+%28mortensen%2C+1984+%3B+mccall%2C+2012%29%0D%0A%0D%0Amortensen’s+3-valued+logic"><b>m3v</b></a> (mortensen, 1984&nbsp;; mccall, 2012)
 		<li><a href="?n=3&v0=Ω&d0=y&v1=∅&d1=n&v2=N%2FA&d2=n&description=-+this+logic+is+inspired+by+conditional+probability%0D%0A-+Ω+is+a+certain+event%2C+∅+is+an+impossible+event%0D%0A-+by+definition%2C+P%28B%7CA%29+%3D+P%28B%26A%29%2FP%28A%29%2C+so+if+A%3D∅%2C+that+yields+a+ZeroDivisionError%2C+hence+the+N%2FA+value&N0=∅&N1=Ω&N2=N%2FA&K0%3B0=Ω&K0%3B1=∅&K0%3B2=N%2FA&K1%3B0=∅&K1%3B1=∅&K1%3B2=N%2FA&K2%3B0=N%2FA&K2%3B1=N%2FA&K2%3B2=N%2FA&A0%3B0=Ω&A0%3B1=Ω&A0%3B2=N%2FA&A1%3B0=Ω&A1%3B1=∅&A1%3B2=N%2FA&A2%3B0=N%2FA&A2%3B1=N%2FA&A2%3B2=N%2FA&C0%3B0=Ω&C0%3B1=∅&C0%3B2=N%2FA&C1%3B0=N%2FA&C1%3B1=N%2FA&C1%3B2=N%2FA&C2%3B0=N%2FA&C2%3B1=N%2FA&C2%3B2=N%2FA">&Omega;&ndash;&varnothing; conditional probabilities</a>
+		<li>example of 3-valued <a href="?n=3&v0=3&d0=y&v1=2&d1=n&v2=1&d2=n&description=this+is+an+example+of+a+3-valued+abelian+logic+%28ie.+satisfies+the+axiom+of+relativity%2C+cf.+meyer+%26+slaney%29%2C+where+p⊃q+stands+for+q-p+in+Z%2F3Z.&N0=1&N1=1&N2=3&K0%3B0=3&K0%3B1=2&K0%3B2=1&K1%3B0=2&K1%3B1=2&K1%3B2=1&K2%3B0=1&K2%3B1=1&K2%3B2=1&A0%3B0=3&A0%3B1=3&A0%3B2=3&A1%3B0=3&A1%3B1=2&A1%3B2=2&A2%3B0=3&A2%3B1=2&A2%3B2=1&C0%3B0=3&C0%3B1=2&C0%3B2=1&C1%3B0=1&C1%3B1=3&C1%3B2=2&C2%3B0=2&C2%3B1=1&C2%3B2=3">abelian logic</a> (cf. meyer &amp; slaney)
 	  </ul>
 	</li>
   </ul>
@@ -1292,8 +1293,50 @@ for ($i = 0; $i < $n; $i++) {
 		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
+
+<tr><td colspan='2' align='center'><i><b>exclusive &or; intro.
+<tr><td valign='top'>$$\frac{A\quad{\sim}B}{A\lor B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($v[$i], $designated) and in_array($N[$v[$j]], $designated)) {
+				if (!in_array($A[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}A\quad B}{A\lor B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$v[$i]], $designated) and in_array($v[$j], $designated)) {
+				if (!in_array($A[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
 	
-<tr><td colspan='2' align='center'><i><b>dual-&amp; (&or;) dual-elim.
+<tr><td colspan='2' align='center'><i><b>dual nd &or; elim.
 <tr><td valign='top'>$$\frac{A\lor B}{A\quad B}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1546,6 +1589,88 @@ for ($i = 0; $i < $n; $i++) {
 						$bool = False;
 						$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k].",<br>\n<i>D</i>&nbsp;=&nbsp;".$v[$l];
 					}
+				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>de morgan's laws
+<tr><td valign='top'>$$\frac{{\sim}(A\;\&\;B)}{{\sim}A\lor{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$K[$v[$i]][$v[$j]]], $designated)) {
+				if (!in_array($A[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}A\lor{\sim}B}{{\sim}(A\;\&\;B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
+				if (!in_array($N[$K[$v[$i]][$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}(A\lor B)}{{\sim}A\;\&\;{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$A[$v[$i]][$v[$j]]], $designated)) {
+				if (!in_array($K[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}A\;\&\;{\sim}B}{{\sim}(A\lor B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($K[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
+				if (!in_array($N[$A[$v[$i]][$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
 				}
 			}
 		}
