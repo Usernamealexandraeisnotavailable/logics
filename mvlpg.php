@@ -174,9 +174,9 @@ if (isset($_GET["n"])) {
 			}
 		}
 	} else {
-		$designated = [];
+		$designated = [$n];
 		for ($i = 0; $i < $n; $i++) {
-			$v[$i] = "";
+			$v[$i] = $n-$i;
 		}
 	}
 } else {
@@ -240,7 +240,7 @@ for ($i = 0; $i < $n; $i++) {
 <input type="hidden" name="description" value="<?=$description;?>">
 <table>
 <tr><td><b>negation :
-		<table b cellspacing="0"><tr><td b><i>p</i><td b>&sim;<i>p</i><?php
+		<table b cellspacing="0"><tr><td b><i>A</i><td b>&sim;<i>A</i><?php
 			for ($i = 0; $i < $n; $i++) {
 				print "\n		<tr><td b>".$v[$i]."<td><select name='N$i'>\n";
 				for ($j = 0; $j < $n; $j++) {
@@ -254,12 +254,12 @@ for ($i = 0; $i < $n; $i++) {
 		?>
 		</table>
 <tr><td><b>conjunction :
-		<table cellspacing="0" b><tr><td b><i>p</i>&nbsp;&amp;&nbsp;<i>q</i><?php
+		<table cellspacing="0" b><tr><td b><i>A</i>&nbsp;&amp;&nbsp;<i>B</i><?php
 			for ($i = 0; $i < $n; $i++) {
-				print "<td b><i>q</i>&nbsp;=&nbsp;".$v[$i];
+				print "<td b><i>B</i>&nbsp;=&nbsp;".$v[$i];
 			}
 			for ($i1 = 0; $i1 < $n; $i1++) {
-				print "\n<tr><td b><i>p</i>&nbsp;=&nbsp;".$v[$i1];
+				print "\n<tr><td b><i>A</i>&nbsp;=&nbsp;".$v[$i1];
 				for ($i2 = 0; $i2 < $n; $i2++) {
 					print "<td><select name='K".strval($i1).";".strval($i2)."'>";
 					for ($j = 0; $j < $n; $j++) {
@@ -274,12 +274,12 @@ for ($i = 0; $i < $n; $i++) {
 		?>
 		</table>
 <tr><td><b>disjunction :
-		<table cellspacing="0" b><tr><td b><i>p</i>&nbsp;&or;&nbsp;<i>q</i><?php
+		<table cellspacing="0" b><tr><td b><i>A</i>&nbsp;&or;&nbsp;<i>B</i><?php
 			for ($i = 0; $i < $n; $i++) {
-				print "<td b><i>q</i>&nbsp;=&nbsp;".$v[$i];
+				print "<td b><i>B</i>&nbsp;=&nbsp;".$v[$i];
 			}
 			for ($i1 = 0; $i1 < $n; $i1++) {
-				print "\n<tr><td b><i>p</i>&nbsp;=&nbsp;".$v[$i1];
+				print "\n<tr><td b><i>A</i>&nbsp;=&nbsp;".$v[$i1];
 				for ($i2 = 0; $i2 < $n; $i2++) {
 					print "<td><select name='A".strval($i1).";".strval($i2)."'>";
 					for ($j = 0; $j < $n; $j++) {
@@ -294,12 +294,12 @@ for ($i = 0; $i < $n; $i++) {
 		?>
 		</table>
 <tr><td><b>implication :
-		<table cellspacing="0" b><tr><td b><i>p</i>&nbsp;&supset;&nbsp;<i>q</i><?php
+		<table cellspacing="0" b><tr><td b><i>A</i>&nbsp;&supset;&nbsp;<i>B</i><?php
 			for ($i = 0; $i < $n; $i++) {
-				print "<td b><i>q</i>&nbsp;=&nbsp;".$v[$i];
+				print "<td b><i>B</i>&nbsp;=&nbsp;".$v[$i];
 			}
 			for ($i1 = 0; $i1 < $n; $i1++) {
-				print "\n<tr><td b><i>p</i>&nbsp;=&nbsp;".$v[$i1];
+				print "\n<tr><td b><i>A</i>&nbsp;=&nbsp;".$v[$i1];
 				for ($i2 = 0; $i2 < $n; $i2++) {
 					print "<td><select name='C".strval($i1).";".strval($i2)."'>";
 					for ($j = 0; $j < $n; $j++) {
@@ -720,7 +720,83 @@ for ($i = 0; $i < $n; $i++) {
 		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
+
+<tr><td colspan='2' align='center'><i><b>self-negation
+
+<tr><td valign='top'>$$\frac A{{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (in_array($v[$i], $designated)) {
+			if (!in_array($N[$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\frac{{\sim}A}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (in_array($N[$v[$i]], $designated)) {
+			if (!in_array($v[$i], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
 	
+<tr><td valign='top'>$$\overline{A\supset{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($C[$v[$i]][$N[$v[$i]]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td valign='top'>$$\overline{{\sim}A\supset A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($C[$N[$v[$i]]][$v[$i]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><hr>
+
 <tr><td colspan='2' align='center'><i><b>idempotency of &amp;
 <tr><td valign='top'>$$\frac A{A\;\&\;A}$$
 	<td valign='center'><?php
@@ -1073,6 +1149,50 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
+<tr><td colspan='2' align='center'><i><b>associativity of &amp;
+<tr><td valign='top'>$$\frac{(A\;\&\;B)\;\&\;C}{A\;(B\;\&\;C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($K[$K[$v[$i]][$v[$j]]][$v[$k]], $designated))
+			if (!in_array($K[$v[$i]][$K[$v[$j]][$v[$k]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\;(B\;\&\;C)}{(A\;\&\;B)\;\&\;C}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($K[$v[$i]][$K[$v[$j]][$v[$k]]], $designated))
+			if (!in_array($K[$K[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+
+
+<tr><td colspan='2' align='center'><hr>
 <tr><td colspan='2' align='center'><i><b>idempotency of &or;
 <tr><td valign='top'>$$\frac A{A\lor A}$$
 	<td valign='center'><?php
@@ -1336,6 +1456,48 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
+<tr><td colspan='2' align='center'><i><b>affirming a disjunct, exclusive &or; elim.
+<tr><td valign='top'>$$\frac{A\lor B\quad A}{{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($v[$i], $designated)) {
+				if (!in_array($N[$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\lor B\quad B}{{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($v[$j], $designated)) {
+				if (!in_array($N[$v[$i]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+	
 <tr><td colspan='2' align='center'><i><b>dual nd &or; elim.
 <tr><td valign='top'>$$\frac{A\lor B}{A\quad B}$$
 	<td valign='center'><?php
@@ -1505,6 +1667,49 @@ for ($i = 0; $i < $n; $i++) {
 		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
+	
+<tr><td colspan='2' align='center'><i><b>associativity of &or;
+<tr><td valign='top'>$$\frac{(A\lor B)\lor C}{A\lor(B\lor C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($A[$A[$v[$i]][$v[$j]]][$v[$k]], $designated))
+			if (!in_array($A[$v[$i]][$A[$v[$j]][$v[$k]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\lor(B\lor C)}{(A\lor B)\lor C}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($A[$v[$i]][$A[$v[$j]][$v[$k]]], $designated))
+			if (!in_array($A[$A[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+	
 <tr><td colspan='2' align='center'><i><b>constructive dilemma
 <tr><td valign='top'>$$\frac{A\lor B\quad A\supset C\quad B\supset D}{C\lor D}$$
 	<td valign='center'><?php
@@ -1601,6 +1806,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
+<tr><td colspan='2' align='center'><hr>
 <tr><td colspan='2' align='center'><i><b>de morgan's laws
 <tr><td valign='top'>$$\frac{{\sim}(A\;\&\;B)}{{\sim}A\lor{\sim}B}$$
 	<td valign='center'><?php
@@ -1845,6 +2051,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
+<tr><td colspan='2' align='center'><hr>
 <tr><td colspan='2' align='center'><i><b>reflexivity of &supset;
 <tr><td valign='top'>$$\overline{A\supset A}$$
 	<td valign='center'><?php
@@ -1916,7 +2123,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>modus ponens, or &supset; elim.
+<tr><td colspan='2' align='center'><i><b>modus ponens, &supset; elim.
 <tr><td valign='top'>$$\frac{A\supset B\quad A}B$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2064,6 +2271,69 @@ for ($i = 0; $i < $n; $i++) {
 		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
+
+<tr><td colspan='2' align='center'><b><i>conjunctive conditional
+<tr><td valign='top'>$$\frac{A\quad B}{A\supset B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($v[$i], $designated) and in_array($v[$j], $designated)) {
+				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\supset B}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($v[$i], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\supset B}B$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($v[$j], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+	
 <tr><td colspan='2' align='center'><i><b>standard conditional
 <tr><td valign='top'>$$\frac{A\supset B}{{\sim}A\lor B}$$
 	<td valign='center'><?php
@@ -2215,6 +2485,48 @@ for ($i = 0; $i < $n; $i++) {
 					$bool = False;
 					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
 				}
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>associativity of &supset;
+<tr><td valign='top'>$$\frac{(A\supset B)\supset C}{A\supset(B\supset C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($C[$C[$v[$i]][$v[$j]]][$v[$k]], $designated))
+			if (!in_array($C[$v[$i]][$C[$v[$j]][$v[$k]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+			}
+		}
+	}
+	print "<b>valid&nbsp;?</b> ";
+	if ($bool) {
+		print "yes&nbsp;!";
+	} else {
+		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\supset(B\supset C)}{(A\supset B)\supset C}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($C[$v[$i]][$C[$v[$j]][$v[$k]]], $designated))
+			if (!in_array($C[$C[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
 			}
 		}
 	}
@@ -2636,68 +2948,6 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><b><i>conjunctive conditional
-<tr><td valign='top'>$$\frac{A\quad B}{A\supset B}$$
-	<td valign='center'><?php
-	$bool = True;
-	for ($i = 0; $i < $n; $i++) {
-		for ($j = 0; $j < $n; $j++) {
-			if (in_array($v[$i], $designated) and in_array($v[$j], $designated)) {
-				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
-					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
-				}
-			}
-		}
-	}
-	print "<b>valid&nbsp;?</b> ";
-	if ($bool) {
-		print "yes&nbsp;!";
-	} else {
-		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
-	}
-	?>
-<tr><td valign='top'>$$\frac{A\supset B}A$$
-	<td valign='center'><?php
-	$bool = True;
-	for ($i = 0; $i < $n; $i++) {
-		for ($j = 0; $j < $n; $j++) {
-			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
-				if (!in_array($v[$i], $designated)) {
-					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
-				}
-			}
-		}
-	}
-	print "<b>valid&nbsp;?</b> ";
-	if ($bool) {
-		print "yes&nbsp;!";
-	} else {
-		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
-	}
-	?>
-<tr><td valign='top'>$$\frac{A\supset B}B$$
-	<td valign='center'><?php
-	$bool = True;
-	for ($i = 0; $i < $n; $i++) {
-		for ($j = 0; $j < $n; $j++) {
-			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
-				if (!in_array($v[$j], $designated)) {
-					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
-				}
-			}
-		}
-	}
-	print "<b>valid&nbsp;?</b> ";
-	if ($bool) {
-		print "yes&nbsp;!";
-	} else {
-		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
-	}
-	?>
-
 <tr><td colspan='2' align='center'><b><i>affirming the consequent
 <tr><td valign='top'>$$\frac{A\supset B\quad B}A$$
 	<td valign='center'><?php
@@ -2741,6 +2991,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
+<tr><td colspan='2' align='center'><hr>
 
 </table>
 
