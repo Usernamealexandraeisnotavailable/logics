@@ -4,6 +4,10 @@
 <script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>
 <?php
 
+foreach ($_GET as $name => $value) {
+	$_GET[$name] = str_replace(['"',"'",'<','>'],['&quot;','’','&lt;','&gt;'],$value);
+}
+
 $min_n = 1;
 $max_n = 14;
 
@@ -592,15 +596,17 @@ print "<tr><td valign='top' colspan='2' align='center'><b><i>custom inference
 <tr><td valign='top'>".latex($prem, $conc)."
 <td valign='center'>";
 eval("\$bool = True;
+\$counter = '<hr>\n';
 ".loops($_GET["inf_nv"]).cond($prem, $conc)." {
 	\$bool = False;
-	\$counter = ".counter_format($_GET["inf_nv"])."
+	\$counter .= ".counter_format($_GET["inf_nv"])."
+	\$counter .= '<hr>\n';
 }
 print \"<b>valid&nbsp;?</b> \";
 if (\$bool) {
 	print \"yes&nbsp;!\";
 } else {
-	print \"nope.<br>\\n<b>counter-example&nbsp;:</b><br>\\n\$counter\";
+	print \"nope.<br>\\n<b>counter-example(s)&nbsp;:</b><br>\\n\$counter\";
 }");
 }
 ?></pre>
