@@ -6,6 +6,8 @@
 
 foreach ($_GET as $name => $value) {
 	$_GET[$name] = str_replace(['"',"'",'<','>'],['&quot;','’','&lt;','&gt;'],$value);
+	if (in_array($name, ["n","inf_np","inf_nc","inf_nv"]))
+		$_GET[$name] = intval($_GET[$name]);
 }
 
 $min_n = 1;
@@ -13,44 +15,33 @@ $max_n = 14;
 
 $nope = False;
 
-function hack ($str) {
-	return str_replace(['"',"'","<"], ['',''], $str) != $str;
-}
-
 if (isset($_GET["description"])) {
 	$description = $_GET["description"];
-	if (hack($_GET["description"])) {
-		$nope = True;
-		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
-	}
 } else {
 	$description = "N/A";
 }
 
 if (isset($_GET["inf_c0"])) {
-	if (hack($_GET["inf_np"])
-	or hack($_GET["inf_nc"])
-	or hack($_GET["inf_nv"])
-	or intval($_GET["inf_np"]) < 0 or intval($_GET["inf_np"]) > 5
+	if (intval($_GET["inf_np"]) < 0 or intval($_GET["inf_np"]) > 5
 	or intval($_GET["inf_nc"]) < 1 or intval($_GET["inf_nc"]) > 5
 	or intval($_GET["inf_nv"]) < 1 or intval($_GET["inf_nv"]) > 5) {
 		$nope = True;
 		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 	}
 	for ($i = 0; $i < $_GET["inf_np"]; $i++)
-	if (hack($_GET["inf_p$i"]) or "" != str_replace(["and(","or(","implies(","not(",",","A","B","C","D","E",")"," "],[""],$_GET["inf_p$i"])) {
+	if ("" != str_replace(["and(","or(","implies(","not(",",","A","B","C","D","E",")"," "],[""],$_GET["inf_p$i"])) {
 		$nope = True;
 		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 	}
 	for ($i = 0; $i < $_GET["inf_nc"]; $i++)
-	if (hack($_GET["inf_c$i"]) or "" != str_replace(["and(","or(","implies(","not(",",","A","B","C","D","E",")"," "],[""],$_GET["inf_c$i"])) {
+	if ("" != str_replace(["and(","or(","implies(","not(",",","A","B","C","D","E",")"," "],[""],$_GET["inf_c$i"])) {
 		$nope = True;
 		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 	}
 }
 
 if (isset($_GET["n"])) {
-	if (hack($_GET["n"]) or $_GET["n"] < $min_n or $_GET["n"] > $max_n) {
+	if ($_GET["n"] < $min_n or $_GET["n"] > $max_n) {
 		$nope = True;
 		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 	}
@@ -62,27 +53,43 @@ if (isset($_GET["v0"])) {
 			$nope = True;
 			print "nice try.<meta http-equiv='refresh' content='1; ?'>";
 		}
-		if (hack($_GET["v$i"]) or hack($_GET["d$i"])) {
-			$nope = True;
-			print "nice try.<meta http-equiv='refresh' content='1; ?'>";
-		}
 		$memory[count($memory)] = $_GET["v$i"];
 	}
 }
 if (!$nope) {
 ?>
 <style>
-[b] { 
-	border: solid 1px black;
+a {
+	color: rgb(100,176,255)
+}
+
+body {
+	background-color: black;
+	color: white;
+}
+
+input, textarea, select {
+	background-color: rgb(50,50,50);
+	color: white;
+}
+
+table[b] { 
+	border: solid 1px grey;
+}
+
+td[b] {
+	padding: 5px;
+	text-align: center;
+	border: solid 1px grey;
 }
 
 span.wff {
-	background-color: rgb(241, 223, 245);
+	background-color: rgb(120, 0, 64);
 }
 
 span.wff i, i.wff {
-	background-color: rgb(205, 240, 255);
-	border: solid 1px rgb(101, 178, 255);
+	background-color: rgb(240, 0, 255);
+	border: solid 1px rgb(178, 0, 255);
 }
 
 nav{
@@ -99,7 +106,7 @@ nav ul {
 nav a {
 	cursor: grab;
 	text-decoration: none;
-	color: red;
+	color: rgb(255,200,200);
 }
 
 nav a:hover {
@@ -122,13 +129,13 @@ nav ul::after{
 
 .deroulant {
 	padding: 0px;
-    background-color: rgb(255, 240, 220);
+    background-color: rgb(0, 30, 63);
     width: 100%;
 }
 
 .sous{
     display: none;
-	background-color: rgb(255, 248, 240);
+	background-color: rgb(0, 48, 90);
     position: absolute;
     width: 100%;
 }
@@ -1156,7 +1163,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>associativity of &amp;
-<tr><td valign='top'>$$\frac{(A\;\&\;B)\;\&\;C}{A\;(B\;\&\;C)}$$
+<tr><td valign='top'>$$\frac{(A\;\&\;B)\;\&\;C}{A\;\&\;(B\;\&\;C)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1176,7 +1183,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "nope.<br>\n<b>counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{A\;(B\;\&\;C)}{(A\;\&\;B)\;\&\;C}$$
+<tr><td valign='top'>$$\frac{A\;\&\;(B\;\&\;C)}{(A\;\&\;B)\;\&\;C}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
