@@ -253,7 +253,7 @@ for ($i = 0; $i < $n; $i++) {
 <tr><td><b>negation :
 		<table b cellspacing="0"><tr><td b><i>A</i><td b>&sim;<i>A</i><?php
 			for ($i = 0; $i < $n; $i++) {
-				print "\n		<tr><td b>".$v[$i]."<td><select name='N$i'>\n";
+				print "\n		<tr><td b>".$v[$i]."<td><center><select name='N$i'>\n";
 				for ($j = 0; $j < $n; $j++) {
 					if ($v[$j] == $N[$v[$i]]) {
 						print "			<option value='".$v[$j]."' selected>".$v[$j]."\n";
@@ -272,7 +272,7 @@ for ($i = 0; $i < $n; $i++) {
 			for ($i1 = 0; $i1 < $n; $i1++) {
 				print "\n<tr><td b><i>A</i>&nbsp;=&nbsp;".$v[$i1];
 				for ($i2 = 0; $i2 < $n; $i2++) {
-					print "<td><select name='K".strval($i1).";".strval($i2)."'>";
+					print "<td><center><select name='K".strval($i1).";".strval($i2)."'>";
 					for ($j = 0; $j < $n; $j++) {
 						if ($v[$j] == $K[$v[$i1]][$v[$i2]]) {
 							print "			<option value='".$v[$j]."' selected>".$v[$j]."\n";
@@ -292,7 +292,7 @@ for ($i = 0; $i < $n; $i++) {
 			for ($i1 = 0; $i1 < $n; $i1++) {
 				print "\n<tr><td b><i>A</i>&nbsp;=&nbsp;".$v[$i1];
 				for ($i2 = 0; $i2 < $n; $i2++) {
-					print "<td><select name='A".strval($i1).";".strval($i2)."'>";
+					print "<td><center><select name='A".strval($i1).";".strval($i2)."'>";
 					for ($j = 0; $j < $n; $j++) {
 						if ($v[$j] == $A[$v[$i1]][$v[$i2]]) {
 							print "			<option value='".$v[$j]."' selected>".$v[$j]."\n";
@@ -312,7 +312,7 @@ for ($i = 0; $i < $n; $i++) {
 			for ($i1 = 0; $i1 < $n; $i1++) {
 				print "\n<tr><td b><i>A</i>&nbsp;=&nbsp;".$v[$i1];
 				for ($i2 = 0; $i2 < $n; $i2++) {
-					print "<td><select name='C".strval($i1).";".strval($i2)."'>";
+					print "<td><center><select name='C".strval($i1).";".strval($i2)."'>";
 					for ($j = 0; $j < $n; $j++) {
 						if ($v[$j] == $C[$v[$i1]][$v[$i2]]) {
 							print "			<option value='".$v[$j]."' selected>".$v[$j]."\n";
