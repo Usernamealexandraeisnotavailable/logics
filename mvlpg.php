@@ -201,7 +201,7 @@ if (isset($_GET["n"])) {
 <i>See also&nbsp;: <a href="https://users.cecs.anu.edu.au/~jks/magic.html" target="_blank">MaGIC</a> (Slaney)</i>&nbsp;; <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvlpg.php" target="_blank">Source code</a>
 <nav>
   <ul>
-    <li class="deroulant"><b><i>examples</i> &#9660;</b></a>
+    <li class="deroulant"><b><i>Examples</i> &#9660;</b></a>
 	  <center>
       <ul class="sous">
 		<li><a href="?n=2&v0=True&d0=y&v1=False&d1=n&description=Standard+logic+(Frege%2C+1879+%3B+Russell+%26+Whitehead%2C+1910)">Standard</a> (Frege, 1879&nbsp;; Russell &amp; Whitehead, 1910)
@@ -225,8 +225,8 @@ if (isset($_GET["n"])) {
 <table>
 <tr><td>
 <ul>
-<tr><td><form method='get'><b>number of values :</b> <input type='number' value='<?=$n;?>' name='n' min='<?=$min_n;?>' max='<?=$max_n;?>'> <input type='submit' value='submit'></form>
-<tr><td><form method='get'><input type="hidden" name="n" value="<?=$n;?>"><b>values :</b> <ul><?php
+<tr><td><form method='get'><b>Number of values :</b> <input type='number' value='<?=$n;?>' name='n' min='<?=$min_n;?>' max='<?=$max_n;?>'> <input type='submit' value='submit'></form>
+<tr><td><form method='get'><input type="hidden" name="n" value="<?=$n;?>"><b>Values :</b> <ul><?php
 for ($i = 0; $i < $n; $i++) {
 	if (in_array($v[$i], $designated)) {
 		print "\n	<li><input type='text' value='".$v[$i]."' name='v$i'><br>\n	designated ? <input type='radio' name='d$i' value='y' checked> yes / <input type='radio' name='d$i' value='n'> no";
@@ -235,7 +235,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 }
 ?></ul>
-<b>description :</b><br>
+<b>Description :</b><br>
 <textarea name="description" style="width: 100%; height: 100px; font-family: Times New Roman"><?=$description;?></textarea><br>
 <input type='submit' value='submit'></form>
 </table>
@@ -250,7 +250,7 @@ for ($i = 0; $i < $n; $i++) {
 ?>
 <input type="hidden" name="description" value="<?=$description;?>">
 <table>
-<tr><td><b>negation :
+<tr><td><b>Negation :
 		<table b cellspacing="0"><tr><td b><i>A</i><td b>&sim;<i>A</i><?php
 			for ($i = 0; $i < $n; $i++) {
 				print "\n		<tr><td b>".$v[$i]."<td><center><select name='N$i'>\n";
@@ -264,7 +264,7 @@ for ($i = 0; $i < $n; $i++) {
 			}
 		?>
 		</table>
-<tr><td><b>conjunction :
+<tr><td><b>Conjunction :
 		<table cellspacing="0" b><tr><td b><i>A</i>&nbsp;&amp;&nbsp;<i>B</i><?php
 			for ($i = 0; $i < $n; $i++) {
 				print "<td b><i>B</i>&nbsp;=&nbsp;".$v[$i];
@@ -284,7 +284,7 @@ for ($i = 0; $i < $n; $i++) {
 			}
 		?>
 		</table>
-<tr><td><b>disjunction :
+<tr><td><b>Disjunction :
 		<table cellspacing="0" b><tr><td b><i>A</i>&nbsp;&or;&nbsp;<i>B</i><?php
 			for ($i = 0; $i < $n; $i++) {
 				print "<td b><i>B</i>&nbsp;=&nbsp;".$v[$i];
@@ -304,7 +304,7 @@ for ($i = 0; $i < $n; $i++) {
 			}
 		?>
 		</table>
-<tr><td><b>implication :
+<tr><td><b>Implication :
 		<table cellspacing="0" b><tr><td b><i>A</i>&nbsp;&supset;&nbsp;<i>B</i><?php
 			for ($i = 0; $i < $n; $i++) {
 				print "<td b><i>B</i>&nbsp;=&nbsp;".$v[$i];
@@ -355,14 +355,14 @@ for ($i = 0; $i < $n; $i++) {
 	}
 }
 ?>
-<center><b>custom inference test</b></center>
+<center><b>Custom inference test</b></center>
 <hr>
-<b>number of variables&nbsp;:</b> <input type="number" name="inf_nv" min="1" max="5" value="<?=$_GET["inf_nv"];?>"><br>
-<b>number of premises&nbsp;:</b> <input type="number" name="inf_np" min="0" max="5" value="<?=$_GET["inf_np"];?>"><br>
-<b>number of conclusions&nbsp;:</b> <input type="number" name="inf_nc" min="1" max="5" value="<?=$_GET["inf_nc"];?>"><br>
+<b>Number of variables&nbsp;:</b> <input type="number" name="inf_nv" min="1" max="5" value="<?=$_GET["inf_nv"];?>"><br>
+<b>Number of premises&nbsp;:</b> <input type="number" name="inf_np" min="0" max="5" value="<?=$_GET["inf_np"];?>"><br>
+<b>Number of conclusions&nbsp;:</b> <input type="number" name="inf_nc" min="1" max="5" value="<?=$_GET["inf_nc"];?>"><br>
 <input type="submit" value="submit">
 </form><br><br>
-&bullet; wff are case-sensitive, but space-insensitive.<br>
+&bullet; WFF (well-formed formulas) are case-sensitive, but space-insensitive.<br>
 &bullet; <span class='wff'>A</span><?php
 for ($i = 1; $i < $_GET["inf_nv"]; $i++) {
 	print ", <span class='wff'>".['A','B','C','D','E'][$i]."</span>";
@@ -370,10 +370,10 @@ for ($i = 1; $i < $_GET["inf_nv"]; $i++) {
 if ($_GET["inf_nv"] == 1) print " is a wff.";
 else print " are wff.";
 ?><br>
-&bullet; if <i class='wff'>&alpha;</i> is a wff, then so is <span class='wff'>not(<i>&alpha;</i>)</span>.<br>
-&bullet; if <i class='wff'>&alpha;</i> and <i class='wff'>&beta;</i> are wff, then so is <span class='wff'>and(<i>&alpha;</i>, <i>&beta;</i>)</span>.<br>
-&bullet; if <i class='wff'>&alpha;</i> and <i class='wff'>&beta;</i> are wff, then so is <span class='wff'>or(<i>&alpha;</i>, <i>&beta;</i>)</span>.<br>
-&bullet; if <i class='wff'>&alpha;</i> and <i class='wff'>&beta;</i> are wff, then so is <span class='wff'>implies(<i>&alpha;</i>, <i>&beta;</i>)</span>.<br>
+&bullet; If <i class='wff'>&alpha;</i> is a WFF, then so is <span class='wff'>not(<i>&alpha;</i>)</span>.<br>
+&bullet; If <i class='wff'>&alpha;</i> and <i class='wff'>&beta;</i> are WFF, then so is <span class='wff'>and(<i>&alpha;</i>, <i>&beta;</i>)</span>.<br>
+&bullet; If <i class='wff'>&alpha;</i> and <i class='wff'>&beta;</i> are WFF, then so is <span class='wff'>or(<i>&alpha;</i>, <i>&beta;</i>)</span>.<br>
+&bullet; If <i class='wff'>&alpha;</i> and <i class='wff'>&beta;</i> are WFF, then so is <span class='wff'>implies(<i>&alpha;</i>, <i>&beta;</i>)</span>.<br>
 <br>
 
 <form method="get">
@@ -398,7 +398,7 @@ for ($i = 0; $i < $n; $i++) {
 <input type="hidden" name="inf_nv" value="<?=$_GET["inf_nv"];?>">
 <input type="hidden" name="inf_np" value="<?=$_GET["inf_np"];?>">
 <input type="hidden" name="inf_nc" value="<?=$_GET["inf_nc"];?>">
-<b>premise(s)&nbsp;:</b><br>
+<b>Premise(s)&nbsp;:</b><br>
 <?php
 for ($i = 0; $i < $_GET["inf_np"]; $i++)
 	if (isset($_GET["inf_p$i"]))
@@ -406,7 +406,7 @@ for ($i = 0; $i < $_GET["inf_np"]; $i++)
 	else
 	print "<input type='text' name='inf_p$i'><br>\n";
 ?><br>
-<b>conclusion(s)&nbsp;:</b><br>
+<b>Conclusion(s)&nbsp;:</b><br>
 <?php
 for ($i = 0; $i < $_GET["inf_nc"]; $i++)
 	if (isset($_GET["inf_c$i"]))
@@ -599,7 +599,7 @@ function counter_format ($num) {
 	$ret .= ";";
 	return $ret;
 }
-print "<tr><td valign='top' colspan='2' align='center'><b><i>custom inference
+print "<tr><td valign='top' colspan='2' align='center'><b><i>Custom inference
 <tr><td valign='top'>".latex($prem, $conc)."
 <td valign='center'>";
 eval("\$bool = True;
@@ -611,15 +611,15 @@ eval("\$bool = True;
 }
 print \"<b>valid&nbsp;?</b> \";
 if (\$bool) {
-	print \"yes&nbsp;!\";
+	print \"Yes&nbsp;!\";
 } else {
-	print \"nope.<br>\\n<b>counter-example(s)&nbsp;:</b><br>\\n\$counter\";
+	print \"Nope.<br>\\n<b>Counter-example(s)&nbsp;:</b><br>\\n\$counter\";
 }");
 }
 ?></pre>
 <?php } else { ?>
 <form method="get">
-<center><b>custom inference test</b></center>
+<center><b>Custom inference test</b></center>
 <input type="hidden" name="n" value="<?=$n;?>">
 <?php
 for ($i = 0; $i < $n; $i++) {
@@ -639,9 +639,9 @@ for ($i = 0; $i < $n; $i++) {
 }
 ?>
 <hr>
-<b>number of variables&nbsp;:</b> <input type="number" name="inf_nv" min="1" max="5"><br>
-<b>number of premises&nbsp;:</b> <input type="number" name="inf_np" min="0" max="5"><br>
-<b>number of conclusions&nbsp;:</b> <input type="number" name="inf_nc" min="1" max="5"><br>
+<b>Number of variables&nbsp;:</b> <input type="number" name="inf_nv" min="1" max="5"><br>
+<b>Number of premises&nbsp;:</b> <input type="number" name="inf_np" min="0" max="5"><br>
+<b>Number of conclusions&nbsp;:</b> <input type="number" name="inf_nc" min="1" max="5"><br>
 <input type="submit" value="submit">
 </form>
 <?php } ?>
@@ -657,10 +657,10 @@ for ($i = 0; $i < $n; $i++) {
 <hr>
 <table cellspacing="20px">
 
-<tr><td colspan='2' align='center'><b>inference tests' results</b>
+<tr><td colspan='2' align='center'><b>Inference tests' results</b>
 <hr>
 
-<tr><td colspan='2' align='center'><i><b>double negation
+<tr><td colspan='2' align='center'><i><b>Double negation
 
 <tr><td valign='top'>$$\frac A{{\sim}{\sim}A}$$
 	<td valign='center'><?php
@@ -734,7 +734,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>self-negation
+<tr><td colspan='2' align='center'><i><b>Self-negation
 
 <tr><td valign='top'>$$\frac A{{\sim}A}$$
 	<td valign='center'><?php
@@ -810,7 +810,7 @@ for ($i = 0; $i < $n; $i++) {
 	
 <tr><td colspan='2' align='center'><hr>
 
-<tr><td colspan='2' align='center'><i><b>idempotency of &amp;
+<tr><td colspan='2' align='center'><i><b>Idempotency of &amp;
 <tr><td valign='top'>$$\frac A{A\;\&\;A}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -883,7 +883,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td colspan='2' align='center'><i><b>law of noncontradiction
+<tr><td colspan='2' align='center'><i><b>Law of noncontradiction
 <tr><td valign='top'>$$\overline{{\sim}(A\;\&\;{\sim}A)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -939,7 +939,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>simplification, &amp; elim.
+<tr><td colspan='2' align='center'><i><b>Simplification, &amp; elim.
 <tr><td valign='top'>$$\frac{A\;\&\;B}A$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1020,7 +1020,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>symmetry of &amp;
+<tr><td colspan='2' align='center'><i><b>Symmetry of &amp;
 <tr><td valign='top'>$$\frac{A\;\&\;B}{B\;\&\;A}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1060,7 +1060,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td colspan='2' align='center'><i><b>ex contradictione quodlibet
+<tr><td colspan='2' align='center'><i><b>Ex contradictione quodlibet
 <tr><td valign='top'>$$\frac{A\quad{\sim}A}B$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1162,7 +1162,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>associativity of &amp;
+<tr><td colspan='2' align='center'><i><b>Associativity of &amp;
 <tr><td valign='top'>$$\frac{(A\;\&\;B)\;\&\;C}{A\;\&\;(B\;\&\;C)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1206,7 +1206,7 @@ for ($i = 0; $i < $n; $i++) {
 
 
 <tr><td colspan='2' align='center'><hr>
-<tr><td colspan='2' align='center'><i><b>idempotency of &or;
+<tr><td colspan='2' align='center'><i><b>Idempotency of &or;
 <tr><td valign='top'>$$\frac A{A\lor A}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1279,7 +1279,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td colspan='2' align='center'><i><b>law of excluded middle
+<tr><td colspan='2' align='center'><i><b>Law of excluded middle
 <tr><td valign='top'>$$\overline{A\lor{\sim}A}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1347,7 +1347,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>addition, &or; intro.
+<tr><td colspan='2' align='center'><i><b>Addition, &or; intro.
 <tr><td valign='top'>$$\frac A{A\lor B}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1427,7 +1427,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>exclusive &or; intro.
+<tr><td colspan='2' align='center'><i><b>Exclusive &or; intro.
 <tr><td valign='top'>$$\frac{A\quad{\sim}B}{A\lor B}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1469,7 +1469,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td colspan='2' align='center'><i><b>affirming a disjunct, exclusive &or; elim.
+<tr><td colspan='2' align='center'><i><b>Affirming a disjunct, exclusive &or; elim.
 <tr><td valign='top'>$$\frac{A\lor B\quad A}{{\sim}B}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1511,7 +1511,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td colspan='2' align='center'><i><b>dual nd &or; elim.
+<tr><td colspan='2' align='center'><i><b>Dual nd &or; elim.
 <tr><td valign='top'>$$\frac{A\lor B}{A\quad B}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1533,7 +1533,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>symmetry of &or;
+<tr><td colspan='2' align='center'><i><b>Symmetry of &or;
 <tr><td valign='top'>$$\frac{A\lor B}{B\lor A}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1573,7 +1573,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>disjunctive syllogism
+<tr><td colspan='2' align='center'><i><b>Disjunctive syllogism
 <tr><td valign='top'>$$\frac{A\lor B\quad{\sim}A}B$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1615,7 +1615,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>disjunctive syllogism (standard implication form)
+<tr><td colspan='2' align='center'><i><b>Disjunctive syllogism (standard implication form)
 <tr><td valign='top'>$$\frac{{\sim}A\lor B\quad A}B$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1681,7 +1681,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td colspan='2' align='center'><i><b>associativity of &or;
+<tr><td colspan='2' align='center'><i><b>Associativity of &or;
 <tr><td valign='top'>$$\frac{(A\lor B)\lor C}{A\lor(B\lor C)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1723,7 +1723,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td colspan='2' align='center'><i><b>constructive dilemma
+<tr><td colspan='2' align='center'><i><b>Constructive dilemma
 <tr><td valign='top'>$$\frac{A\lor B\quad A\supset C\quad B\supset D}{C\lor D}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1771,7 +1771,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>destructive dilemma
+<tr><td colspan='2' align='center'><i><b>Destructive dilemma
 <tr><td valign='top'>$$\frac{A\supset C\quad B\supset D\quad{\sim}C\lor{\sim}D}{{\sim}A\lor{\sim}B}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1820,7 +1820,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><hr>
-<tr><td colspan='2' align='center'><i><b>de morgan's laws
+<tr><td colspan='2' align='center'><i><b>De Morgan's laws
 <tr><td valign='top'>$$\frac{{\sim}(A\;\&\;B)}{{\sim}A\lor{\sim}B}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -1902,7 +1902,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>distributivity
+<tr><td colspan='2' align='center'><i><b>Distributivity
 <tr><td valign='top'>$$\frac{A\;\&\;(B\lor C)}{(A\;\&\;B)\lor(A\;\&\;C)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2065,7 +2065,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><hr>
-<tr><td colspan='2' align='center'><i><b>reflexivity of &supset;
+<tr><td colspan='2' align='center'><i><b>Reflexivity of &supset;
 <tr><td valign='top'>$$\overline{A\supset A}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2083,7 +2083,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>irreflexivity of &supset;
+<tr><td colspan='2' align='center'><i><b>Irreflexivity of &supset;
 <tr><td valign='top'>$$\overline{{\sim}(A\supset A)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2101,7 +2101,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>aristotle's theses
+<tr><td colspan='2' align='center'><i><b>Aristotle's theses
 <tr><td valign='top'>$$\overline{{\sim}(A\supset{\sim}A)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2136,7 +2136,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>modus ponens, &supset; elim.
+<tr><td colspan='2' align='center'><i><b>Modus ponens, &supset; elim.
 <tr><td valign='top'>$$\frac{A\supset B\quad A}B$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2158,7 +2158,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>modus tollens
+<tr><td colspan='2' align='center'><i><b>Modus tollens
 <tr><td valign='top'>$$\frac{A\supset B\quad{\sim}B}{{\sim}A}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2180,7 +2180,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>positive paradox
+<tr><td colspan='2' align='center'><i><b>Positive paradox
 <tr><td valign='top'>$$\overline{B\supset(A\supset B)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2200,7 +2200,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>vacuous truth
+<tr><td colspan='2' align='center'><i><b>Vacuous truth
 <tr><td valign='top'>$$\overline{{\sim}A\supset(A\supset B)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2220,7 +2220,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>contrapositive
+<tr><td colspan='2' align='center'><i><b>Contrapositive
 <tr><td valign='top'>$$\frac{{\sim}B\supset{\sim}A}{A\supset B}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2263,7 +2263,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>symmetry of &supset;
+<tr><td colspan='2' align='center'><i><b>Symmetry of &supset;
 <tr><td valign='top'>$$\frac{A\supset B}{B\supset A}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2285,7 +2285,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><b><i>conjunctive conditional
+<tr><td colspan='2' align='center'><b><i>Conjunctive conditional
 <tr><td valign='top'>$$\frac{A\quad B}{A\supset B}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2347,7 +2347,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td colspan='2' align='center'><i><b>standard conditional
+<tr><td colspan='2' align='center'><i><b>Standard conditional
 <tr><td valign='top'>$$\frac{A\supset B}{{\sim}A\lor B}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2509,7 +2509,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>associativity of &supset;
+<tr><td colspan='2' align='center'><i><b>Associativity of &supset;
 <tr><td valign='top'>$$\frac{(A\supset B)\supset C}{A\supset(B\supset C)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2551,7 +2551,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>boethius's theses
+<tr><td colspan='2' align='center'><i><b>Boethius's theses
 <tr><td valign='top'>$$\overline{(A\supset B)\supset{\sim}(A\supset{\sim}B)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2590,7 +2590,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>boethius's theses (rule form)
+<tr><td colspan='2' align='center'><i><b>Boethius's theses (rule form)
 <tr><td valign='top'>$$\frac{A\supset B}{{\sim}(A\supset{\sim}B)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2633,7 +2633,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>reciprocal boethius's theses
+<tr><td colspan='2' align='center'><i><b>Reciprocal Boethius's theses
 <tr><td valign='top'>$$\overline{{\sim}(A\supset{\sim}B)\supset(A\supset B)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2672,7 +2672,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td colspan='2' align='center'><i><b>reciprocal boethius's theses (rule form)
+<tr><td colspan='2' align='center'><i><b>Reciprocal Boethius's theses (rule form)
 <tr><td valign='top'>$$\frac{{\sim}(A\supset{\sim}B)}{A\supset B}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2715,7 +2715,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>axiom of relativity
+<tr><td colspan='2' align='center'><i><b>Axiom of relativity
 <tr><td valign='top'>$$\overline{((A\supset B)\supset B)\supset A}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2735,7 +2735,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>absorption
+<tr><td colspan='2' align='center'><i><b>Absorption
 <tr><td valign='top'>$$\frac{A\supset B}{A\supset(A\;\&\;B)}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2777,7 +2777,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td colspan='2' align='center'><i><b>abelard's theses
+<tr><td colspan='2' align='center'><i><b>Abelard's theses
 <tr><td valign='top'>$$\overline{{\sim}((A\supset B)\;\&\;({\sim}A\supset B))}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2851,7 +2851,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>exportation/importation (currying)
+<tr><td colspan='2' align='center'><i><b>Exportation/importation (currying)
 <tr><td valign='top'>$$\frac{A\supset(B\supset C)}{(A\;\&\;B)\supset C}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2937,7 +2937,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>hypothetical syllogism
+<tr><td colspan='2' align='center'><i><b>Hypothetical syllogism
 <tr><td valign='top'>$$\frac{A\supset B\quad B\supset C}{A\supset C}$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2961,7 +2961,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><b><i>affirming the consequent
+<tr><td colspan='2' align='center'><b><i>Affirming the consequent
 <tr><td valign='top'>$$\frac{A\supset B\quad B}A$$
 	<td valign='center'><?php
 	$bool = True;
@@ -2983,7 +2983,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><b><i>negating the antecedent
+<tr><td colspan='2' align='center'><b><i>Negating the antecedent
 <tr><td valign='top'>$$\frac{A\supset B\quad{\sim}A}{{\sim}B}$$
 	<td valign='center'><?php
 	$bool = True;
