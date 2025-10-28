@@ -1,5 +1,5 @@
-<title>many-valued logic playground</title>
-<meta name="description" content="an online tool to quickly investigate valid inferences in many-valued logics.">
+<title>Many-Valued Logic PlayGround</title>
+<meta name="description" content="An online tool to quickly investigate valid inferences in many-valued logics.">
 <meta name="author" content="alexandræ">
 <script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>
 <?php
@@ -197,14 +197,14 @@ if (isset($_GET["n"])) {
 }
 ?>
 <center>
-<h1><a href="?">many-valued logic playground</a></h1>
-<i>see also&nbsp;: <a href="https://users.cecs.anu.edu.au/~jks/magic.html" target="_blank"><big>m</big>a<big>gic</big></a> (slaney)</i>
+<h1><a href="?">Many-Valued Logic PlayGround</a></h1>
+<i>See also&nbsp;: <a href="https://users.cecs.anu.edu.au/~jks/magic.html" target="_blank">MaGIC</a> (Slaney)</i>&nbsp;; <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvlpg.php" target="_blank">Source code</a>
 <nav>
   <ul>
     <li class="deroulant"><b><i>examples</i> &#9660;</b></a>
 	  <center>
       <ul class="sous">
-		<li><a href="?n=2&v0=true&d0=y&v1=false&d1=n&N0=false&N1=true&K0%3B0=true&K0%3B1=false&K1%3B0=false&K1%3B1=false&A0%3B0=true&A0%3B1=true&A1%3B0=true&A1%3B1=false&C0%3B0=true&C0%3B1=false&C1%3B0=true&C1%3B1=true&description=Standard+logic+%28Frege%2C+1879+%3B+Russell+%26+Whitehead%2C+1910%29">Standard</a> (Frege, 1879&nbsp;; Russell &amp; Whitehead, 1910)
+		<li><a href="?n=2&v0=True&d0=y&v1=False&d1=n&description=Standard+logic+(Frege%2C+1879+%3B+Russell+%26+Whitehead%2C+1910)">Standard</a> (Frege, 1879&nbsp;; Russell &amp; Whitehead, 1910)
 		<li><a href="?n=1&v0=both&d0=y&description=Trivial+logic+only+has+one+truth+value,+which+happens+to+be+designated.">Trivial</a>
 		<li><a href="?n=1&v0=neither&d0=n&description=Nihilism%2C+at+least+in+this+context%2C+is+what+happens+when+there+is+no+designated+value.+Note+that+there+could+also+be+a+stronger+anti-inferential+nihilism+that+admits+no+rule.">Nihilistic</a>
 		<li><a href="?n=3&v0=1&d0=y&v1=1%2F2&d1=n&v2=0&d2=n&N0=0&N1=0&N2=1&K0%3B0=1&K0%3B1=1%2F2&K0%3B2=0&K1%3B0=1%2F2&K1%3B1=1%2F2&K1%3B2=0&K2%3B0=0&K2%3B1=0&K2%3B2=0&A0%3B0=1&A0%3B1=1&A0%3B2=1&A1%3B0=1&A1%3B1=1%2F2&A1%3B2=1%2F2&A2%3B0=1&A2%3B1=1%2F2&A2%3B2=0&C0%3B0=1&C0%3B1=1%2F2&C0%3B2=0&C1%3B0=1&C1%3B1=1&C1%3B2=0&C2%3B0=1&C2%3B1=1&C2%3B2=1&description=This+is+an+example+of+a+3-valued+Heyting+algebra.">3-valued Heyting algebra</a>
