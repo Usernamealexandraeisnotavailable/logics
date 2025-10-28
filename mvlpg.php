@@ -198,7 +198,7 @@ if (isset($_GET["n"])) {
 ?>
 <center>
 <h1><a href="?">Many-Valued Logic PlayGround</a></h1>
-<i>See also&nbsp;: <a href="https://users.cecs.anu.edu.au/~jks/magic.html" target="_blank">MaGIC</a> (Slaney)</i>&nbsp;; <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvlpg.php" target="_blank">Source code</a>
+<i>See also&nbsp;: <a href="https://users.cecs.anu.edu.au/~jks/magic.html" target="_blank">MaGIC</a> (Slaney)&nbsp;; <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvlpg.php" target="_blank">Source code</a> (please don't judge... lol)</i>
 <nav>
   <ul>
     <li class="deroulant"><b><i>Examples</i> &#9660;</b></a>
