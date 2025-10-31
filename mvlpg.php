@@ -305,7 +305,7 @@ for ($i = 0; $i < $n; $i++) {
 		?>
 		</table>
 <tr><td><b>Implication :
-		<table cellspacing="0" b><tr><td b><i>A</i>&nbsp;&supset;&nbsp;<i>B</i><?php
+		<table cellspacing="0" b><tr><td b><i>A</i>&nbsp;&rarr;&nbsp;<i>B</i><?php
 			for ($i = 0; $i < $n; $i++) {
 				print "<td b><i>B</i>&nbsp;=&nbsp;".$v[$i];
 			}
@@ -419,7 +419,7 @@ for ($i = 0; $i < $_GET["inf_nc"]; $i++)
 
 <pre><?php
 function latex_implies ($A, $B) {
-	return "($A\\supset $B)";
+	return "($A\\to $B)";
 }
 function latex_and ($A, $B) {
 	return "($A\\;\\&\\;$B)";
@@ -700,7 +700,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\overline{A\supset{\sim}{\sim}A}$$
+<tr><td valign='top'>$$\overline{A\to{\sim}{\sim}A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -717,7 +717,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\overline{{\sim}{\sim}A\supset A}$$
+<tr><td valign='top'>$$\overline{{\sim}{\sim}A\to A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -774,7 +774,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td valign='top'>$$\overline{A\supset{\sim}A}$$
+<tr><td valign='top'>$$\overline{A\to{\sim}A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -791,7 +791,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td valign='top'>$$\overline{{\sim}A\supset A}$$
+<tr><td valign='top'>$$\overline{{\sim}A\to A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -849,7 +849,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td valign='top'>$$\overline{A\supset(A\;\&\;A)}$$
+<tr><td valign='top'>$$\overline{A\to(A\;\&\;A)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -866,7 +866,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td valign='top'>$$\overline{(A\;\&\;A)\supset A}$$
+<tr><td valign='top'>$$\overline{(A\;\&\;A)\to A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -982,7 +982,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\overline{(A\;\&\;B)\supset A}$$
+<tr><td valign='top'>$$\overline{(A\;\&\;B)\to A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1001,7 +1001,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\overline{(A\;\&\;B)\supset B}$$
+<tr><td valign='top'>$$\overline{(A\;\&\;B)\to B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1041,7 +1041,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\overline{(A\;\&\;B)\supset(B\;\&\;A)}$$
+<tr><td valign='top'>$$\overline{(A\;\&\;B)\to(B\;\&\;A)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1124,7 +1124,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\overline{(A\;\&\;{\sim}A)\supset B}$$
+<tr><td valign='top'>$$\overline{(A\;\&\;{\sim}A)\to B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1143,7 +1143,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\overline{({\sim}A\;\&\;A)\supset B}$$
+<tr><td valign='top'>$$\overline{({\sim}A\;\&\;A)\to B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1245,7 +1245,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td valign='top'>$$\overline{A\supset(A\lor A)}$$
+<tr><td valign='top'>$$\overline{A\to(A\lor A)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1262,7 +1262,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 	
-<tr><td valign='top'>$$\overline{(A\lor A)\supset A}$$
+<tr><td valign='top'>$$\overline{(A\lor A)\to A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1312,7 +1312,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\overline{A\supset(B\lor{\sim}B)}$$
+<tr><td valign='top'>$$\overline{A\to(B\lor{\sim}B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1329,7 +1329,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\overline{A\supset({\sim}B\lor B)}$$
+<tr><td valign='top'>$$\overline{A\to({\sim}B\lor B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1390,7 +1390,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\overline{A\supset(A\lor B)}$$
+<tr><td valign='top'>$$\overline{A\to(A\lor B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1408,7 +1408,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\overline{B\supset(A\lor B)}$$
+<tr><td valign='top'>$$\overline{B\to(A\lor B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1554,7 +1554,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\overline{(A\lor B)\supset(B\lor A)}$$
+<tr><td valign='top'>$$\overline{(A\lor B)\to(B\lor A)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1658,7 +1658,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>&or; elim. (with conditionals)
-<tr><td valign='top'>$$\frac{A\lor B\quad A\supset C\quad B\supset C}C$$
+<tr><td valign='top'>$$\frac{A\lor B\quad A\to C\quad B\to C}C$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1724,7 +1724,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 	
 <tr><td colspan='2' align='center'><i><b>Constructive dilemma
-<tr><td valign='top'>$$\frac{A\lor B\quad A\supset C\quad B\supset D}{C\lor D}$$
+<tr><td valign='top'>$$\frac{A\lor B\quad A\to C\quad B\to D}{C\lor D}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1747,7 +1747,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{A\lor B\quad A\supset C\quad B\supset D}{D\lor C}$$
+<tr><td valign='top'>$$\frac{A\lor B\quad A\to C\quad B\to D}{D\lor C}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1772,7 +1772,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Destructive dilemma
-<tr><td valign='top'>$$\frac{A\supset C\quad B\supset D\quad{\sim}C\lor{\sim}D}{{\sim}A\lor{\sim}B}$$
+<tr><td valign='top'>$$\frac{A\to C\quad B\to D\quad{\sim}C\lor{\sim}D}{{\sim}A\lor{\sim}B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -1795,7 +1795,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{A\supset C\quad B\supset D\quad{\sim}C\lor{\sim}D}{{\sim}B\lor{\sim}A}$$
+<tr><td valign='top'>$$\frac{A\to C\quad B\to D\quad{\sim}C\lor{\sim}D}{{\sim}B\lor{\sim}A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2065,8 +2065,8 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><hr>
-<tr><td colspan='2' align='center'><i><b>Reflexivity of &supset;
-<tr><td valign='top'>$$\overline{A\supset A}$$
+<tr><td colspan='2' align='center'><i><b>Reflexivity of &rarr;
+<tr><td valign='top'>$$\overline{A\to A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2083,8 +2083,8 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>Irreflexivity of &supset;
-<tr><td valign='top'>$$\overline{{\sim}(A\supset A)}$$
+<tr><td colspan='2' align='center'><i><b>Irreflexivity of &rarr;
+<tr><td valign='top'>$$\overline{{\sim}(A\to A)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2102,7 +2102,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Aristotle's theses
-<tr><td valign='top'>$$\overline{{\sim}(A\supset{\sim}A)}$$
+<tr><td valign='top'>$$\overline{{\sim}(A\to{\sim}A)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2119,7 +2119,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\overline{{\sim}({\sim}A\supset A)}$$
+<tr><td valign='top'>$$\overline{{\sim}({\sim}A\to A)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2136,8 +2136,8 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>Modus ponens, &supset; elim.
-<tr><td valign='top'>$$\frac{A\supset B\quad A}B$$
+<tr><td colspan='2' align='center'><i><b>Modus ponens, &rarr; elim.
+<tr><td valign='top'>$$\frac{A\to B\quad A}B$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2159,7 +2159,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Modus tollens
-<tr><td valign='top'>$$\frac{A\supset B\quad{\sim}B}{{\sim}A}$$
+<tr><td valign='top'>$$\frac{A\to B\quad{\sim}B}{{\sim}A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2181,7 +2181,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Positive paradox
-<tr><td valign='top'>$$\overline{B\supset(A\supset B)}$$
+<tr><td valign='top'>$$\overline{B\to(A\to B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2201,7 +2201,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Vacuous truth
-<tr><td valign='top'>$$\overline{{\sim}A\supset(A\supset B)}$$
+<tr><td valign='top'>$$\overline{{\sim}A\to(A\to B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2221,7 +2221,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Contrapositive
-<tr><td valign='top'>$$\frac{{\sim}B\supset{\sim}A}{A\supset B}$$
+<tr><td valign='top'>$$\frac{{\sim}B\to{\sim}A}{A\to B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2242,7 +2242,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\frac{A\supset B}{{\sim}B\supset{\sim}A}$$
+<tr><td valign='top'>$$\frac{A\to B}{{\sim}B\to{\sim}A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2263,8 +2263,8 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>Symmetry of &supset;
-<tr><td valign='top'>$$\frac{A\supset B}{B\supset A}$$
+<tr><td colspan='2' align='center'><i><b>Symmetry of &rarr;
+<tr><td valign='top'>$$\frac{A\to B}{B\to A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2286,7 +2286,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><b><i>Conjunctive conditional
-<tr><td valign='top'>$$\frac{A\quad B}{A\supset B}$$
+<tr><td valign='top'>$$\frac{A\quad B}{A\to B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2306,7 +2306,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{A\supset B}A$$
+<tr><td valign='top'>$$\frac{A\to B}A$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2326,7 +2326,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{A\supset B}B$$
+<tr><td valign='top'>$$\frac{A\to B}B$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2348,7 +2348,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 	
 <tr><td colspan='2' align='center'><i><b>Standard conditional
-<tr><td valign='top'>$$\frac{A\supset B}{{\sim}A\lor B}$$
+<tr><td valign='top'>$$\frac{A\to B}{{\sim}A\lor B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2368,7 +2368,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{A\supset B}{B\lor{\sim}A}$$
+<tr><td valign='top'>$$\frac{A\to B}{B\lor{\sim}A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2388,7 +2388,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{{\sim}A\lor B}{A\supset B}$$
+<tr><td valign='top'>$$\frac{{\sim}A\lor B}{A\to B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2408,7 +2408,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{B\lor{\sim}A}{A\supset B}$$
+<tr><td valign='top'>$$\frac{B\lor{\sim}A}{A\to B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2428,7 +2428,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{A\supset B}{{\sim}(A\;\&\;{\sim}B)}$$
+<tr><td valign='top'>$$\frac{A\to B}{{\sim}(A\;\&\;{\sim}B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2448,7 +2448,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{A\supset B}{{\sim}({\sim}B\;\&\;A)}$$
+<tr><td valign='top'>$$\frac{A\to B}{{\sim}({\sim}B\;\&\;A)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2468,7 +2468,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{{\sim}(A\;\&\;{\sim}B)}{A\supset B}$$
+<tr><td valign='top'>$$\frac{{\sim}(A\;\&\;{\sim}B)}{A\to B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2488,7 +2488,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{{\sim}({\sim}B\;\&\;A)}{A\supset B}$$
+<tr><td valign='top'>$$\frac{{\sim}({\sim}B\;\&\;A)}{A\to B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2509,8 +2509,8 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>Associativity of &supset;
-<tr><td valign='top'>$$\frac{(A\supset B)\supset C}{A\supset(B\supset C)}$$
+<tr><td colspan='2' align='center'><i><b>Associativity of &rarr;
+<tr><td valign='top'>$$\frac{(A\to B)\to C}{A\to(B\to C)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2530,7 +2530,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{A\supset(B\supset C)}{(A\supset B)\supset C}$$
+<tr><td valign='top'>$$\frac{A\to(B\to C)}{(A\to B)\to C}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2552,7 +2552,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Boethius's theses
-<tr><td valign='top'>$$\overline{(A\supset B)\supset{\sim}(A\supset{\sim}B)}$$
+<tr><td valign='top'>$$\overline{(A\to B)\to{\sim}(A\to{\sim}B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2571,7 +2571,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\overline{(A\supset{\sim}B)\supset{\sim}(A\supset B)}$$
+<tr><td valign='top'>$$\overline{(A\to{\sim}B)\to{\sim}(A\to B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2591,7 +2591,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Boethius's theses (rule form)
-<tr><td valign='top'>$$\frac{A\supset B}{{\sim}(A\supset{\sim}B)}$$
+<tr><td valign='top'>$$\frac{A\to B}{{\sim}(A\to{\sim}B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2612,7 +2612,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\frac{A\supset{\sim}B}{{\sim}(A\supset B)}$$
+<tr><td valign='top'>$$\frac{A\to{\sim}B}{{\sim}(A\to B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2634,7 +2634,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Reciprocal Boethius's theses
-<tr><td valign='top'>$$\overline{{\sim}(A\supset{\sim}B)\supset(A\supset B)}$$
+<tr><td valign='top'>$$\overline{{\sim}(A\to{\sim}B)\to(A\to B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2653,7 +2653,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\overline{{\sim}(A\supset B)\supset(A\supset{\sim}B)}$$
+<tr><td valign='top'>$$\overline{{\sim}(A\to B)\to(A\to{\sim}B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2673,7 +2673,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 	
 <tr><td colspan='2' align='center'><i><b>Reciprocal Boethius's theses (rule form)
-<tr><td valign='top'>$$\frac{{\sim}(A\supset{\sim}B)}{A\supset B}$$
+<tr><td valign='top'>$$\frac{{\sim}(A\to{\sim}B)}{A\to B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2694,7 +2694,7 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td valign='top'>$$\frac{{\sim}(A\supset B)}{A\supset{\sim}B}$$
+<tr><td valign='top'>$$\frac{{\sim}(A\to B)}{A\to{\sim}B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2716,7 +2716,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Axiom of relativity
-<tr><td valign='top'>$$\overline{((A\supset B)\supset B)\supset A}$$
+<tr><td valign='top'>$$\overline{((A\to B)\to B)\to A}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2736,7 +2736,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Absorption
-<tr><td valign='top'>$$\frac{A\supset B}{A\supset(A\;\&\;B)}$$
+<tr><td valign='top'>$$\frac{A\to B}{A\to(A\;\&\;B)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2756,7 +2756,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{A\supset B}{A\supset(B\;\&\;A)}$$
+<tr><td valign='top'>$$\frac{A\to B}{A\to(B\;\&\;A)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2778,7 +2778,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 	
 <tr><td colspan='2' align='center'><i><b>Abelard's theses
-<tr><td valign='top'>$$\overline{{\sim}((A\supset B)\;\&\;({\sim}A\supset B))}$$
+<tr><td valign='top'>$$\overline{{\sim}((A\to B)\;\&\;({\sim}A\to B))}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2796,7 +2796,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\overline{{\sim}(({\sim}A\supset B)\;\&\;({\sim}A\supset B))}$$
+<tr><td valign='top'>$$\overline{{\sim}(({\sim}A\to B)\;\&\;({\sim}A\to B))}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2814,7 +2814,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\overline{{\sim}((A\supset B)\;\&\;(A\supset{\sim}B))}$$
+<tr><td valign='top'>$$\overline{{\sim}((A\to B)\;\&\;(A\to{\sim}B))}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2832,7 +2832,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\overline{{\sim}((A\supset{\sim}B)\;\&\;({\sim}A\supset B))}$$
+<tr><td valign='top'>$$\overline{{\sim}((A\to{\sim}B)\;\&\;({\sim}A\to B))}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2852,7 +2852,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Exportation/importation (currying)
-<tr><td valign='top'>$$\frac{A\supset(B\supset C)}{(A\;\&\;B)\supset C}$$
+<tr><td valign='top'>$$\frac{A\to(B\to C)}{(A\;\&\;B)\to C}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2874,7 +2874,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\frac{(A\;\&\;B)\supset C}{A\supset(B\supset C)}$$
+<tr><td valign='top'>$$\frac{(A\;\&\;B)\to C}{A\to(B\to C)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2896,7 +2896,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\overline{(A\supset(B\supset C))\supset((A\;\&\;B)\supset C)}$$
+<tr><td valign='top'>$$\overline{(A\to(B\to C))\to((A\;\&\;B)\to C)}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2916,7 +2916,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\overline{((A\;\&\;B)\supset C)\supset(A\supset(B\supset C))}$$
+<tr><td valign='top'>$$\overline{((A\;\&\;B)\to C)\to(A\to(B\to C))}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2938,7 +2938,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><i><b>Hypothetical syllogism
-<tr><td valign='top'>$$\frac{A\supset B\quad B\supset C}{A\supset C}$$
+<tr><td valign='top'>$$\frac{A\to B\quad B\to C}{A\to C}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2962,7 +2962,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><b><i>Affirming the consequent
-<tr><td valign='top'>$$\frac{A\supset B\quad B}A$$
+<tr><td valign='top'>$$\frac{A\to B\quad B}A$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
@@ -2984,7 +2984,7 @@ for ($i = 0; $i < $n; $i++) {
 	?>
 
 <tr><td colspan='2' align='center'><b><i>Negating the antecedent
-<tr><td valign='top'>$$\frac{A\supset B\quad{\sim}A}{{\sim}B}$$
+<tr><td valign='top'>$$\frac{A\to B\quad{\sim}A}{{\sim}B}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
