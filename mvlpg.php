@@ -2508,6 +2508,108 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
+	
+<tr><td colspan='2' align='center'><i><b>Standard conditional negation
+<tr><td valign='top'>$$\frac{{\sim}(A\to B)}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+				if (!in_array($v[$i], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid&nbsp;?</b> ";
+	if ($bool) {
+		print "Yes&nbsp;!";
+	} else {
+		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}(A\to B)}{{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+				if (!in_array($N[$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid&nbsp;?</b> ";
+	if ($bool) {
+		print "Yes&nbsp;!";
+	} else {
+		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}(A\to B)}{A\;\&\;{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+				if (!in_array($K[$v[$i]][$N[$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid&nbsp;?</b> ";
+	if ($bool) {
+		print "Yes&nbsp;!";
+	} else {
+		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\;\&\;{\sim}B}{{\sim}(A\to B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($K[$v[$i]][$N[$v[$j]]], $designated)) {
+				if (!in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid&nbsp;?</b> ";
+	if ($bool) {
+		print "Yes&nbsp;!";
+	} else {
+		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\quad{\sim}B}{{\sim}(A\to B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($v[$i], $designated) and in_array($N[$v[$j]], $designated)) {
+				if (!in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid&nbsp;?</b> ";
+	if ($bool) {
+		print "Yes&nbsp;!";
+	} else {
+		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
 
 <tr><td colspan='2' align='center'><i><b>Associativity of &rarr;
 <tr><td valign='top'>$$\frac{(A\to B)\to C}{A\to(B\to C)}$$
