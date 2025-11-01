@@ -2715,6 +2715,26 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
+<tr><td colspan='2' align='center'><i><b>Peirce's law
+<tr><td valign='top'>$$\overline{((A\to B)\to A)\to B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$C[$C[$v[$i]][$v[$j]]][$v[$i]]][$v[$j]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid&nbsp;?</b> ";
+	if ($bool) {
+		print "Yes&nbsp;!";
+	} else {
+		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
+
 <tr><td colspan='2' align='center'><i><b>Axiom of relativity
 <tr><td valign='top'>$$\overline{((A\to B)\to B)\to A}$$
 	<td valign='center'><?php
