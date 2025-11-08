@@ -235,8 +235,10 @@ for ($i = 0; $i < $n; $i++) {
 	}
 }
 ?></ul>
+<?php if (!isset($_GET["v0"])) { ?>
 <b>Description :</b><br>
 <textarea name="description" style="width: 100%; height: 100px; font-family: Times New Roman"><?=$description;?></textarea><br>
+<?php } ?>
 <input type='submit' value='submit'></form>
 </table>
 <?php if (isset($_GET["v0"])) { ?>
@@ -248,8 +250,10 @@ for ($i = 0; $i < $n; $i++) {
 	print "<input type='hidden' name='d$i' value='".$_GET["d$i"]."'>\n";
 }
 ?>
-<input type="hidden" name="description" value="<?=$description;?>">
 <table>
+<tr><td>
+<b>Description :</b><br>
+<textarea name="description" style="width: 100%; height: 100px; font-family: Times New Roman"><?=$description;?></textarea><br>
 <tr><td><b>Negation :
 		<table b cellspacing="0"><tr><td b><i>A</i><td b>&sim;<i>A</i><?php
 			for ($i = 0; $i < $n; $i++) {
