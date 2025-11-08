@@ -1,4 +1,8 @@
 <title>Many-Valued Logic PlayGround</title>
+<?php if ($_SERVER['SERVER_NAME'] == "bexandre.alwaysdata.net") {
+?>
+<meta http-equiv="refresh" content="0; https://alexandrae.fr<?=$_SERVER['REQUEST_URI'];?>">
+<?php } ?>
 <meta name="description" content="An online tool to quickly investigate valid inferences in many-valued logics.">
 <meta name="author" content="alexandræ">
 <script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>
