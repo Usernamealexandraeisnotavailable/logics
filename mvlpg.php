@@ -2927,7 +2927,7 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
-<tr><td valign='top'>$$\overline{{\sim}(({\sim}A\to B)\;\&\;({\sim}A\to B))}$$
+<tr><td valign='top'>$$\overline{{\sim}(({\sim}A\to B)\;\&\;(A\to B))}$$
 	<td valign='center'><?php
 	$bool = True;
 	for ($i = 0; $i < $n; $i++) {
