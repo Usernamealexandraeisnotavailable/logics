@@ -622,7 +622,7 @@ print \"<b>Valid&nbsp;?</b> \";
 if (\$bool) {
 	print \"Yes&nbsp;!\";
 } else {
-	print \"Nope.<br>\\n<b>Counter-example(s)&nbsp;:</b><br>\\n\$counter\";
+	print \"Nope.<br>\\n<b>All counter-examples&nbsp;:</b><br>\\n\$counter\";
 }");
 }
 ?></pre>
@@ -686,7 +686,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -705,7 +705,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -722,7 +722,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -739,7 +739,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -760,7 +760,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -779,7 +779,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -796,7 +796,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -813,7 +813,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -835,7 +835,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -854,7 +854,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -871,7 +871,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -888,7 +888,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -906,7 +906,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{{\sim}({\sim}A\;\&\;A)}$$
@@ -922,7 +922,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -944,7 +944,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -966,7 +966,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -987,7 +987,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1006,7 +1006,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1025,7 +1025,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1047,7 +1047,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{(A\;\&\;B)\to(B\;\&\;A)}$$
@@ -1065,7 +1065,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1087,7 +1087,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1108,7 +1108,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1129,7 +1129,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1148,7 +1148,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1167,7 +1167,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1189,7 +1189,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\;\&\;(B\;\&\;C)}{(A\;\&\;B)\;\&\;C}$$
@@ -1209,7 +1209,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1231,7 +1231,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1250,7 +1250,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1267,7 +1267,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1284,7 +1284,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1302,7 +1302,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{{\sim}A\lor A}$$
@@ -1318,7 +1318,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{A\to(B\lor{\sim}B)}$$
@@ -1335,7 +1335,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{A\to({\sim}B\lor B)}$$
@@ -1352,7 +1352,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1374,7 +1374,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1395,7 +1395,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1414,7 +1414,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{B\to(A\lor B)}$$
@@ -1432,7 +1432,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1454,7 +1454,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}A\quad B}{A\lor B}$$
@@ -1474,7 +1474,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1496,7 +1496,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor B\quad B}{{\sim}A}$$
@@ -1516,7 +1516,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1538,7 +1538,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1560,7 +1560,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{(A\lor B)\to(B\lor A)}$$
@@ -1578,7 +1578,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1600,7 +1600,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor B\quad{\sim}B}A$$
@@ -1620,7 +1620,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1642,7 +1642,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor{\sim}B\quad B}A$$
@@ -1662,7 +1662,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1686,7 +1686,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1708,7 +1708,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor(B\lor C)}{(A\lor B)\lor C}$$
@@ -1728,7 +1728,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1753,7 +1753,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor B\quad A\to C\quad B\to D}{D\lor C}$$
@@ -1776,7 +1776,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1801,7 +1801,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to C\quad B\to D\quad{\sim}C\lor{\sim}D}{{\sim}B\lor{\sim}A}$$
@@ -1824,7 +1824,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1847,7 +1847,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}A\lor{\sim}B}{{\sim}(A\;\&\;B)}$$
@@ -1867,7 +1867,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}(A\lor B)}{{\sim}A\;\&\;{\sim}B}$$
@@ -1887,7 +1887,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}A\;\&\;{\sim}B}{{\sim}(A\lor B)}$$
@@ -1907,7 +1907,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -1929,7 +1929,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor(B\;\&\;C)}{(A\lor B)\;\&\;(A\lor C)}$$
@@ -1949,7 +1949,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(B\lor C)\;\&\;A}{(B\;\&\;A)\lor(C\;\&\;A)}$$
@@ -1969,7 +1969,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(B\;\&\;C)\lor A}{(B\lor A)\;\&\;(C\lor A)}$$
@@ -1989,7 +1989,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(A\;\&\;B)\lor(A\;\&\;C)}{A\;\&\;(B\lor C)}$$
@@ -2009,7 +2009,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(A\lor B)\;\&\;(A\lor C)}{A\lor(B\;\&\;C)}$$
@@ -2029,7 +2029,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(B\;\&\;A)\lor(C\;\&\;A)}{(B\lor C)\;\&\;A}$$
@@ -2049,7 +2049,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(B\lor A)\;\&\;(C\lor A)}{(B\;\&\;C)\lor A}$$
@@ -2069,7 +2069,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2088,7 +2088,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2106,7 +2106,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2124,7 +2124,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2141,7 +2141,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2163,7 +2163,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2185,7 +2185,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2205,7 +2205,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2225,7 +2225,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2247,7 +2247,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2268,7 +2268,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2290,7 +2290,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{(A\to B)\to(B\to A)}$$
@@ -2308,7 +2308,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2330,7 +2330,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}A$$
@@ -2350,7 +2350,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}B$$
@@ -2370,7 +2370,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -2392,7 +2392,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}{B\lor{\sim}A}$$
@@ -2412,7 +2412,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}A\lor B}{A\to B}$$
@@ -2432,7 +2432,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{B\lor{\sim}A}{A\to B}$$
@@ -2452,7 +2452,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}{{\sim}(A\;\&\;{\sim}B)}$$
@@ -2472,7 +2472,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}{{\sim}({\sim}B\;\&\;A)}$$
@@ -2492,7 +2492,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}(A\;\&\;{\sim}B)}{A\to B}$$
@@ -2512,7 +2512,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}({\sim}B\;\&\;A)}{A\to B}$$
@@ -2532,7 +2532,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -2554,7 +2554,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}(A\to B)}{{\sim}B}$$
@@ -2574,7 +2574,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}(A\to B)}{A\;\&\;{\sim}B}$$
@@ -2594,7 +2594,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\;\&\;{\sim}B}{{\sim}(A\to B)}$$
@@ -2614,7 +2614,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\quad{\sim}B}{{\sim}(A\to B)}$$
@@ -2634,7 +2634,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2656,7 +2656,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to(B\to C)}{(A\to B)\to C}$$
@@ -2676,7 +2676,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2696,7 +2696,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2715,7 +2715,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2737,7 +2737,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2758,7 +2758,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2778,7 +2778,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2797,7 +2797,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -2819,7 +2819,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2840,7 +2840,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2860,7 +2860,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2880,7 +2880,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -2902,7 +2902,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}{A\to(B\;\&\;A)}$$
@@ -2922,7 +2922,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 	
@@ -2942,7 +2942,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{{\sim}(({\sim}A\to B)\;\&\;(A\to B))}$$
@@ -2960,7 +2960,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{{\sim}((A\to B)\;\&\;(A\to{\sim}B))}$$
@@ -2978,7 +2978,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{{\sim}((A\to{\sim}B)\;\&\;(A\to B))}$$
@@ -2996,7 +2996,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -3020,7 +3020,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(A\;\&\;B)\to C}{A\to(B\to C)}$$
@@ -3042,7 +3042,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{(A\to(B\to C))\to((A\;\&\;B)\to C)}$$
@@ -3062,7 +3062,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{((A\;\&\;B)\to C)\to(A\to(B\to C))}$$
@@ -3082,7 +3082,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -3106,7 +3106,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -3128,7 +3128,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 
@@ -3150,7 +3150,7 @@ for ($i = 0; $i < $n; $i++) {
 	if ($bool) {
 		print "Yes&nbsp;!";
 	} else {
-		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
 <tr><td colspan='2' align='center'><hr>
