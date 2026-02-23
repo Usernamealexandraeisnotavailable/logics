@@ -2293,6 +2293,24 @@ for ($i = 0; $i < $n; $i++) {
 		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
 	}
 	?>
+<tr><td valign='top'>$$\overline{(A\to B)\to(B\to A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$C[$v[$i]][$v[$j]]][$C[$v[$j]][$v[$i]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid&nbsp;?</b> ";
+	if ($bool) {
+		print "Yes&nbsp;!";
+	} else {
+		print "Nope.<br>\n<b>Counter-example&nbsp;:</b><br>\n$counter";
+	}
+	?>
 
 <tr><td colspan='2' align='center'><b><i>Conjunctive conditional
 <tr><td valign='top'>$$\frac{A\quad B}{A\to B}$$
