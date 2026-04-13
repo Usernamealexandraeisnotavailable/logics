@@ -202,13 +202,13 @@ if (isset($_GET["n"])) {
 ?>
 <center>
 <h1><a href="?">Many-Valued Logic PlayGround</a></h1>
-<i>See also&nbsp;: <a href="https://users.cecs.anu.edu.au/~jks/magic.html" target="_blank">MaGIC</a> (Slaney)&nbsp;; <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvlpg.php" target="_blank">Source code</a> (please don't judge... lol)</i>
+<i>See also: <a href="https://users.cecs.anu.edu.au/~jks/magic.html" target="_blank">MaGIC</a> (Slaney); <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvlpg.php" target="_blank">Source code</a> (please don't judge... lol)</i>
 <nav>
   <ul>
     <li class="deroulant"><b><i>Examples</i> &#9660;</b></a>
 	  <center class="sous">
       <table style="width: 50%">
-		<tr><td><a href="?n=2&v0=True&d0=y&v1=False&d1=n&description=Standard+logic+(Frege%2C+1879+%3B+Russell+%26+Whitehead%2C+1910)">Frege-Russell logic</a>, a.k.a. "classical" logic, "standard" logic...<td>(<a href="https://gallica.bnf.fr/ark:/12148/bpt6k65658c" style="color: rgb(220,255,255)" target="_blank">Frege, 1879</a>&nbsp;;<a href="https://en.wikisource.org/wiki/Russell_%26_Whitehead%27s_Principia_Mathematica" style="color: rgb(220,255,255)" target="_blank">Russell &amp; Whitehead, 1910</a>)
+		<tr><td><a href="?n=2&v0=True&d0=y&v1=False&d1=n&description=Standard+logic+(Frege%2C+1879+%3B+Russell+%26+Whitehead%2C+1910)">Frege-Russell logic</a>, a.k.a. "classical" logic, "standard" logic...<td>(<a href="https://gallica.bnf.fr/ark:/12148/bpt6k65658c" style="color: rgb(220,255,255)" target="_blank">Frege, 1879</a>;<a href="https://en.wikisource.org/wiki/Russell_%26_Whitehead%27s_Principia_Mathematica" style="color: rgb(220,255,255)" target="_blank">Russell &amp; Whitehead, 1910</a>)
 		<tr><td><a href="?n=1&v0=both&d0=y&description=Trivial+logic+only+has+one+truth+value,+which+happens+to+be+designated.">Trivial</a>
 		<tr><td><a href="?n=1&v0=neither&d0=n&description=Nihilism%2C+at+least+in+this+context%2C+is+what+happens+when+there+is+no+designated+value.+Note+that+there+could+also+be+a+stronger+anti-inferential+nihilism+that+admits+no+rule.">Nihilistic</a>
 		<tr><td><a href="?n=3&v0=1&d0=y&v1=1%2F2&d1=n&v2=0&d2=n&N0=0&N1=0&N2=1&K0%3B0=1&K0%3B1=1%2F2&K0%3B2=0&K1%3B0=1%2F2&K1%3B1=1%2F2&K1%3B2=0&K2%3B0=0&K2%3B1=0&K2%3B2=0&A0%3B0=1&A0%3B1=1&A0%3B2=1&A1%3B0=1&A1%3B1=1%2F2&A1%3B2=1%2F2&A2%3B0=1&A2%3B1=1%2F2&A2%3B2=0&C0%3B0=1&C0%3B1=1%2F2&C0%3B2=0&C1%3B0=1&C1%3B1=1&C1%3B2=0&C2%3B0=1&C2%3B1=1&C2%3B2=1&description=This+is+an+example+of+a+3-valued+Heyting+algebra.">A 3-valued Heyting algebra</a>
@@ -216,8 +216,8 @@ if (isset($_GET["n"])) {
 		<tr><td><a href="?n=10&v0=9&d0=y&v1=8&d1=y&v2=7&d2=n&v3=6&d3=y&v4=5&d4=n&v5=4&d5=y&v6=3&d6=n&v7=2&d7=y&v8=1&d8=n&v9=0&d9=n&description=De+Morgan+monoid+C6+%28Slaney%2C+1989%29&N0=0&N1=1&N2=2&N3=3&N4=4&N5=5&N6=6&N7=7&N8=8&N9=9&K0%3B0=9&K0%3B1=8&K0%3B2=7&K0%3B3=6&K0%3B4=5&K0%3B5=4&K0%3B6=3&K0%3B7=2&K0%3B8=1&K0%3B9=0&K1%3B0=8&K1%3B1=8&K1%3B2=7&K1%3B3=6&K1%3B4=5&K1%3B5=4&K1%3B6=3&K1%3B7=2&K1%3B8=1&K1%3B9=0&K2%3B0=7&K2%3B1=7&K2%3B2=7&K2%3B3=5&K2%3B4=5&K2%3B5=3&K2%3B6=3&K2%3B7=1&K2%3B8=1&K2%3B9=0&K3%3B0=6&K3%3B1=6&K3%3B2=5&K3%3B3=6&K3%3B4=5&K3%3B5=2&K3%3B6=1&K3%3B7=2&K3%3B8=1&K3%3B9=0&K4%3B0=5&K4%3B1=5&K4%3B2=5&K4%3B3=5&K4%3B4=5&K4%3B5=1&K4%3B6=1&K4%3B7=1&K4%3B8=1&K4%3B9=0&K5%3B0=4&K5%3B1=4&K5%3B2=3&K5%3B3=2&K5%3B4=1&K5%3B5=4&K5%3B6=3&K5%3B7=2&K5%3B8=1&K5%3B9=0&K6%3B0=3&K6%3B1=3&K6%3B2=3&K6%3B3=1&K6%3B4=1&K6%3B5=3&K6%3B6=3&K6%3B7=1&K6%3B8=1&K6%3B9=0&K7%3B0=2&K7%3B1=2&K7%3B2=1&K7%3B3=2&K7%3B4=1&K7%3B5=2&K7%3B6=1&K7%3B7=2&K7%3B8=1&K7%3B9=0&K8%3B0=1&K8%3B1=1&K8%3B2=1&K8%3B3=1&K8%3B4=1&K8%3B5=1&K8%3B6=1&K8%3B7=1&K8%3B8=1&K8%3B9=0&K9%3B0=0&K9%3B1=0&K9%3B2=0&K9%3B3=0&K9%3B4=0&K9%3B5=0&K9%3B6=0&K9%3B7=0&K9%3B8=0&K9%3B9=0&A0%3B0=9&A0%3B1=9&A0%3B2=9&A0%3B3=9&A0%3B4=9&A0%3B5=9&A0%3B6=9&A0%3B7=9&A0%3B8=9&A0%3B9=9&A1%3B0=9&A1%3B1=8&A1%3B2=8&A1%3B3=8&A1%3B4=8&A1%3B5=8&A1%3B6=8&A1%3B7=8&A1%3B8=8&A1%3B9=8&A2%3B0=9&A2%3B1=8&A2%3B2=7&A2%3B3=8&A2%3B4=7&A2%3B5=8&A2%3B6=7&A2%3B7=8&A2%3B8=7&A2%3B9=7&A3%3B0=9&A3%3B1=8&A3%3B2=8&A3%3B3=6&A3%3B4=6&A3%3B5=8&A3%3B6=8&A3%3B7=6&A3%3B8=6&A3%3B9=6&A4%3B0=9&A4%3B1=8&A4%3B2=7&A4%3B3=6&A4%3B4=5&A4%3B5=8&A4%3B6=7&A4%3B7=6&A4%3B8=5&A4%3B9=5&A5%3B0=9&A5%3B1=8&A5%3B2=8&A5%3B3=8&A5%3B4=8&A5%3B5=4&A5%3B6=4&A5%3B7=4&A5%3B8=4&A5%3B9=4&A6%3B0=9&A6%3B1=8&A6%3B2=7&A6%3B3=8&A6%3B4=7&A6%3B5=4&A6%3B6=3&A6%3B7=4&A6%3B8=3&A6%3B9=3&A7%3B0=9&A7%3B1=8&A7%3B2=8&A7%3B3=6&A7%3B4=6&A7%3B5=4&A7%3B6=4&A7%3B7=2&A7%3B8=2&A7%3B9=2&A8%3B0=9&A8%3B1=8&A8%3B2=7&A8%3B3=6&A8%3B4=5&A8%3B5=4&A8%3B6=3&A8%3B7=2&A8%3B8=1&A8%3B9=1&A9%3B0=9&A9%3B1=8&A9%3B2=7&A9%3B3=6&A9%3B4=5&A9%3B5=4&A9%3B6=3&A9%3B7=2&A9%3B8=1&A9%3B9=0&C0%3B0=9&C0%3B1=0&C0%3B2=0&C0%3B3=0&C0%3B4=0&C0%3B5=0&C0%3B6=0&C0%3B7=0&C0%3B8=0&C0%3B9=0&C1%3B0=9&C1%3B1=4&C1%3B2=1&C1%3B3=1&C1%3B4=1&C1%3B5=0&C1%3B6=0&C1%3B7=0&C1%3B8=0&C1%3B9=0&C2%3B0=9&C2%3B1=4&C2%3B2=2&C2%3B3=1&C2%3B4=1&C2%3B5=0&C2%3B6=0&C2%3B7=0&C2%3B8=0&C2%3B9=0&C3%3B0=9&C3%3B1=4&C3%3B2=3&C3%3B3=2&C3%3B4=1&C3%3B5=0&C3%3B6=0&C3%3B7=0&C3%3B8=0&C3%3B9=0&C4%3B0=9&C4%3B1=4&C4%3B2=4&C4%3B3=4&C4%3B4=4&C4%3B5=4&C4%3B6=0&C4%3B7=0&C4%3B8=0&C4%3B9=0&C5%3B0=9&C5%3B1=8&C5%3B2=5&C5%3B3=5&C5%3B4=5&C5%3B5=4&C5%3B6=1&C5%3B7=1&C5%3B8=1&C5%3B9=0&C6%3B0=9&C6%3B1=8&C6%3B2=6&C6%3B3=5&C6%3B4=5&C6%3B5=4&C6%3B6=2&C6%3B7=1&C6%3B8=1&C6%3B9=0&C7%3B0=9&C7%3B1=8&C7%3B2=7&C7%3B3=6&C7%3B4=5&C7%3B5=4&C7%3B6=3&C7%3B7=2&C7%3B8=1&C7%3B9=0&C8%3B0=9&C8%3B1=8&C8%3B2=8&C8%3B3=8&C8%3B4=8&C8%3B5=4&C8%3B6=4&C8%3B7=4&C8%3B8=4&C8%3B9=0&C9%3B0=9&C9%3B1=9&C9%3B2=9&C9%3B3=9&C9%3B4=9&C9%3B5=9&C9%3B6=9&C9%3B7=9&C9%3B8=9&C9%3B9=9">De Morgan monoid C6</a> (model for <b>R</b>)
 		<td>(<a href="https://philpapers.org/rec/ANDETL-2" style="color: rgb(220,255,255)" target="_blank">Anderson &amp; Belnap, 1975</a>; <a href="https://doi.org/10.1305/ndjfl/1093634999" style="color: rgb(220,255,255)" target="_blank">Slaney, 1989</a>)
 		<tr><td><a href="?n=3&v0=F&d0=n&v1=U&d1=n&v2=T&d2=y&N0=T&N1=U&N2=F&K0%3B0=F&K0%3B1=F&K0%3B2=F&K1%3B0=F&K1%3B1=U&K1%3B2=U&K2%3B0=F&K2%3B1=U&K2%3B2=T&A0%3B0=F&A0%3B1=U&A0%3B2=T&A1%3B0=U&A1%3B1=U&A1%3B2=T&A2%3B0=T&A2%3B1=T&A2%3B2=T&C0%3B0=T&C0%3B1=T&C0%3B2=T&C1%3B0=U&C1%3B1=U&C1%3B2=T&C2%3B0=F&C2%3B1=U&C2%3B2=T&description=Strong+Kleene+logic+of+indeterminacy+%28Kleene%2C+1938%29">Strong Kleene</a><td>(<a href="https://doi.org/10.2307/2267778" style="color: rgb(220,255,255)" target="_blank">Kleene, 1938</a>)
-		<tr><td><a href="?n=4&v0=1&d0=y&v1=2&d1=y&v2=3&d2=n&v3=4&d3=n&description=CC1+(Angell%2C+1962+%3B+McCall%2C+1966)&N0=4&N1=3&N2=2&N3=1&K0%3B0=1&K0%3B1=2&K0%3B2=3&K0%3B3=4&K1%3B0=2&K1%3B1=1&K1%3B2=4&K1%3B3=3&K2%3B0=3&K2%3B1=4&K2%3B2=3&K2%3B3=4&K3%3B0=4&K3%3B1=3&K3%3B2=4&K3%3B3=3&A0%3B0=2&A0%3B1=1&A0%3B2=2&A0%3B3=1&A1%3B0=1&A1%3B1=2&A1%3B2=1&A1%3B3=2&A2%3B0=2&A2%3B1=1&A2%3B2=4&A2%3B3=3&A3%3B0=1&A3%3B1=2&A3%3B2=3&A3%3B3=4&C0%3B0=1&C0%3B1=4&C0%3B2=3&C0%3B3=4&C1%3B0=4&C1%3B1=1&C1%3B2=4&C1%3B3=3&C2%3B0=1&C2%3B1=4&C2%3B2=1&C2%3B3=4&C3%3B0=4&C3%3B1=1&C3%3B2=4&C3%3B3=1"><b>CC1</b></a><td>(<a href="https://doi.org/10.2307/2964651" style="color: rgb(220,255,255)" target="_blank">Angell, 1962</a>&nbsp;; <a href="https://doi.org/10.2307/2270458" style="color: rgb(220,255,255)" target="_blank">McCall, 1966</a>)
-		<tr><td><a href="?n=4&v0=true&d0=y&v1=both&d1=y&v2=neither&d2=n&v3=false&d3=n&description=FDE+(Dunn%2C+1976+%3B+Belnap%2C+1977)%0D%0A%0D%0AFDE+has+no+native+implication%2C+I+used+a+table+of+a+connexive+expansion+of+FDE+with+the+variable-sharing+property+shown+in+a+talk+by+Robbles+(2024)+%3A+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DHm1JAKULW1c&N0=false&N1=both&N2=neither&N3=true&K0%3B0=true&K0%3B1=both&K0%3B2=neither&K0%3B3=false&K1%3B0=both&K1%3B1=both&K1%3B2=false&K1%3B3=false&K2%3B0=neither&K2%3B1=false&K2%3B2=neither&K2%3B3=false&K3%3B0=false&K3%3B1=false&K3%3B2=false&K3%3B3=false&A0%3B0=true&A0%3B1=true&A0%3B2=true&A0%3B3=true&A1%3B0=true&A1%3B1=both&A1%3B2=true&A1%3B3=both&A2%3B0=true&A2%3B1=true&A2%3B2=neither&A2%3B3=neither&A3%3B0=true&A3%3B1=both&A3%3B2=neither&A3%3B3=false&C0%3B0=true&C0%3B1=neither&C0%3B2=neither&C0%3B3=false&C1%3B0=neither&C1%3B1=both&C1%3B2=neither&C1%3B3=neither&C2%3B0=neither&C2%3B1=neither&C2%3B2=both&C2%3B3=neither&C3%3B0=false&C3%3B1=both&C3%3B2=both&C3%3B3=true"><b>FDE</b></a>, a.k.a. Belnap&ndash;Dunn logic<td>(<a href="https://doi.org/10.1007/978-3-030-31136-0_3" style="color: rgb(220,255,255)" target="_blank">Dunn, 1976</a>&nbsp;; <a href="https://doi.org/10.1007/978-94-010-1161-7_2" style="color: rgb(220,255,255)" target="_blank">Belnap, 1977</a>)
+		<tr><td><a href="?n=4&v0=1&d0=y&v1=2&d1=y&v2=3&d2=n&v3=4&d3=n&description=CC1+(Angell%2C+1962+%3B+McCall%2C+1966)&N0=4&N1=3&N2=2&N3=1&K0%3B0=1&K0%3B1=2&K0%3B2=3&K0%3B3=4&K1%3B0=2&K1%3B1=1&K1%3B2=4&K1%3B3=3&K2%3B0=3&K2%3B1=4&K2%3B2=3&K2%3B3=4&K3%3B0=4&K3%3B1=3&K3%3B2=4&K3%3B3=3&A0%3B0=2&A0%3B1=1&A0%3B2=2&A0%3B3=1&A1%3B0=1&A1%3B1=2&A1%3B2=1&A1%3B3=2&A2%3B0=2&A2%3B1=1&A2%3B2=4&A2%3B3=3&A3%3B0=1&A3%3B1=2&A3%3B2=3&A3%3B3=4&C0%3B0=1&C0%3B1=4&C0%3B2=3&C0%3B3=4&C1%3B0=4&C1%3B1=1&C1%3B2=4&C1%3B3=3&C2%3B0=1&C2%3B1=4&C2%3B2=1&C2%3B3=4&C3%3B0=4&C3%3B1=1&C3%3B2=4&C3%3B3=1"><b>CC1</b></a><td>(<a href="https://doi.org/10.2307/2964651" style="color: rgb(220,255,255)" target="_blank">Angell, 1962</a>; <a href="https://doi.org/10.2307/2270458" style="color: rgb(220,255,255)" target="_blank">McCall, 1966</a>)
+		<tr><td><a href="?n=4&v0=true&d0=y&v1=both&d1=y&v2=neither&d2=n&v3=false&d3=n&description=FDE+(Dunn%2C+1976+%3B+Belnap%2C+1977)%0D%0A%0D%0AFDE+has+no+native+implication%2C+I+used+a+table+of+a+connexive+expansion+of+FDE+with+the+variable-sharing+property+shown+in+a+talk+by+Robbles+(2024)+%3A+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DHm1JAKULW1c&N0=false&N1=both&N2=neither&N3=true&K0%3B0=true&K0%3B1=both&K0%3B2=neither&K0%3B3=false&K1%3B0=both&K1%3B1=both&K1%3B2=false&K1%3B3=false&K2%3B0=neither&K2%3B1=false&K2%3B2=neither&K2%3B3=false&K3%3B0=false&K3%3B1=false&K3%3B2=false&K3%3B3=false&A0%3B0=true&A0%3B1=true&A0%3B2=true&A0%3B3=true&A1%3B0=true&A1%3B1=both&A1%3B2=true&A1%3B3=both&A2%3B0=true&A2%3B1=true&A2%3B2=neither&A2%3B3=neither&A3%3B0=true&A3%3B1=both&A3%3B2=neither&A3%3B3=false&C0%3B0=true&C0%3B1=neither&C0%3B2=neither&C0%3B3=false&C1%3B0=neither&C1%3B1=both&C1%3B2=neither&C1%3B3=neither&C2%3B0=neither&C2%3B1=neither&C2%3B2=both&C2%3B3=neither&C3%3B0=false&C3%3B1=both&C3%3B2=both&C3%3B3=true"><b>FDE</b></a>, a.k.a. Belnap&ndash;Dunn logic<td>(<a href="https://doi.org/10.1007/978-3-030-31136-0_3" style="color: rgb(220,255,255)" target="_blank">Dunn, 1976</a>; <a href="https://doi.org/10.1007/978-94-010-1161-7_2" style="color: rgb(220,255,255)" target="_blank">Belnap, 1977</a>)
 		<tr><td><a href="?n=3&v0=F&d0=n&v1=B&d1=y&v2=T&d2=y&N0=T&N1=B&N2=F&K0%3B0=F&K0%3B1=F&K0%3B2=F&K1%3B0=F&K1%3B1=B&K1%3B2=B&K2%3B0=F&K2%3B1=B&K2%3B2=T&A0%3B0=F&A0%3B1=B&A0%3B2=T&A1%3B0=B&A1%3B1=B&A1%3B2=T&A2%3B0=T&A2%3B1=T&A2%3B2=T&C0%3B0=T&C0%3B1=T&C0%3B2=T&C1%3B0=B&C1%3B1=B&C1%3B2=T&C2%3B0=F&C2%3B1=B&C2%3B2=T&description=LP+%28Priest%2C+1979%29%0D%0A%0D%0ALP+stands+for+logic+of+paradox"><b>LP</b></a><td>(<a href="https://doi.org/10.1007/BF00258428" style="color: rgb(220,255,255)" target="_blank">Priest, 1979</a>)
 		<tr><td><a href="?n=3&v0=T&d0=y&v1=*&d1=y&v2=F&d2=n&N0=F&N1=*&N2=T&K0%3B0=T&K0%3B1=*&K0%3B2=F&K1%3B0=*&K1%3B1=*&K1%3B2=F&K2%3B0=F&K2%3B1=F&K2%3B2=F&A0%3B0=T&A0%3B1=T&A0%3B2=T&A1%3B0=T&A1%3B1=*&A1%3B2=*&A2%3B0=T&A2%3B1=*&A2%3B2=F&C0%3B0=*&C0%3B1=F&C0%3B2=F&C1%3B0=*&C1%3B1=*&C1%3B2=F&C2%3B0=*&C2%3B1=*&C2%3B2=*&description=M3V+%28Mortensen%2C+1984+%3B+McCall%2C+2012%29%0D%0A%0D%0AMortensen’s+3-valued+logic."><b>M3V</b></a><td>(<a href="https://doi.org/10.1007/BF00935744" style="color: rgb(220,255,255)" target="_blank">Mortensen, 1984</a>; named as such from <a href="https://doi.org/10.1016/B978-0-444-52937-4.50008-3" style="color: rgb(220,255,255)" target="_blank">McCall, 2012</a>)
 		<tr><td>Example of a 3-valued <a href="?n=3&v0=3&d0=y&v1=2&d1=n&v2=1&d2=n&description=This+is+an+example+of+a+3-valued+model+for+a+%7B%E2%86%92%2C+%7E%7D-fragment+of+abelian+logic%2C+as+there+is+no+%28non-trivial%29+finite+abelian+%26ell%3B-groups+to+model+genuine+abelian+logics+%E2%80%94+but+if+all+we+care+about+is+satisfying+the+relativity+axiom+%28cf.+Meyer+%26+Slaney%29%2C+one+can+argue+we+do+not+need+the+lattice+part%2C+and+only+focus+on+%E2%86%92+and+%7E%2C+which+can+be+described+using+abelian+groups+%28some+of+which+are+indeed+finite%29.+Thus%2C+the+conjunction+and+disjunction+below+operations%2C+along+with+the+theorems+that+use+them%2C+are+mere+noise.&N0=1&N1=1&N2=3&K0%3B0=3&K0%3B1=2&K0%3B2=1&K1%3B0=2&K1%3B1=2&K1%3B2=1&K2%3B0=1&K2%3B1=1&K2%3B2=1&A0%3B0=3&A0%3B1=3&A0%3B2=3&A1%3B0=3&A1%3B1=2&A1%3B2=2&A2%3B0=3&A2%3B1=2&A2%3B2=1&C0%3B0=3&C0%3B1=2&C0%3B2=1&C1%3B0=1&C1%3B1=3&C1%3B2=2&C2%3B0=2&C2%3B1=1&C2%3B2=3">{&rarr;, ~}-fragment of abelian logic</a><td>(<a href="https://doi.org/10.2307/j.ctv2x8v8c7.12" style="color: rgb(220,255,255)" target="_blank">Meyer &amp; Slaney, 1989</a>)
@@ -277,12 +277,12 @@ for ($i = 0; $i < $n; $i++) {
 		?>
 		</table>
 <tr><td><b>Conjunction :
-		<table cellspacing="0" b><tr><td b><i>A</i>&nbsp;&amp;&nbsp;<i>B</i><?php
+		<table cellspacing="0" b><tr><td b><i>A</i>&amp;<i>B</i><?php
 			for ($i = 0; $i < $n; $i++) {
-				print "<td b><i>B</i>&nbsp;=&nbsp;".$v[$i];
+				print "<td b><i>B</i>=".$v[$i];
 			}
 			for ($i1 = 0; $i1 < $n; $i1++) {
-				print "\n<tr><td b><i>A</i>&nbsp;=&nbsp;".$v[$i1];
+				print "\n<tr><td b><i>A</i>=".$v[$i1];
 				for ($i2 = 0; $i2 < $n; $i2++) {
 					print "<td><center><select name='K".strval($i1).";".strval($i2)."'>";
 					for ($j = 0; $j < $n; $j++) {
@@ -297,12 +297,12 @@ for ($i = 0; $i < $n; $i++) {
 		?>
 		</table>
 <tr><td><b>Disjunction :
-		<table cellspacing="0" b><tr><td b><i>A</i>&nbsp;&or;&nbsp;<i>B</i><?php
+		<table cellspacing="0" b><tr><td b><i>A</i>&or;<i>B</i><?php
 			for ($i = 0; $i < $n; $i++) {
-				print "<td b><i>B</i>&nbsp;=&nbsp;".$v[$i];
+				print "<td b><i>B</i>=".$v[$i];
 			}
 			for ($i1 = 0; $i1 < $n; $i1++) {
-				print "\n<tr><td b><i>A</i>&nbsp;=&nbsp;".$v[$i1];
+				print "\n<tr><td b><i>A</i>=".$v[$i1];
 				for ($i2 = 0; $i2 < $n; $i2++) {
 					print "<td><center><select name='A".strval($i1).";".strval($i2)."'>";
 					for ($j = 0; $j < $n; $j++) {
@@ -317,12 +317,12 @@ for ($i = 0; $i < $n; $i++) {
 		?>
 		</table>
 <tr><td><b>Implication :
-		<table cellspacing="0" b><tr><td b><i>A</i>&nbsp;&rarr;&nbsp;<i>B</i><?php
+		<table cellspacing="0" b><tr><td b><i>A</i>&rarr;<i>B</i><?php
 			for ($i = 0; $i < $n; $i++) {
-				print "<td b><i>B</i>&nbsp;=&nbsp;".$v[$i];
+				print "<td b><i>B</i>=".$v[$i];
 			}
 			for ($i1 = 0; $i1 < $n; $i1++) {
-				print "\n<tr><td b><i>A</i>&nbsp;=&nbsp;".$v[$i1];
+				print "\n<tr><td b><i>A</i>=".$v[$i1];
 				for ($i2 = 0; $i2 < $n; $i2++) {
 					print "<td><center><select name='C".strval($i1).";".strval($i2)."'>";
 					for ($j = 0; $j < $n; $j++) {
@@ -369,9 +369,9 @@ for ($i = 0; $i < $n; $i++) {
 ?>
 <center><b>Custom inference test</b></center>
 <hr>
-<b>Number of variables&nbsp;:</b> <input type="number" name="inf_nv" min="1" max="5" value="<?=$_GET["inf_nv"];?>"><br>
-<b>Number of premises&nbsp;:</b> <input type="number" name="inf_np" min="0" max="5" value="<?=$_GET["inf_np"];?>"><br>
-<b>Number of conclusions&nbsp;:</b> <input type="number" name="inf_nc" min="1" max="5" value="<?=$_GET["inf_nc"];?>"><br>
+<b>Number of variables:</b> <input type="number" name="inf_nv" min="1" max="5" value="<?=$_GET["inf_nv"];?>"><br>
+<b>Number of premises:</b> <input type="number" name="inf_np" min="0" max="5" value="<?=$_GET["inf_np"];?>"><br>
+<b>Number of conclusions:</b> <input type="number" name="inf_nc" min="1" max="5" value="<?=$_GET["inf_nc"];?>"><br>
 <input type="submit" value="submit">
 </form><br><br>
 &bullet; WFF (well-formed formulas) are case-sensitive, but space-insensitive.<br>
@@ -410,7 +410,7 @@ for ($i = 0; $i < $n; $i++) {
 <input type="hidden" name="inf_nv" value="<?=$_GET["inf_nv"];?>">
 <input type="hidden" name="inf_np" value="<?=$_GET["inf_np"];?>">
 <input type="hidden" name="inf_nc" value="<?=$_GET["inf_nc"];?>">
-<b>Premise(s)&nbsp;:</b><br>
+<b>Premise(s):</b><br>
 <?php
 for ($i = 0; $i < $_GET["inf_np"]; $i++)
 	if (isset($_GET["inf_p$i"]))
@@ -418,7 +418,7 @@ for ($i = 0; $i < $_GET["inf_np"]; $i++)
 	else
 	print "<input type='text' name='inf_p$i'><br>\n";
 ?><br>
-<b>Conclusion(s)&nbsp;:</b><br>
+<b>Conclusion(s):</b><br>
 <?php
 for ($i = 0; $i < $_GET["inf_nc"]; $i++)
 	if (isset($_GET["inf_c$i"]))
@@ -604,9 +604,9 @@ function loops ($num) {
 	return $ret;
 }
 function counter_format ($num) {
-	$ret = "\"<i>A</i>&nbsp;=&nbsp;\".\$v0";
+	$ret = "\"<i>A</i>=\".\$v0";
 	for ($i = 1; $i < $num; $i++) {
-		$ret .= ".\",<br>\\n<i>".['A','B','C','D','E'][$i]."</i>&nbsp;=&nbsp;\".\$v$i";
+		$ret .= ".\",<br>\\n<i>".['A','B','C','D','E'][$i]."</i>=\".\$v$i";
 	}
 	$ret .= ";";
 	return $ret;
@@ -621,11 +621,11 @@ eval("\$bool = True;
 	\$counter .= ".counter_format($_GET["inf_nv"])."
 	\$counter .= '<hr>\n';
 }
-print \"<b>Valid&nbsp;?</b> \";
+print \"<b>Valid?</b> \";
 if (\$bool) {
-	print \"Yes&nbsp;!\";
+	print \"Yes!\";
 } else {
-	print \"Nope.<br>\\n<b>All counter-examples&nbsp;:</b><br>\\n\$counter\";
+	print \"Nope.<br>\\n<b>All counter-examples:</b><br>\\n\$counter\";
 }");
 }
 ?></pre>
@@ -651,9 +651,9 @@ for ($i = 0; $i < $n; $i++) {
 }
 ?>
 <hr>
-<b>Number of variables&nbsp;:</b> <input type="number" name="inf_nv" min="1" max="5"><br>
-<b>Number of premises&nbsp;:</b> <input type="number" name="inf_np" min="0" max="5"><br>
-<b>Number of conclusions&nbsp;:</b> <input type="number" name="inf_nc" min="1" max="5"><br>
+<b>Number of variables:</b> <input type="number" name="inf_nv" min="1" max="5"><br>
+<b>Number of premises:</b> <input type="number" name="inf_np" min="0" max="5"><br>
+<b>Number of conclusions:</b> <input type="number" name="inf_nc" min="1" max="5"><br>
 <input type="submit" value="submit">
 </form>
 <?php } ?>
@@ -681,15 +681,15 @@ for ($i = 0; $i < $n; $i++) {
 		if (in_array($v[$i], $designated)) {
 			if (!in_array($N[$N[$v[$i]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -700,15 +700,15 @@ for ($i = 0; $i < $n; $i++) {
 		if (in_array($N[$N[$v[$i]]], $designated)) {
 			if (!in_array($v[$i], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -718,14 +718,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($C[$v[$i]][$N[$N[$v[$i]]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -735,14 +735,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($C[$N[$N[$v[$i]]]][$v[$i]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -755,15 +755,15 @@ for ($i = 0; $i < $n; $i++) {
 		if (in_array($v[$i], $designated)) {
 			if (!in_array($N[$v[$i]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -774,15 +774,15 @@ for ($i = 0; $i < $n; $i++) {
 		if (in_array($N[$v[$i]], $designated)) {
 			if (!in_array($v[$i], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -792,14 +792,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($C[$v[$i]][$N[$v[$i]]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -809,14 +809,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($C[$N[$v[$i]]][$v[$i]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -830,15 +830,15 @@ for ($i = 0; $i < $n; $i++) {
 		if (in_array($v[$i], $designated)) {
 			if (!in_array($K[$v[$i]][$v[$i]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -849,15 +849,15 @@ for ($i = 0; $i < $n; $i++) {
 		if (in_array($K[$v[$i]][$v[$i]], $designated)) {
 			if (!in_array($v[$i], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -867,14 +867,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($C[$v[$i]][$K[$v[$i]][$v[$i]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -884,14 +884,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($C[$K[$v[$i]][$v[$i]]][$v[$i]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -902,14 +902,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($N[$K[$v[$i]][$N[$v[$i]]]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{{\sim}({\sim}A\;\&\;A)}$$
@@ -918,14 +918,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($N[$K[$N[$v[$i]]][$v[$i]]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -938,16 +938,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($v[$i], $designated) and in_array($v[$j], $designated)) {
 				if (!in_array($K[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -960,16 +960,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($v[$i], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -981,16 +981,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($v[$j], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1001,15 +1001,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$K[$v[$i]][$v[$j]]][$v[$i]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1020,15 +1020,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$K[$v[$i]][$v[$j]]][$v[$j]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1041,16 +1041,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($K[$v[$j]][$v[$i]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{(A\;\&\;B)\to(B\;\&\;A)}$$
@@ -1060,15 +1060,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$K[$v[$i]][$v[$j]]][$K[$v[$j]][$v[$i]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1081,16 +1081,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($v[$i], $designated) and in_array($N[$v[$i]], $designated)) {
 				if (!in_array($v[$j], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1102,16 +1102,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$v[$i]][$N[$v[$i]]], $designated)) {
 				if (!in_array($v[$j], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1123,16 +1123,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$N[$v[$i]]][$v[$i]], $designated)) {
 				if (!in_array($v[$j], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1143,15 +1143,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$K[$v[$i]][$N[$v[$i]]]][$v[$j]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1162,15 +1162,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$K[$N[$v[$i]]][$v[$i]]][$v[$j]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1184,15 +1184,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$K[$v[$i]][$v[$j]]][$v[$k]], $designated))
 			if (!in_array($K[$v[$i]][$K[$v[$j]][$v[$k]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\;\&\;(B\;\&\;C)}{(A\;\&\;B)\;\&\;C}$$
@@ -1204,15 +1204,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$v[$i]][$K[$v[$j]][$v[$k]]], $designated))
 			if (!in_array($K[$K[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1226,15 +1226,15 @@ for ($i = 0; $i < $n; $i++) {
 		if (in_array($v[$i], $designated)) {
 			if (!in_array($A[$v[$i]][$v[$i]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1245,15 +1245,15 @@ for ($i = 0; $i < $n; $i++) {
 		if (in_array($A[$v[$i]][$v[$i]], $designated)) {
 			if (!in_array($v[$i], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1263,14 +1263,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($C[$v[$i]][$A[$v[$i]][$v[$i]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1280,14 +1280,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($C[$A[$v[$i]][$v[$i]]][$v[$i]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+				$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1298,14 +1298,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($A[$v[$i]][$N[$v[$i]]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{{\sim}A\lor A}$$
@@ -1314,14 +1314,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($A[$N[$v[$i]]][$v[$i]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{A\to(B\lor{\sim}B)}$$
@@ -1331,14 +1331,14 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++)
 		if (!in_array($C[$v[$i]][$A[$v[$j]][$N[$v[$j]]]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+			$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{A\to({\sim}B\lor B)}$$
@@ -1348,14 +1348,14 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++)
 		if (!in_array($C[$v[$i]][$A[$N[$v[$j]]][$v[$j]]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+			$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1368,16 +1368,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($v[$i], $designated)) {
 				if (!in_array($A[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1389,16 +1389,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($v[$j], $designated)) {
 				if (!in_array($A[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1409,15 +1409,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$v[$i]][$A[$v[$i]][$v[$j]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{B\to(A\lor B)}$$
@@ -1427,15 +1427,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$v[$j]][$A[$v[$i]][$v[$j]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1448,16 +1448,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($v[$i], $designated) and in_array($N[$v[$j]], $designated)) {
 				if (!in_array($A[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}A\quad B}{A\lor B}$$
@@ -1468,16 +1468,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($N[$v[$i]], $designated) and in_array($v[$j], $designated)) {
 				if (!in_array($A[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1490,16 +1490,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($v[$i], $designated)) {
 				if (!in_array($N[$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor B\quad B}{{\sim}A}$$
@@ -1510,16 +1510,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($v[$j], $designated)) {
 				if (!in_array($N[$v[$i]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1532,16 +1532,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($v[$i], $designated) and !in_array($v[$j], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1554,16 +1554,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($A[$v[$j]][$v[$i]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{(A\lor B)\to(B\lor A)}$$
@@ -1573,15 +1573,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$A[$v[$i]][$v[$j]]][$A[$v[$j]][$v[$i]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1594,16 +1594,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($N[$v[$i]], $designated)) {
 				if (!in_array($v[$j], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor B\quad{\sim}B}A$$
@@ -1614,16 +1614,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($N[$v[$j]], $designated)) {
 				if (!in_array($v[$i], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1636,16 +1636,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$N[$v[$i]]][$v[$j]], $designated) and in_array($v[$i], $designated)) {
 				if (!in_array($v[$j], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor{\sim}B\quad B}A$$
@@ -1656,16 +1656,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$v[$i]][$N[$v[$j]]], $designated) and in_array($v[$j], $designated)) {
 				if (!in_array($v[$i], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1679,17 +1679,17 @@ for ($i = 0; $i < $n; $i++) {
 				if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($C[$v[$i]][$v[$k]], $designated) and in_array($C[$v[$j]][$v[$k]], $designated)) {
 					if (!in_array($v[$k], $designated)) {
 						$bool = False;
-						$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 					}
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1703,15 +1703,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$A[$v[$i]][$v[$j]]][$v[$k]], $designated))
 			if (!in_array($A[$v[$i]][$A[$v[$j]][$v[$k]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor(B\lor C)}{(A\lor B)\lor C}$$
@@ -1723,15 +1723,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$v[$i]][$A[$v[$j]][$v[$k]]], $designated))
 			if (!in_array($A[$A[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -1746,17 +1746,17 @@ for ($i = 0; $i < $n; $i++) {
 				if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($C[$v[$i]][$v[$k]], $designated) and in_array($C[$v[$j]][$v[$l]], $designated)) {
 					if (!in_array($A[$v[$k]][$v[$l]], $designated)) {
 						$bool = False;
-						$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k].",<br>\n<i>D</i>&nbsp;=&nbsp;".$v[$l];
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k].",<br>\n<i>D</i>=".$v[$l];
 					}
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor B\quad A\to C\quad B\to D}{D\lor C}$$
@@ -1769,17 +1769,17 @@ for ($i = 0; $i < $n; $i++) {
 				if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($C[$v[$i]][$v[$k]], $designated) and in_array($C[$v[$j]][$v[$l]], $designated)) {
 					if (!in_array($A[$v[$l]][$v[$k]], $designated)) {
 						$bool = False;
-						$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k].",<br>\n<i>D</i>&nbsp;=&nbsp;".$v[$l];
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k].",<br>\n<i>D</i>=".$v[$l];
 					}
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1794,17 +1794,17 @@ for ($i = 0; $i < $n; $i++) {
 				if (in_array($C[$v[$i]][$v[$k]], $designated) and in_array($C[$v[$j]][$v[$l]], $designated) and in_array($A[$N[$v[$k]]][$N[$v[$l]]], $designated)) {
 					if (!in_array($A[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
 						$bool = False;
-						$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k].",<br>\n<i>D</i>&nbsp;=&nbsp;".$v[$l];
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k].",<br>\n<i>D</i>=".$v[$l];
 					}
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to C\quad B\to D\quad{\sim}C\lor{\sim}D}{{\sim}B\lor{\sim}A}$$
@@ -1817,17 +1817,17 @@ for ($i = 0; $i < $n; $i++) {
 				if (in_array($C[$v[$i]][$v[$k]], $designated) and in_array($C[$v[$j]][$v[$l]], $designated) and in_array($A[$N[$v[$k]]][$N[$v[$l]]], $designated)) {
 					if (!in_array($A[$N[$v[$j]]][$N[$v[$i]]], $designated)) {
 						$bool = False;
-						$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k].",<br>\n<i>D</i>&nbsp;=&nbsp;".$v[$l];
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k].",<br>\n<i>D</i>=".$v[$l];
 					}
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1841,16 +1841,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($N[$K[$v[$i]][$v[$j]]], $designated)) {
 				if (!in_array($A[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}A\lor{\sim}B}{{\sim}(A\;\&\;B)}$$
@@ -1861,16 +1861,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
 				if (!in_array($N[$K[$v[$i]][$v[$j]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}(A\lor B)}{{\sim}A\;\&\;{\sim}B}$$
@@ -1881,16 +1881,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($N[$A[$v[$i]][$v[$j]]], $designated)) {
 				if (!in_array($K[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}A\;\&\;{\sim}B}{{\sim}(A\lor B)}$$
@@ -1901,16 +1901,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
 				if (!in_array($N[$A[$v[$i]][$v[$j]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -1924,15 +1924,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$v[$i]][$A[$v[$j]][$v[$k]]], $designated))
 			if (!in_array($A[$K[$v[$i]][$v[$j]]][$K[$v[$i]][$v[$k]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\lor(B\;\&\;C)}{(A\lor B)\;\&\;(A\lor C)}$$
@@ -1944,15 +1944,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$v[$i]][$K[$v[$j]][$v[$k]]], $designated))
 			if (!in_array($K[$A[$v[$i]][$v[$j]]][$A[$v[$i]][$v[$k]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(B\lor C)\;\&\;A}{(B\;\&\;A)\lor(C\;\&\;A)}$$
@@ -1964,15 +1964,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$A[$v[$j]][$v[$k]]][$v[$i]], $designated))
 			if (!in_array($A[$K[$v[$j]][$v[$i]]][$K[$v[$k]][$v[$i]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(B\;\&\;C)\lor A}{(B\lor A)\;\&\;(C\lor A)}$$
@@ -1984,15 +1984,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$K[$v[$j]][$v[$k]]][$v[$i]], $designated))
 			if (!in_array($K[$A[$v[$j]][$v[$i]]][$A[$v[$k]][$v[$i]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(A\;\&\;B)\lor(A\;\&\;C)}{A\;\&\;(B\lor C)}$$
@@ -2004,15 +2004,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$K[$v[$i]][$v[$j]]][$K[$v[$i]][$v[$k]]], $designated))
 			if (!in_array($K[$v[$i]][$A[$v[$j]][$v[$k]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(A\lor B)\;\&\;(A\lor C)}{A\lor(B\;\&\;C)}$$
@@ -2024,15 +2024,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$A[$v[$i]][$v[$j]]][$A[$v[$i]][$v[$k]]], $designated))
 			if (!in_array($A[$v[$i]][$K[$v[$j]][$v[$k]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(B\;\&\;A)\lor(C\;\&\;A)}{(B\lor C)\;\&\;A}$$
@@ -2044,15 +2044,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$K[$v[$j]][$v[$i]]][$K[$v[$k]][$v[$i]]], $designated))
 			if (!in_array($K[$A[$v[$j]][$v[$k]]][$v[$i]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(B\lor A)\;\&\;(C\lor A)}{(B\;\&\;C)\lor A}$$
@@ -2064,15 +2064,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$A[$v[$j]][$v[$i]]][$A[$v[$k]][$v[$i]]], $designated))
 			if (!in_array($A[$K[$v[$j]][$v[$k]]][$v[$i]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2084,14 +2084,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($C[$v[$i]][$v[$i]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2102,14 +2102,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($N[$C[$v[$i]][$v[$i]]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2120,14 +2120,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($N[$C[$v[$i]][$N[$v[$i]]]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2137,14 +2137,14 @@ for ($i = 0; $i < $n; $i++) {
 	for ($i = 0; $i < $n; $i++) {
 		if (!in_array($N[$C[$N[$v[$i]]][$v[$i]]], $designated)) {
 			$bool = False;
-			$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i];
+			$counter = "<i>A</i>=".$v[$i];
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2157,16 +2157,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated) and in_array($v[$i], $designated)) {
 				if (!in_array($v[$j], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2179,16 +2179,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated) and in_array($N[$v[$j]], $designated)) {
 				if (!in_array($N[$v[$i]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2200,15 +2200,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$v[$j]][$C[$v[$i]][$v[$j]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2220,15 +2220,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$N[$v[$i]]][$C[$v[$i]][$v[$j]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2241,16 +2241,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$N[$v[$j]]][$N[$v[$i]]], $designated)) {
 				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2262,16 +2262,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($C[$N[$v[$j]]][$N[$v[$i]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2284,16 +2284,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($C[$v[$j]][$v[$i]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{(A\to B)\to(B\to A)}$$
@@ -2303,15 +2303,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$C[$v[$i]][$v[$j]]][$C[$v[$j]][$v[$i]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2324,16 +2324,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($v[$i], $designated) and in_array($v[$j], $designated)) {
 				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}A$$
@@ -2344,16 +2344,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($v[$i], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}B$$
@@ -2364,16 +2364,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($v[$j], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -2386,16 +2386,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($A[$N[$v[$i]]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}{B\lor{\sim}A}$$
@@ -2406,16 +2406,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($A[$v[$j]][$N[$v[$i]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}A\lor B}{A\to B}$$
@@ -2426,16 +2426,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$N[$v[$i]]][$v[$j]], $designated)) {
 				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{B\lor{\sim}A}{A\to B}$$
@@ -2446,16 +2446,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($A[$v[$j]][$N[$v[$i]]], $designated)) {
 				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}{{\sim}(A\;\&\;{\sim}B)}$$
@@ -2466,16 +2466,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($N[$K[$v[$i]][$N[$v[$j]]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}{{\sim}({\sim}B\;\&\;A)}$$
@@ -2486,16 +2486,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($N[$K[$N[$v[$j]]][$v[$i]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}(A\;\&\;{\sim}B)}{A\to B}$$
@@ -2506,16 +2506,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($N[$K[$v[$i]][$N[$v[$j]]]], $designated)) {
 				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}({\sim}B\;\&\;A)}{A\to B}$$
@@ -2526,16 +2526,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($N[$K[$N[$v[$j]]][$v[$i]]], $designated)) {
 				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -2548,16 +2548,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
 				if (!in_array($v[$i], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}(A\to B)}{{\sim}B}$$
@@ -2568,16 +2568,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
 				if (!in_array($N[$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{{\sim}(A\to B)}{A\;\&\;{\sim}B}$$
@@ -2588,16 +2588,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
 				if (!in_array($K[$v[$i]][$N[$v[$j]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\;\&\;{\sim}B}{{\sim}(A\to B)}$$
@@ -2608,16 +2608,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($K[$v[$i]][$N[$v[$j]]], $designated)) {
 				if (!in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\quad{\sim}B}{{\sim}(A\to B)}$$
@@ -2628,16 +2628,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($v[$i], $designated) and in_array($N[$v[$j]], $designated)) {
 				if (!in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2651,15 +2651,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$C[$v[$i]][$v[$j]]][$v[$k]], $designated))
 			if (!in_array($C[$v[$i]][$C[$v[$j]][$v[$k]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to(B\to C)}{(A\to B)\to C}$$
@@ -2671,15 +2671,15 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$C[$v[$j]][$v[$k]]], $designated))
 			if (!in_array($C[$C[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2691,15 +2691,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$C[$v[$i]][$v[$j]]][$N[$C[$v[$i]][$N[$v[$j]]]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2710,15 +2710,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$C[$v[$i]][$N[$v[$j]]]][$N[$C[$v[$i]][$v[$j]]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2731,16 +2731,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($N[$C[$v[$i]][$N[$v[$j]]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2752,16 +2752,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$N[$v[$j]]], $designated)) {
 				if (!in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2773,15 +2773,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$N[$C[$v[$i]][$N[$v[$j]]]]][$C[$v[$i]][$v[$j]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2792,15 +2792,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$N[$C[$v[$i]][$v[$j]]]][$C[$v[$i]][$N[$v[$j]]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -2813,16 +2813,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($N[$C[$v[$i]][$N[$v[$j]]]], $designated)) {
 				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2834,16 +2834,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
 				if (!in_array($C[$v[$i]][$N[$v[$j]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2855,15 +2855,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$C[$C[$v[$i]][$v[$j]]][$v[$i]]][$v[$i]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2875,15 +2875,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($C[$C[$C[$v[$i]][$v[$j]]][$v[$j]]][$v[$i]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -2896,16 +2896,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($C[$v[$i]][$K[$v[$i]][$v[$j]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{A\to B}{A\to(B\;\&\;A)}$$
@@ -2916,16 +2916,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
 				if (!in_array($C[$v[$i]][$K[$v[$j]][$v[$i]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 	
@@ -2937,15 +2937,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($N[$K[$C[$v[$i]][$v[$j]]][$C[$N[$v[$i]]][$v[$j]]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{{\sim}(({\sim}A\to B)\;\&\;(A\to B))}$$
@@ -2955,15 +2955,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($N[$K[$C[$N[$v[$i]]][$v[$j]]][$C[$v[$i]][$v[$j]]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{{\sim}((A\to B)\;\&\;(A\to{\sim}B))}$$
@@ -2973,15 +2973,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($N[$K[$C[$v[$i]][$v[$j]]][$C[$v[$i]][$N[$v[$j]]]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{{\sim}((A\to{\sim}B)\;\&\;(A\to B))}$$
@@ -2991,15 +2991,15 @@ for ($i = 0; $i < $n; $i++) {
 		for ($j = 0; $j < $n; $j++) {
 			if (!in_array($N[$K[$C[$v[$i]][$N[$v[$j]]]][$C[$v[$i]][$v[$j]]]], $designated)) {
 				$bool = False;
-				$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -3013,17 +3013,17 @@ for ($i = 0; $i < $n; $i++) {
 				if (in_array($C[$v[$i]][$C[$v[$j]][$v[$k]]], $designated)) {
 					if (!in_array($C[$K[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
 						$bool = False;
-						$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 					}
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\frac{(A\;\&\;B)\to C}{A\to(B\to C)}$$
@@ -3035,17 +3035,17 @@ for ($i = 0; $i < $n; $i++) {
 				if (in_array($C[$K[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
 					if (!in_array($C[$v[$i]][$C[$v[$j]][$v[$k]]], $designated)) {
 						$bool = False;
-						$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 					}
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{(A\to(B\to C))\to((A\;\&\;B)\to C)}$$
@@ -3056,16 +3056,16 @@ for ($i = 0; $i < $n; $i++) {
 			for ($k = 0; $k < $n; $k++) {
 				if (!in_array($C[$C[$v[$i]][$C[$v[$j]][$v[$k]]]][$C[$K[$v[$i]][$v[$j]]][$v[$k]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td valign='top'>$$\overline{((A\;\&\;B)\to C)\to(A\to(B\to C))}$$
@@ -3076,16 +3076,16 @@ for ($i = 0; $i < $n; $i++) {
 			for ($k = 0; $k < $n; $k++) {
 				if (!in_array($C[$C[$K[$v[$i]][$v[$j]]][$v[$k]]][$C[$v[$i]][$C[$v[$j]][$v[$k]]]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -3099,17 +3099,17 @@ for ($i = 0; $i < $n; $i++) {
 				if (in_array($C[$v[$i]][$v[$j]], $designated) and in_array($C[$v[$j]][$v[$k]], $designated)) {
 					if (!in_array($C[$v[$i]][$v[$k]], $designated)) {
 						$bool = False;
-						$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j].",<br>\n<i>C</i>&nbsp;=&nbsp;".$v[$k];
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
 					}
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -3122,16 +3122,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated) and in_array($v[$j], $designated)) {
 				if (!in_array($v[$i], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 
@@ -3144,16 +3144,16 @@ for ($i = 0; $i < $n; $i++) {
 			if (in_array($C[$v[$i]][$v[$j]], $designated) and in_array($N[$v[$i]], $designated)) {
 				if (!in_array($N[$v[$j]], $designated)) {
 					$bool = False;
-					$counter = "<i>A</i>&nbsp;=&nbsp;".$v[$i].",<br>\n<i>B</i>&nbsp;=&nbsp;".$v[$j];
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
 				}
 			}
 		}
 	}
-	print "<b>Valid&nbsp;?</b> ";
+	print "<b>Valid?</b> ";
 	if ($bool) {
-		print "Yes&nbsp;!";
+		print "Yes!";
 	} else {
-		print "Nope.<br>\n<b>Here's a counter-example&nbsp;:</b><br>\n$counter";
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
 	}
 	?>
 <tr><td colspan='2' align='center'><hr>
