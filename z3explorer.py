@@ -375,7 +375,7 @@ while not found :
     should_we_satisfy("dne", 1)
     # connexive
     should_we_satisfy("anticonditional proof", 1)
-    should_we_satisfy("ponens modus", 1)
+    should_we_satisfy("ponens modus", .5)
     should_we_satisfy("antiaddition", 1)
     should_we_satisfy("antisimplification", 1)
     should_we_satisfy("antidisjunction", 1)
