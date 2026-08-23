@@ -352,7 +352,7 @@ while not found :
     # rule switches
     
     should_we_satisfy("consistent", .5)
-    # should_we_satisfy("negtriviality", 0)
+    should_we_satisfy("negtriviality", .5)
     should_we_satisfy("triviality", 0)
     should_we_satisfy("identity", 1)
     should_we_satisfy("cut", 1)
@@ -370,27 +370,17 @@ while not found :
     should_we_satisfy("simplification", 1)
     should_we_satisfy("proof of negation", .5)
     should_we_satisfy("modus tollens", .5)
+    
     should_we_satisfy("distrib", 1)
+    
     should_we_satisfy("dni", 1)
     should_we_satisfy("dne", 1)
-    # connexive
     should_we_satisfy("anticonditional proof", 1)
-    should_we_satisfy("ponens modus", .5)
+    should_we_satisfy("ponens modus", 1)
     should_we_satisfy("antiaddition", 1)
     should_we_satisfy("antisimplification", 1)
     should_we_satisfy("antidisjunction", 1)
     should_we_satisfy("anticonjunction", 1)
-    # s.add(And([le(empty, neg(meet(imp(a,b),imp(neg(a),b)))) for a in K for b in K])) # abelard
-    # s.add(And([le(empty, neg(meet(imp(a,b),imp(a,neg(b))))) for a in K for b in K])) # abelard
-    
-    # s.add(Or([Not(le(empty, imp(a,neg(a)))) for a in K]))
-    # s.add(Or([Not(le(empty, imp(neg(a),a))) for a in K]))
-    """
-    s.add(Or([neg(a) != a for a in K]))
-    s.add(Or([Not(le(empty, imp(neg(a),a))) for a in K]))
-    s.add(Or([Not(le(empty, neg(imp(a,a)))) for a in K]))
-    s.add(And(neg(2) == 2, neg(3) == 3))
-    """
     
     print(f"Solving at size {size}...")
     
