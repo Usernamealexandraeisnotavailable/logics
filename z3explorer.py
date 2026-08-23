@@ -2,7 +2,7 @@ from z3 import *
 from itertools import product
 
 found = False
-size = 6
+size = 2
 
 while not found :
     
