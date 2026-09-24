@@ -182,8 +182,8 @@ b<?php } ?></textarea>
         <textarea style="width: 100%; height: 100pt" name="txt<?=$n;?>" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+' '+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"><?php if (!isset($_GET["txt1"])) { ?>Not(Entails(a,b))<?php } ?></textarea>
 <tr><td colspan="2" style="text-align: center; border-top: 0pt">
 <fieldset><legend><b><i>Type of rule:</i></b></legend>
-    <input type="radio" name="typ<?=$n;?>" value="And" id="And<?=$n;?>" checked> <label for="And<?=$n;?>">Universal</label><br>
-    <input type="radio" name="typ<?=$n;?>" value="Or" id="Or<?=$n;?>"> <label for="Or<?=$n;?>">Existential</label>
+    <input type="radio" name="typ<?=$n;?>" value="And" id="And<?=$n;?>"<?php if (isset($_GET["txt1"])) { ?> checked<?php } ?>> <label for="And<?=$n;?>">Universal</label><br>
+    <input type="radio" name="typ<?=$n;?>" value="Or" id="Or<?=$n;?>"<?php if (!isset($_GET["txt1"])) { ?> checked<?php } ?>> <label for="Or<?=$n;?>">Existential</label>
 </fieldset>
 <?php
 }
