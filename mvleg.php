@@ -1,6 +1,7 @@
 <title>Many-Valued Logic Explorer Generator</title>
 <script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>
 <style>
+h1 { margin: 0pt; margin-top: 5pt }
 body { background-color: black; color: white }
 textarea { color: white; background-color: rgb(64,64,64) }
 [code] { font-family: Courier }
@@ -80,7 +81,8 @@ function processed ($i) {
 <h1><a href="mvleg.php">Many-Valued Logic Explorer Generator</a></h1>
 Install Python on <a href="https://www.python.org" target="_blank" code>https://www.python.org</a><br>
 To install PIP, follow instructions from <a href="https://pip.pypa.io/" target="_blank" code>https://pip.pypa.io/</a><br>
-To install Z3, follow instructions from <a href="https://pypi.org/project/z3-solver/" target="_blank" code>https://pypi.org/project/z3-solver/</a>
+To install Z3, follow instructions from <a href="https://pypi.org/project/z3-solver/" target="_blank" code>https://pypi.org/project/z3-solver/</a><br>
+<i>(Source code <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvleg.php" target="_blank">here</a>)</i>
 
 <tr style="height: 70%">
 <td style="height: 90%; width: 50%" valign="top" align="center">
