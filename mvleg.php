@@ -1,4 +1,4 @@
-<title>Many-Valued Logic Explorer Generator</title>
+<title>Many-Valued Logic Explorer Generator (No AI :3c)</title>
 <meta name="description" content="An online tool that takes a proof calculus and designs an SAT solving algorithm to find sound many-valued functional semantics (with eventual user-input restrictions).">
 <meta name="author" content="alexandræ">
 <script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>
