@@ -326,6 +326,26 @@ while not found :
             )
             for a, b in product(*([V]*2))
         ]))
+    s.add(And([ # Boths and Neithers in the middle :3
+            Implies(
+                And(
+                    a == N(a),
+                    b != N(b),
+                    Entails(Neutral,a) == Entails(Neutral,b)
+                ),
+                And(
+                    Implies(
+                        Not(Entails(Neutral,a)),
+                        b <= a
+                    ),
+                    Implies(
+                        Entails(Neutral,a),
+                        a <= b
+                    )
+                )
+            )
+            for a, b in product(*([V]*2))
+        ]))
     s.add(And([ # Neutral = inf(V^+) under integer ordering
             Implies(
                 Entails(Neutral, a),
