@@ -95,7 +95,10 @@ To install Z3, follow instructions from <a href="https://pypi.org/project/z3-sol
 <tr style="height: 70%">
 <td style="height: 90%; width: 50%" valign="top" align="center">
 <div style="overflow:scroll; width:100%; height: 90%">
-
+<h2>Presentation</h2>
+<table style="width: 80%"><tr><td style="text-align: justify">
+Have a proof calculus and want to show it's non-trivial? Or variable sharing? Or non-symmetric implication? Or basically anything of the form &Gamma;&nvdash;<i>p</i> (existentially or universally)? Sounds like you need a sound (finitely) many-valued model! If one exists, this tool <b>will</b> find it. Guaranteed 100% without LLM hallucination (it uses the Z3 SAT solver, and most importantly, not an ounce of AI). Even this page's HTML and PHP code are made with my <s>paws</s> <i>hands</i> all the way through (well, given how garbage it is, it better be).
+</table>
 <h2>Metasyntax</h2>
 <?php
 foreach ($sanitizedGET as $i => $j) {
