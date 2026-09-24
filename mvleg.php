@@ -90,7 +90,7 @@ function processed ($i) {
 Install Python on <a href="https://www.python.org" target="_blank" code>https://www.python.org</a><br>
 To install PIP, follow instructions from <a href="https://pip.pypa.io/" target="_blank" code>https://pip.pypa.io/</a><br>
 To install Z3, follow instructions from <a href="https://pypi.org/project/z3-solver/" target="_blank" code>https://pypi.org/project/z3-solver/</a><br>
-<i>(Source code <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvleg.php" target="_blank">here</a> &bullet; Some basic (sub)structurality <a href="?nam1=Non-triviality&var1=a%0D%0Ab&txt1=Not%28Entails%28a%2Cb%29%29&typ1=Or&nam2=Associativity&var2=a%0D%0Ab%0D%0Ac%0D%0Ad&txt2=And%28%0D%0A+Implies%28%0D%0A++Entails%28Comma%28a%2CComma%28b%2Cc%29%29%2Cd%29%2C%0D%0A++Entails%28Comma%28Comma%28a%2Cb%29%2Cc%29%2Cd%29%0D%0A+%29%2C%0D%0A+Implies%28%0D%0A++Entails%28Comma%28Comma%28a%2Cb%29%2Cc%29%2Cd%29%2C%0D%0A++Entails%28Comma%28a%2CComma%28b%2Cc%29%29%2Cd%29%0D%0A+%29%0D%0A%29&typ2=And&nam3=Left+neutrality&var3=a%0D%0Ab&txt3=And%28%0D%0A+Implies%28%0D%0A++Entails%28Comma%28Neutral%2Ca%29%2Cb%29%2C%0D%0A++Entails%28a%2Cb%29%0D%0A+%29%2C%0D%0A+Implies%28%0D%0A++Entails%28a%2Cb%29%2C%0D%0A++Entails%28Comma%28Neutral%2Ca%29%2Cb%29%0D%0A+%29%0D%0A%29&typ3=And&nam4=Permutation&var4=a%0D%0Ab%0D%0Ac&txt4=Implies%28%0D%0A+Entails%28Comma%28a%2Cb%29%2Cc%29%2C%0D%0A+Entails%28Comma%28b%2Ca%29%2Cc%29%0D%0A%29&typ4=And&nam5=Axiom+rule&var5=a&txt5=Entails%28a%2Ca%29&typ5=And&nam6=Cut%20rule&var6=g%0D%0Ad%0D%0Aa%0D%0Ab&txt6=Implies%28%0D%0A+And%28%0D%0A++Entails%28g%2Ca%29%2C%0D%0A++Entails%28Comma%28d%2Ca%29%2Cb%29%0D%0A+%29%2C%0D%0A+Entails%28Comma%28g%2Cd%29%2Cb%29%0D%0A%29&typ6=And&sub=Submit">here</a>)</i>
+<i>(Source code <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvleg.php" target="_blank">here</a> &bullet; Some basic (sub)structurality <a href="?nam1=Non-triviality&var1=a&txt1=Not%28Entails%28Neutral%2Ca%29%29&typ1=Or&nam2=Associativity&var2=a%0D%0Ab%0D%0Ac%0D%0Ad&txt2=And%28%0D%0A+Implies%28%0D%0A++Entails%28Comma%28a%2CComma%28b%2Cc%29%29%2Cd%29%2C%0D%0A++Entails%28Comma%28Comma%28a%2Cb%29%2Cc%29%2Cd%29%0D%0A+%29%2C%0D%0A+Implies%28%0D%0A++Entails%28Comma%28Comma%28a%2Cb%29%2Cc%29%2Cd%29%2C%0D%0A++Entails%28Comma%28a%2CComma%28b%2Cc%29%29%2Cd%29%0D%0A+%29%0D%0A%29&typ2=And&nam3=Left+neutrality&var3=a%0D%0Ab&txt3=And%28%0D%0A+Implies%28%0D%0A++Entails%28Comma%28Neutral%2Ca%29%2Cb%29%2C%0D%0A++Entails%28a%2Cb%29%0D%0A+%29%2C%0D%0A+Implies%28%0D%0A++Entails%28a%2Cb%29%2C%0D%0A++Entails%28Comma%28Neutral%2Ca%29%2Cb%29%0D%0A+%29%0D%0A%29&typ3=And&nam4=Permutation&var4=a%0D%0Ab%0D%0Ac&txt4=Implies%28%0D%0A+Entails%28Comma%28a%2Cb%29%2Cc%29%2C%0D%0A+Entails%28Comma%28b%2Ca%29%2Cc%29%0D%0A%29&typ4=And&nam5=Axiom+rule&var5=a&txt5=Entails%28a%2Ca%29&typ5=And&nam6=Cut%20rule&var6=g%0D%0Ad%0D%0Aa%0D%0Ab&txt6=Implies%28%0D%0A+And%28%0D%0A++Entails%28g%2Ca%29%2C%0D%0A++Entails%28Comma%28d%2Ca%29%2Cb%29%0D%0A+%29%2C%0D%0A+Entails%28Comma%28g%2Cd%29%2Cb%29%0D%0A%29&typ6=And&sub=Submit">here</a>)</i>
 
 <tr style="height: 70%">
 <td style="height: 90%; width: 50%" valign="top" align="center">
@@ -186,13 +186,12 @@ for ($i = 1; $i < $n; $i++) {
 if (!isset($sanitizedGET["sub"]) or ($sanitizedGET["sub"] == "+")) {
 ?>
 <tr><td colspan="2" style="text-align: center; border-bottom: 0pt">
-        <?php if (!isset($_GET["txt1"])) { ?>$$\textbf{not}\left(a\vdash b\right)$$<?php } ?>
+        <?php if (!isset($_GET["txt1"])) { ?>$$\textbf{not}\left(()\vdash a\right)$$<?php } ?>
         Name: <input type="text" name="nam<?=$n;?>"<?php if (!isset($_GET["txt1"])) { ?> value="Non-triviality"<?php } ?>>
 <tr><td style="width: 20%; text-align: center; border-top: 0pt; border-right: 0pt; border-bottom: 0pt">
-        <textarea name="var<?=$n;?>" style="width: 100%; height: 100pt"><?php if (!isset($_GET["txt1"])) { ?>a
-b<?php } ?></textarea>
+        <textarea name="var<?=$n;?>" style="width: 100%; height: 100pt"><?php if (!isset($_GET["txt1"])) { ?>a<?php } ?></textarea>
     <td style="width: 80%; text-align: center; border-top: 0pt; border-left: 0pt; border-bottom: 0pt">
-        <textarea style="width: 100%; height: 100pt" name="txt<?=$n;?>" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+' '+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"><?php if (!isset($_GET["txt1"])) { ?>Not(Entails(a,b))<?php } ?></textarea>
+        <textarea style="width: 100%; height: 100pt" name="txt<?=$n;?>" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+' '+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"><?php if (!isset($_GET["txt1"])) { ?>Not(Entails(Neutral,a))<?php } ?></textarea>
 <tr><td colspan="2" style="text-align: center; border-top: 0pt">
 <fieldset><legend><b><i>Type of rule:</i></b></legend>
     <input type="radio" name="typ<?=$n;?>" value="And" id="And<?=$n;?>"<?php if (isset($_GET["txt1"])) { ?> checked<?php } ?>> <label for="And<?=$n;?>">Universal</label><br>
