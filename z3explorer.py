@@ -1,5 +1,6 @@
 from z3 import *
 from itertools import product
+# edit 25/09/2026 : this program led to the creation of MVLEG (https://alexandrae.fr/mvleg.php)
 
 found = False
 size = 2
