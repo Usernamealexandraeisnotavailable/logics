@@ -1,465 +1,3166 @@
-<title>Many-Valued Logic Explorer Generator (No AI :3c)</title>
-<meta name="description" content="An online tool that takes a proof calculus and designs an SAT solving algorithm to find sound many-valued functional semantics (with eventual user-input restrictions).">
+<title>Many-Valued Logic PlayGround</title>
+<?php if ($_SERVER['SERVER_NAME'] == "bexandre.alwaysdata.net") {
+?>
+<meta http-equiv="refresh" content="0; https://alexandrae.fr<?=$_SERVER['REQUEST_URI'];?>">
+<?php } ?>
+<meta name="description" content="An online tool to quickly investigate valid inferences in many-valued logics.">
 <meta name="author" content="alexandræ">
 <script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>
-<style>
-h1 { margin: 0pt; margin-top: 5pt }
-body { background-color: black; color: white }
-textarea { color: white; background-color: rgb(64,64,64) }
-[code] { font-family: Courier }
-code { font-family: Courier; background-color: rgb(64,64,64) }
-[bordered] { border: solid 1px white }
-[bordered] tr td { border: solid 1px white; padding: 5pt; }
-a { color: yellow; text-decoration: none }
-a:hover { color: orange; text-decoration: underline }
-table[main] {
-  grid-template-areas: 
-  "head-fixed" 
-  "body-scrollable";
+<?php
+
+foreach ($_GET as $name => $value) {
+	$_GET[$name] = str_replace(['"',"'",'<','>'],['&quot;','’','&lt;','&gt;'],$value);
+	if (in_array($name, ["n","inf_np","inf_nc","inf_nv"]))
+		$_GET[$name] = intval($_GET[$name]);
 }
-table[main] tbody[main] {
-  grid-area: body-scrollable;
-  overflow: auto;
-  height: calc(100vh - 55px);
+
+$min_n = 1;
+$max_n = 14;
+
+$nope = False;
+
+if (isset($_GET["description"])) {
+	$description = $_GET["description"];
+} else {
+	$description = "N/A";
+}
+
+if (isset($_GET["inf_c0"])) {
+	if (intval($_GET["inf_np"]) < 0 or intval($_GET["inf_np"]) > 5
+	or intval($_GET["inf_nc"]) < 1 or intval($_GET["inf_nc"]) > 5
+	or intval($_GET["inf_nv"]) < 1 or intval($_GET["inf_nv"]) > 5) {
+		$nope = True;
+		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
+	}
+	for ($i = 0; $i < $_GET["inf_np"]; $i++)
+	if ("" != str_replace(["and(","or(","implies(","not(",",","A","B","C","D","E",")"," "],[""],$_GET["inf_p$i"])) {
+		$nope = True;
+		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
+	}
+	for ($i = 0; $i < $_GET["inf_nc"]; $i++)
+	if ("" != str_replace(["and(","or(","implies(","not(",",","A","B","C","D","E",")"," "],[""],$_GET["inf_c$i"])) {
+		$nope = True;
+		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
+	}
+}
+
+if (isset($_GET["n"])) {
+	if ($_GET["n"] < $min_n or $_GET["n"] > $max_n) {
+		$nope = True;
+		print "nice try.<meta http-equiv='refresh' content='1; ?'>";
+	}
+}
+if (isset($_GET["v0"])) {
+	$memory = [];
+	for ($i = 0; $i < intval($_GET["n"]); $i++) {
+		if (in_array($_GET["v$i"], $memory)) {
+			$nope = True;
+			print "nice try.<meta http-equiv='refresh' content='1; ?'>";
+		}
+		$memory[count($memory)] = $_GET["v$i"];
+	}
+}
+if (!$nope) {
+?>
+<style>
+a {
+	color: rgb(100,176,255)
+}
+
+body {
+	background-color: black;
+	color: white;
+}
+
+input, textarea, select {
+	background-color: rgb(50,50,50);
+	color: white;
+}
+
+table[b] { 
+	border: solid 1px grey;
+}
+
+td[b] {
+	padding: 5px;
+	text-align: center;
+	border: solid 1px grey;
+}
+
+span.wff {
+	background-color: rgb(120, 0, 64);
+}
+
+span.wff i, i.wff {
+	background-color: rgb(240, 0, 255);
+	border: solid 1px rgb(178, 0, 255);
+}
+
+nav{
+    width: 100%;
+    top: 0px;
+	cursor: pointer;
+}
+
+nav ul {
+	padding: 0px;
+    list-style-type: none;
+}
+
+nav a {
+	cursor: grab;
+	text-decoration: none;
+	color: rgb(255,200,200);
+}
+
+nav a:hover {
+	text-decoration: underline;
+	color: orange;
+}
+
+nav ul li{
+    float: left;
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+nav ul::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.deroulant {
+	padding: 0px;
+    background-color: rgb(0, 30, 63);
+    width: 100%;
+}
+
+.sous{
+    display: none;
+	background-color: rgb(0, 48, 90);
+    position: absolute;
+    width: 100%;
+}
+
+nav > ul li:hover .sous{
+    display: block;
+}
+
+.sous li{
+    float: none;
+    width: 50%;
+    text-align: left;
 }
 </style>
 <?php
-function ENTAILS ($a, $b) {
-    return "$a\\vdash $b";
-}
-function COMMA ($a, $b) {
-    return "($a,$b)";
-}
-function IMPLIES ($a, $b) {
-    return '\frac{'.$a.'}{'.$b.'}';
-}
-function METAAND (...$args) {
-    return "\\left(".implode('\quad\textbf{ and }\quad ',$args)."\\right)";
-}
-function METAOR ($a, $b) {
-    return "\\left(".implode('\quad\textbf{ or }\quad ',$args)."\\right)";
-}
-function METANOT ($a) {
-    return "\\textbf{not}\\left($a\\right)";
-}
-function C ($a, $b) {
-    return "($a\\to $b)";
-}
-function N ($a) {
-    return "\\neg $a";
-}
-function K ($a, $b) {
-    return "($a\\mathbin{\\&}$b)";
-}
-function A ($a, $b) {
-    return "($a\\vee $b)";
-}
-$sanitizedGET = [];
-foreach ($_GET as $i => $j) {
-    $sanitizedGET[htmlentities($i)] = htmlentities($j);
-}
-
-function processed ($i) {
-    global $sanitizedGET;
-    $variables = explode("\n", str_replace("\r","",$sanitizedGET["var$i"]));
-    $variablesWithDollarSigns = [];
-    foreach ($variables as $aa => $bb) {
-        for ($m = 0; $m < strlen($bb); $m++) {
-            if (!in_array($bb[$m], ['a','z','e','r','t','y','u','i','o','p','q','s','d','f','g','h','j','k','l','m','w','x','c','v','b','n'])) {
-                print "<h1>".$bb[$m]."</h1>";
-                return false;
-            }
-        }
-        $variablesWithDollarSigns[$aa] = "\"".$bb."\"";
-    }
-    $test = str_replace($variables,$variablesWithDollarSigns,str_replace(["Entails","Comma","Implies","And","Or","Not","Neutral"],["ENTAILS","COMMA","IMPLIES","METAAND","METAOR","METANOT","\"()\""],$sanitizedGET["txt$i"]));
-    if (str_replace($variablesWithDollarSigns,"",str_replace([" ","ENTAILS","COMMA","IMPLIES","METAAND","METAOR","METANOT","\"()\"","(",")","C","K","N","A"," ","\r","\n",","],"",$test)) == "") {
-        return $test;
-    } else {
-        print "<meta http-equiv='refresh' content='0; mvleg.php'>";
-    }
+if (isset($_GET["n"])) {
+	$n = $_GET["n"];
+	if (isset($_GET["v0"])) {
+		$designated = [];
+		for ($i = 0; $i < $n; $i++) {
+			$v[$i] = $_GET["v$i"];
+			if ($_GET["d$i"] == "y") {
+				$designated[count($designated)] = $_GET["v$i"];
+			}
+		}
+		if (isset($_GET["N0"])) {
+			for ($i = 0; $i < $n; $i++) {
+				$N[$v[$i]] = $_GET["N$i"];
+				for ($j = 0; $j < $n; $j++) {
+					$K[$v[$i]][$v[$j]] = $_GET["K$i;$j"];
+					$A[$v[$i]][$v[$j]] = $_GET["A$i;$j"];
+					$C[$v[$i]][$v[$j]] = $_GET["C$i;$j"];
+				}
+			}
+		} else {
+			for ($i = 0; $i < $n; $i++) {
+				$N[$v[$i]] = $v[$n-1-$i];
+				for ($j = 0; $j < $n; $j++) {
+					$K[$v[$i]][$v[$j]] = $v[max($i,$j)];
+					$A[$v[$i]][$v[$j]] = $v[min($i,$j)];
+					if ($i >= $j) {
+						$C[$v[$i]][$v[$j]] = $v[0];
+					} else {
+						$C[$v[$i]][$v[$j]] = $v[$j];
+					}
+				}
+			}
+		}
+	} else {
+		$designated = [$n];
+		for ($i = 0; $i < $n; $i++) {
+			$v[$i] = $n-$i;
+		}
+	}
+} else {
+	$n = 2;
+	$v = ["true", "false"];
+	$designated = ["true"];
 }
 ?>
 <center>
-<table main width="100%">
-<tbody main>
-<tr width="100%">
-<td width="100%" valign="center" align="center" colspan="2">
-
-<h1><a href="mvleg.php">Many-Valued Logic Explorer Generator</a></h1>
-Install Python on <a href="https://www.python.org" target="_blank" code>https://www.python.org</a><br>
-To install PIP, follow instructions from <a href="https://pip.pypa.io/" target="_blank" code>https://pip.pypa.io/</a><br>
-To install Z3, follow instructions from <a href="https://pypi.org/project/z3-solver/" target="_blank" code>https://pypi.org/project/z3-solver/</a><br>
-<i>(Source code <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvleg.php" target="_blank">here</a> &bullet; Some basic (sub)structurality <a href="?nam1=Non-triviality&var1=a&txt1=Not%28Entails%28Neutral%2Ca%29%29&typ1=Or&nam2=Associativity&var2=g%0D%0Ad%0D%0Ae%0D%0Aa&txt2=And%28%0D%0A+Implies%28%0D%0A++Entails%28Comma%28g%2CComma%28d%2Ce%29%29%2Ca%29%2C%0D%0A++Entails%28Comma%28Comma%28g%2Cd%29%2Ce%29%2Ca%29%0D%0A+%29%2C%0D%0A+Implies%28%0D%0A++Entails%28Comma%28Comma%28g%2Cd%29%2Ce%29%2Ca%29%2C%0D%0A++Entails%28Comma%28g%2CComma%28d%2Ce%29%29%2Ca%29%0D%0A+%29%0D%0A%29&typ2=And&nam3=Left+neutrality&var3=g%0D%0Aa&txt3=And%28%0D%0A+Implies%28%0D%0A++Entails%28Comma%28Neutral%2Cg%29%2Ca%29%2C%0D%0A++Entails%28g%2Ca%29%0D%0A+%29%2C%0D%0A+Implies%28%0D%0A++Entails%28g%2Ca%29%2C%0D%0A++Entails%28Comma%28Neutral%2Cg%29%2Ca%29%0D%0A+%29%0D%0A%29&typ3=And&nam4=Axiom+rule&var4=a&txt4=Entails%28a%2Ca%29&typ4=And&nam5=Cut+rule&var5=g%0D%0Ad%0D%0Aa%0D%0Ab&txt5=Implies%28%0D%0A+And%28%0D%0A++Entails%28g%2Ca%29%2C%0D%0A++Entails%28Comma%28d%2Ca%29%2Cb%29%0D%0A+%29%2C%0D%0A+Entails%28Comma%28g%2Cd%29%2Cb%29%0D%0A%29&typ5=And&nam6=Permutation+rule&var6=g%0D%0Ad%0D%0Aa&txt6=Implies%28%0D%0A+Entails%28Comma%28g%2Cd%29%2Ca%29%2C%0D%0A+Entails%28Comma%28d%2Cg%29%2Ca%29%0D%0A%29&typ6=And&nam7=Contraction+rule&var7=g%0D%0Aa%0D%0Ab&txt7=Implies%28%0D%0A+Entails%28Comma%28g%2CComma%28a%2Ca%29%29%2Cb%29%2C%0D%0A+Entails%28Comma%28g%2Ca%29%2Cb%29%0D%0A%29&typ7=And&nam8=Weakening+rule&var8=g%0D%0Aa%0D%0Ab&txt8=Implies%28%0D%0A+Entails%28g%2Cb%29%2C%0D%0A+Entails%28Comma%28g%2Ca%29%2Cb%29%0D%0A%29&typ8=And&sub=Submit#And8">here</a>)</i>
-
-<tr style="height: 70%">
-<td style="height: 90%; width: 50%" valign="top" align="center">
-<div style="overflow:scroll; width:100%; height: 90%">
-<h2>Presentation</h2>
-<table style="width: 80%"><tr><td style="text-align: justify">
-Have a proof calculus and want to show it's non-trivial? Or variable sharing? Or non-symmetric implication? Or basically anything of the form &Gamma;&nvdash;<i>p</i> (existentially or universally)? Sounds like you need a sound (finitely) many-valued model! If one exists, this tool <b>will</b> find it. Guaranteed 100% without LLM hallucination (it uses the Z3 SAT solver, and most importantly, not an ounce of AI). Even this page's HTML, PHP and Python codes are made with my <s>paws</s> <i>hands</i> all the way through (well, given how garbage it is, it better be).
+<h1><a href="?">Many-Valued Logic PlayGround</a></h1>
+<i>See also: <a href="https://users.cecs.anu.edu.au/~jks/magic.html" target="_blank">MaGIC</a> (Slaney); <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvlpg.php" target="_blank">Source code</a> (please don't judge... lol)</i>
+<nav>
+  <ul>
+    <li class="deroulant"><b><i>Examples</i> &#9660;</b></a>
+	  <center class="sous">
+      <table style="width: 50%">
+		<tr><td colspan="2"><i style="color: yellow">⚠ Given a proof system <b>L</b>, associated functional semantics <b>ML</b> are generally sound (&Gamma; ⊢<sub><b>L</b></sub> <i>p</i> implies &Gamma; ⊨<sub><b>ML</b></sub> <i>p</i>) but unsound (&Gamma; ⊨<sub><b>ML</b></sub> <i>p</i> may not imply &Gamma; ⊢<sub><b>L</b></sub> <i>p</i>): in other words, though invalid rules in such many-valued logic <b>ML</b> are also underivable in <b>L</b>, valid rules in <b>ML</b> may not always be derivable in <b>L</b>. The denominations below generally refer to proof systems, but they must not be confused for the associated models provided.</i>
+		<tr><td><a href="?n=2&v0=True&d0=y&v1=False&d1=n&description=Standard+logic+(Frege%2C+1879+%3B+Russell+%26+Whitehead%2C+1910)">Frege-Russell logic</a>, a.k.a. "classical" logic, "standard" logic...<td>(<a href="https://gallica.bnf.fr/ark:/12148/bpt6k65658c" style="color: rgb(220,255,255)" target="_blank">Frege, 1879</a>; <a href="https://en.wikisource.org/wiki/Russell_%26_Whitehead%27s_Principia_Mathematica" style="color: rgb(220,255,255)" target="_blank">Russell &amp; Whitehead, 1910</a>)
+		<tr><td><a href="?n=1&v0=both&d0=y&description=Trivial+logic+only+has+one+truth+value,+which+happens+to+be+designated.">Trivial</a>
+		<tr><td><a href="?n=1&v0=neither&d0=n&description=Nihilism%2C+at+least+in+this+context%2C+is+what+happens+when+there+is+no+designated+value.+Note+that+there+could+also+be+a+stronger+anti-inferential+nihilism+that+admits+no+rule.">Nihilistic</a>
+		<tr><td><a href="?n=4&v0=11&d0=y&v1=10&d1=n&v2=01&d2=n&v3=00&d3=n&N0=00&N1=01&N2=10&N3=11&K0%3B0=11&K0%3B1=10&K0%3B2=01&K0%3B3=00&K1%3B0=10&K1%3B1=10&K1%3B2=00&K1%3B3=00&K2%3B0=01&K2%3B1=00&K2%3B2=01&K2%3B3=00&K3%3B0=00&K3%3B1=00&K3%3B2=00&K3%3B3=00&A0%3B0=11&A0%3B1=11&A0%3B2=11&A0%3B3=11&A1%3B0=11&A1%3B1=10&A1%3B2=11&A1%3B3=10&A2%3B0=11&A2%3B1=11&A2%3B2=01&A2%3B3=01&A3%3B0=11&A3%3B1=10&A3%3B2=01&A3%3B3=00&C0%3B0=11&C0%3B1=10&C0%3B2=01&C0%3B3=00&C1%3B0=11&C1%3B1=11&C1%3B2=01&C1%3B3=01&C2%3B0=11&C2%3B1=10&C2%3B2=11&C2%3B3=10&C3%3B0=11&C3%3B1=11&C3%3B2=11&C3%3B3=11&description=This+is+an+example+of+a+4-valued+Boolean+algebra.+It+is+entirely+equivalent+to+Frege-Russell-logic.">4-valued Boolean algebra</a>
+		<tr><td><a href="?n=3&v0=1&d0=y&v1=1%2F2&d1=n&v2=0&d2=n&N0=0&N1=0&N2=1&K0%3B0=1&K0%3B1=1%2F2&K0%3B2=0&K1%3B0=1%2F2&K1%3B1=1%2F2&K1%3B2=0&K2%3B0=0&K2%3B1=0&K2%3B2=0&A0%3B0=1&A0%3B1=1&A0%3B2=1&A1%3B0=1&A1%3B1=1%2F2&A1%3B2=1%2F2&A2%3B0=1&A2%3B1=1%2F2&A2%3B2=0&C0%3B0=1&C0%3B1=1%2F2&C0%3B2=0&C1%3B0=1&C1%3B1=1&C1%3B2=0&C2%3B0=1&C2%3B1=1&C2%3B2=1&description=This+is+an+example+of+a+3-valued+Heyting+algebra.">3-valued Heyting algebra</a><td>(<a href="https://doi.org/10.1515/9783112645826-009" style="color: rgb(220,255,255)" target="_blank">Heyting, 1930</a>)
+		<tr><td><a href="?n=3&v0=F&d0=n&v1=U&d1=n&v2=T&d2=y&N0=T&N1=U&N2=F&K0%3B0=F&K0%3B1=F&K0%3B2=F&K1%3B0=F&K1%3B1=U&K1%3B2=U&K2%3B0=F&K2%3B1=U&K2%3B2=T&A0%3B0=F&A0%3B1=U&A0%3B2=T&A1%3B0=U&A1%3B1=U&A1%3B2=T&A2%3B0=T&A2%3B1=T&A2%3B2=T&C0%3B0=T&C0%3B1=T&C0%3B2=T&C1%3B0=U&C1%3B1=U&C1%3B2=T&C2%3B0=F&C2%3B1=U&C2%3B2=T&description=Strong+Kleene+logic+of+indeterminacy+%28Kleene%2C+1938%29">Strong Kleene</a><td>(<a href="https://doi.org/10.2307/2267778" style="color: rgb(220,255,255)" target="_blank">Kleene, 1938</a>)
+		<tr><td><a href="?n=3&v0=T&d0=y&v1=B&d1=y&v2=F&d2=n&description=Sugihara+monoids+are+the+algebraic+equivalent+to+RM%2C+i.e.+R-mingle+%28Dunn%2C+1970%29.+This+3-valued+Sugihara+monoid+is+generally+refered+to+as+RM3.&N0=F&N1=B&N2=T&K0%3B0=T&K0%3B1=B&K0%3B2=F&K1%3B0=B&K1%3B1=B&K1%3B2=F&K2%3B0=F&K2%3B1=F&K2%3B2=F&A0%3B0=T&A0%3B1=T&A0%3B2=T&A1%3B0=T&A1%3B1=B&A1%3B2=B&A2%3B0=T&A2%3B1=B&A2%3B2=F&C0%3B0=T&C0%3B1=F&C0%3B2=F&C1%3B0=T&C1%3B1=B&C1%3B2=F&C2%3B0=T&C2%3B1=T&C2%3B2=T"><b>RM3</b></a><td>(<a href="https://doi.org/10.2307/2268273" style="color: rgb(220,255,255)" target="_blank">Sugihara, 1955</a>; <a href="https://doi.org/10.2307/2271149" style="color: rgb(220,255,255)" target="_blank">Dunn, 1970</a>)
+		<tr><td><a href="?n=4&v0=1&d0=y&v1=2&d1=y&v2=3&d2=n&v3=4&d3=n&description=CC1+(Angell%2C+1962+%3B+McCall%2C+1966)&N0=4&N1=3&N2=2&N3=1&K0%3B0=1&K0%3B1=2&K0%3B2=3&K0%3B3=4&K1%3B0=2&K1%3B1=1&K1%3B2=4&K1%3B3=3&K2%3B0=3&K2%3B1=4&K2%3B2=3&K2%3B3=4&K3%3B0=4&K3%3B1=3&K3%3B2=4&K3%3B3=3&A0%3B0=2&A0%3B1=1&A0%3B2=2&A0%3B3=1&A1%3B0=1&A1%3B1=2&A1%3B2=1&A1%3B3=2&A2%3B0=2&A2%3B1=1&A2%3B2=4&A2%3B3=3&A3%3B0=1&A3%3B1=2&A3%3B2=3&A3%3B3=4&C0%3B0=1&C0%3B1=4&C0%3B2=3&C0%3B3=4&C1%3B0=4&C1%3B1=1&C1%3B2=4&C1%3B3=3&C2%3B0=1&C2%3B1=4&C2%3B2=1&C2%3B3=4&C3%3B0=4&C3%3B1=1&C3%3B2=4&C3%3B3=1"><b>CC1</b></a><td>(<a href="https://doi.org/10.2307/2964651" style="color: rgb(220,255,255)" target="_blank">Angell, 1962</a>; <a href="https://doi.org/10.2307/2270458" style="color: rgb(220,255,255)" target="_blank">McCall, 1966</a>)
+		<tr><td><a href="?n=10&v0=9&d0=y&v1=8&d1=y&v2=7&d2=n&v3=6&d3=y&v4=5&d4=n&v5=4&d5=y&v6=3&d6=n&v7=2&d7=y&v8=1&d8=n&v9=0&d9=n&description=De+Morgan+monoid+C6+(Slaney%2C+1989)&N0=0&N1=1&N2=2&N3=3&N4=4&N5=5&N6=6&N7=7&N8=8&N9=9&K0%3B0=9&K0%3B1=8&K0%3B2=7&K0%3B3=6&K0%3B4=5&K0%3B5=4&K0%3B6=3&K0%3B7=2&K0%3B8=1&K0%3B9=0&K1%3B0=8&K1%3B1=8&K1%3B2=7&K1%3B3=6&K1%3B4=5&K1%3B5=4&K1%3B6=3&K1%3B7=2&K1%3B8=1&K1%3B9=0&K2%3B0=7&K2%3B1=7&K2%3B2=7&K2%3B3=5&K2%3B4=5&K2%3B5=3&K2%3B6=3&K2%3B7=1&K2%3B8=1&K2%3B9=0&K3%3B0=6&K3%3B1=6&K3%3B2=5&K3%3B3=6&K3%3B4=5&K3%3B5=2&K3%3B6=1&K3%3B7=2&K3%3B8=1&K3%3B9=0&K4%3B0=5&K4%3B1=5&K4%3B2=5&K4%3B3=5&K4%3B4=5&K4%3B5=1&K4%3B6=1&K4%3B7=1&K4%3B8=1&K4%3B9=0&K5%3B0=4&K5%3B1=4&K5%3B2=3&K5%3B3=2&K5%3B4=1&K5%3B5=4&K5%3B6=3&K5%3B7=2&K5%3B8=1&K5%3B9=0&K6%3B0=3&K6%3B1=3&K6%3B2=3&K6%3B3=1&K6%3B4=1&K6%3B5=3&K6%3B6=3&K6%3B7=1&K6%3B8=1&K6%3B9=0&K7%3B0=2&K7%3B1=2&K7%3B2=1&K7%3B3=2&K7%3B4=1&K7%3B5=2&K7%3B6=1&K7%3B7=2&K7%3B8=1&K7%3B9=0&K8%3B0=1&K8%3B1=1&K8%3B2=1&K8%3B3=1&K8%3B4=1&K8%3B5=1&K8%3B6=1&K8%3B7=1&K8%3B8=1&K8%3B9=0&K9%3B0=0&K9%3B1=0&K9%3B2=0&K9%3B3=0&K9%3B4=0&K9%3B5=0&K9%3B6=0&K9%3B7=0&K9%3B8=0&K9%3B9=0&A0%3B0=9&A0%3B1=9&A0%3B2=9&A0%3B3=9&A0%3B4=9&A0%3B5=9&A0%3B6=9&A0%3B7=9&A0%3B8=9&A0%3B9=9&A1%3B0=9&A1%3B1=8&A1%3B2=8&A1%3B3=8&A1%3B4=8&A1%3B5=8&A1%3B6=8&A1%3B7=8&A1%3B8=8&A1%3B9=8&A2%3B0=9&A2%3B1=8&A2%3B2=7&A2%3B3=8&A2%3B4=7&A2%3B5=8&A2%3B6=7&A2%3B7=8&A2%3B8=7&A2%3B9=7&A3%3B0=9&A3%3B1=8&A3%3B2=8&A3%3B3=6&A3%3B4=6&A3%3B5=8&A3%3B6=8&A3%3B7=6&A3%3B8=6&A3%3B9=6&A4%3B0=9&A4%3B1=8&A4%3B2=7&A4%3B3=6&A4%3B4=5&A4%3B5=8&A4%3B6=7&A4%3B7=6&A4%3B8=5&A4%3B9=5&A5%3B0=9&A5%3B1=8&A5%3B2=8&A5%3B3=8&A5%3B4=8&A5%3B5=4&A5%3B6=4&A5%3B7=4&A5%3B8=4&A5%3B9=4&A6%3B0=9&A6%3B1=8&A6%3B2=7&A6%3B3=8&A6%3B4=7&A6%3B5=4&A6%3B6=3&A6%3B7=4&A6%3B8=3&A6%3B9=3&A7%3B0=9&A7%3B1=8&A7%3B2=8&A7%3B3=6&A7%3B4=6&A7%3B5=4&A7%3B6=4&A7%3B7=2&A7%3B8=2&A7%3B9=2&A8%3B0=9&A8%3B1=8&A8%3B2=7&A8%3B3=6&A8%3B4=5&A8%3B5=4&A8%3B6=3&A8%3B7=2&A8%3B8=1&A8%3B9=1&A9%3B0=9&A9%3B1=8&A9%3B2=7&A9%3B3=6&A9%3B4=5&A9%3B5=4&A9%3B6=3&A9%3B7=2&A9%3B8=1&A9%3B9=0&C0%3B0=9&C0%3B1=0&C0%3B2=0&C0%3B3=0&C0%3B4=0&C0%3B5=0&C0%3B6=0&C0%3B7=0&C0%3B8=0&C0%3B9=0&C1%3B0=9&C1%3B1=4&C1%3B2=1&C1%3B3=1&C1%3B4=1&C1%3B5=0&C1%3B6=0&C1%3B7=0&C1%3B8=0&C1%3B9=0&C2%3B0=9&C2%3B1=4&C2%3B2=2&C2%3B3=1&C2%3B4=1&C2%3B5=0&C2%3B6=0&C2%3B7=0&C2%3B8=0&C2%3B9=0&C3%3B0=9&C3%3B1=4&C3%3B2=3&C3%3B3=2&C3%3B4=1&C3%3B5=0&C3%3B6=0&C3%3B7=0&C3%3B8=0&C3%3B9=0&C4%3B0=9&C4%3B1=4&C4%3B2=4&C4%3B3=4&C4%3B4=4&C4%3B5=0&C4%3B6=0&C4%3B7=0&C4%3B8=0&C4%3B9=0&C5%3B0=9&C5%3B1=8&C5%3B2=5&C5%3B3=5&C5%3B4=5&C5%3B5=4&C5%3B6=1&C5%3B7=1&C5%3B8=1&C5%3B9=0&C6%3B0=9&C6%3B1=8&C6%3B2=6&C6%3B3=5&C6%3B4=5&C6%3B5=4&C6%3B6=2&C6%3B7=1&C6%3B8=1&C6%3B9=0&C7%3B0=9&C7%3B1=8&C7%3B2=7&C7%3B3=6&C7%3B4=5&C7%3B5=4&C7%3B6=3&C7%3B7=2&C7%3B8=1&C7%3B9=0&C8%3B0=9&C8%3B1=8&C8%3B2=8&C8%3B3=8&C8%3B4=8&C8%3B5=4&C8%3B6=4&C8%3B7=4&C8%3B8=4&C8%3B9=0&C9%3B0=9&C9%3B1=9&C9%3B2=9&C9%3B3=9&C9%3B4=9&C9%3B5=9&C9%3B6=9&C9%3B7=9&C9%3B8=9&C9%3B9=9">De Morgan monoid C6</a> (model for <b>R</b>)
+		<td>(<a href="https://philpapers.org/rec/ANDETL-2" style="color: rgb(220,255,255)" target="_blank">Anderson &amp; Belnap, 1975</a>; <a href="https://doi.org/10.1305/ndjfl/1093634999" style="color: rgb(220,255,255)" target="_blank">Slaney, 1989</a>)
+		<tr><td><a href="?n=4&v0=true&d0=y&v1=both&d1=y&v2=neither&d2=n&v3=false&d3=n&description=FDE+(Dunn%2C+1976+%3B+Belnap%2C+1977)%0D%0A%0D%0AFDE+has+no+native+implication%2C+I+used+a+table+of+a+connexive+expansion+of+FDE+with+the+variable-sharing+property+(c.f.+subalgebras+{both}+and+{true%2Cfalse})+shown+in+a+talk+by+Robles+(2024)+%3A+https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DHm1JAKULW1c%0D%0A%0D%0AFDE+is+at+the+heart+of+many+non-classical+logics%2C+especially+contraclassical+logics+(c.f.+the+Bochum+Plan)+and+relevance+logics.&N0=false&N1=both&N2=neither&N3=true&K0%3B0=true&K0%3B1=both&K0%3B2=neither&K0%3B3=false&K1%3B0=both&K1%3B1=both&K1%3B2=false&K1%3B3=false&K2%3B0=neither&K2%3B1=false&K2%3B2=neither&K2%3B3=false&K3%3B0=false&K3%3B1=false&K3%3B2=false&K3%3B3=false&A0%3B0=true&A0%3B1=true&A0%3B2=true&A0%3B3=true&A1%3B0=true&A1%3B1=both&A1%3B2=true&A1%3B3=both&A2%3B0=true&A2%3B1=true&A2%3B2=neither&A2%3B3=neither&A3%3B0=true&A3%3B1=both&A3%3B2=neither&A3%3B3=false&C0%3B0=true&C0%3B1=neither&C0%3B2=neither&C0%3B3=false&C1%3B0=neither&C1%3B1=both&C1%3B2=neither&C1%3B3=neither&C2%3B0=neither&C2%3B1=neither&C2%3B2=both&C2%3B3=neither&C3%3B0=false&C3%3B1=both&C3%3B2=both&C3%3B3=true"><b>FDE</b></a>, a.k.a. Belnap&ndash;Dunn logic<td>(<a href="https://doi.org/10.1007/BF00373152" style="color: rgb(220,255,255)" target="_blank">Dunn, 1976</a>; <a href="https://doi.org/10.1007/978-94-010-1161-7_2" style="color: rgb(220,255,255)" target="_blank">Belnap, 1977</a>)
+		<tr><td><a href="?n=3&v0=F&d0=n&v1=B&d1=y&v2=T&d2=y&N0=T&N1=B&N2=F&K0%3B0=F&K0%3B1=F&K0%3B2=F&K1%3B0=F&K1%3B1=B&K1%3B2=B&K2%3B0=F&K2%3B1=B&K2%3B2=T&A0%3B0=F&A0%3B1=B&A0%3B2=T&A1%3B0=B&A1%3B1=B&A1%3B2=T&A2%3B0=T&A2%3B1=T&A2%3B2=T&C0%3B0=T&C0%3B1=T&C0%3B2=T&C1%3B0=B&C1%3B1=B&C1%3B2=T&C2%3B0=F&C2%3B1=B&C2%3B2=T&description=LP+%28Priest%2C+1979%29%0D%0A%0D%0ALP+stands+for+logic+of+paradox"><b>LP</b></a><td>(<a href="https://doi.org/10.1007/BF00258428" style="color: rgb(220,255,255)" target="_blank">Priest, 1979</a>)
+		<tr><td><a href="?n=5&v0=0&d0=n&v1=1&d1=n&v2=2&d2=n&v3=3&d3=y&v4=4&d4=y&description=Sound+model+for+linear+logic+%28Girard%2C+1987%29.+Conjunction+and+disjunction+are+additive%2C+%26+and+%E2%8A%95+in+the+original+paper.+%E2%8A%A5+is+0%2C+%F0%9D%9F%8E+is+1%2C+%F0%9D%9F%8F+is+3%2C+and+%E2%8A%A4+is+4.+%21p+sends+undesignated+values+to+1+and+designated+values+to+3.+%3F+sends+values+0+and+1+to+value+0%2C+while+it+sends+values+2%2C+3%2C+and+4+to+value+4.&N0=3&N1=4&N2=2&N3=0&N4=1&K0%3B0=0&K0%3B1=1&K0%3B2=1&K0%3B3=1&K0%3B4=0&K1%3B0=1&K1%3B1=1&K1%3B2=1&K1%3B3=1&K1%3B4=1&K2%3B0=1&K2%3B1=1&K2%3B2=2&K2%3B3=1&K2%3B4=2&K3%3B0=1&K3%3B1=1&K3%3B2=1&K3%3B3=3&K3%3B4=3&K4%3B0=0&K4%3B1=1&K4%3B2=2&K4%3B3=3&K4%3B4=4&A0%3B0=0&A0%3B1=0&A0%3B2=4&A0%3B3=4&A0%3B4=4&A1%3B0=0&A1%3B1=1&A1%3B2=2&A1%3B3=3&A1%3B4=4&A2%3B0=4&A2%3B1=2&A2%3B2=2&A2%3B3=4&A2%3B4=4&A3%3B0=4&A3%3B1=3&A3%3B2=4&A3%3B3=3&A3%3B4=4&A4%3B0=4&A4%3B1=4&A4%3B2=4&A4%3B3=4&A4%3B4=4&C0%3B0=3&C0%3B1=1&C0%3B2=0&C0%3B3=2&C0%3B4=4&C1%3B0=4&C1%3B1=4&C1%3B2=4&C1%3B3=4&C1%3B4=4&C2%3B0=2&C2%3B1=1&C2%3B2=3&C2%3B3=0&C2%3B4=4&C3%3B0=0&C3%3B1=1&C3%3B2=2&C3%3B3=3&C3%3B4=4&C4%3B0=1&C4%3B1=1&C4%3B2=1&C4%3B3=1&C4%3B4=4">Linear logic</a>
+		<td>(<a href="https://doi.org/10.1016/0304-3975(87)90045-4" style="color: rgb(220,255,255)" target="_blank">Girard, 1987</a>)
+		<tr><td><a href="?n=3&v0=T&d0=y&v1=*&d1=y&v2=F&d2=n&description=M3V+(Mortensen%2C+1984+%3B+McCall%2C+2012)%0D%0A%0D%0AMortensen’s+3-valued+logic.+It+also+happens+to+be+a+connexive+model+for+relevant+entailment+logic+E%2C+as+it+can+be+found+in+Øgaard+(2020)%2C+%22Farewell+to+Suppression-Freedom%22.&N0=F&N1=*&N2=T&K0%3B0=T&K0%3B1=*&K0%3B2=F&K1%3B0=*&K1%3B1=*&K1%3B2=F&K2%3B0=F&K2%3B1=F&K2%3B2=F&A0%3B0=T&A0%3B1=T&A0%3B2=T&A1%3B0=T&A1%3B1=*&A1%3B2=*&A2%3B0=T&A2%3B1=*&A2%3B2=F&C0%3B0=*&C0%3B1=F&C0%3B2=F&C1%3B0=*&C1%3B1=*&C1%3B2=F&C2%3B0=*&C2%3B1=*&C2%3B2=*"><b>M3V</b></a><td>(<a href="https://doi.org/10.1007/BF00935744" style="color: rgb(220,255,255)" target="_blank">Mortensen, 1984</a>; <a href="https://doi.org/10.1016/B978-0-444-52937-4.50008-3" style="color: rgb(220,255,255)" target="_blank">McCall, 2012</a>; <a href="https://doi.org/10.1007/s11787-020-00255-0" style="color: rgb(220,255,255)" target="_blank">Øgaard, 2020</a>)
+		<tr><td><a href="?n=4&v0=T&d0=y&v1=B&d1=y&v2=N&d2=n&v3=F&d3=n&description=MC+(Wansing%2C+2005)+as+dBD+(Omori%2C+2016).%0D%0A%0D%0AMC+stands+for+Material+Connexive.&N0=F&N1=B&N2=N&N3=T&K0%3B0=T&K0%3B1=B&K0%3B2=N&K0%3B3=F&K1%3B0=B&K1%3B1=B&K1%3B2=F&K1%3B3=F&K2%3B0=N&K2%3B1=F&K2%3B2=N&K2%3B3=F&K3%3B0=F&K3%3B1=F&K3%3B2=F&K3%3B3=F&A0%3B0=T&A0%3B1=T&A0%3B2=T&A0%3B3=T&A1%3B0=T&A1%3B1=B&A1%3B2=T&A1%3B3=B&A2%3B0=T&A2%3B1=T&A2%3B2=N&A2%3B3=N&A3%3B0=T&A3%3B1=B&A3%3B2=N&A3%3B3=F&C0%3B0=T&C0%3B1=B&C0%3B2=N&C0%3B3=F&C1%3B0=T&C1%3B1=B&C1%3B2=N&C1%3B3=F&C2%3B0=B&C2%3B1=B&C2%3B2=B&C2%3B3=B&C3%3B0=B&C3%3B1=B&C3%3B2=B&C3%3B3=B"><b>MC</b></a><td>(<a href="http://www.aiml.net/volumes/volume5/" style="color: rgb(220,255,255)" target="_blank">Wansing, 2005</a>; As <b>dBD</b> in <a href="https://doi.org/10.1007/978-3-319-40220-8_8" style="color: rgb(220,255,255)" target="_blank">Omori, 2016</a>)
+		<tr><td><a href="?n=3&v0=T&d0=y&v1=B&d1=y&v2=F&d2=n&description=CN+%28Cantwell%2C+2008%29%2C+which+is+essentially%E2%80%89MC+but+with+the+law+of+excluded+middle.%0D%0A%0D%0ACN+stands+for+Conditional+Negation.&N0=F&N1=B&N2=T&K0%3B0=T&K0%3B1=B&K0%3B2=F&K1%3B0=B&K1%3B1=B&K1%3B2=F&K2%3B0=F&K2%3B1=F&K2%3B2=F&A0%3B0=T&A0%3B1=T&A0%3B2=T&A1%3B0=T&A1%3B1=B&A1%3B2=B&A2%3B0=T&A2%3B1=B&A2%3B2=F&C0%3B0=T&C0%3B1=B&C0%3B2=F&C1%3B0=T&C1%3B1=B&C1%3B2=F&C2%3B0=B&C2%3B1=B&C2%3B2=B"><b>CN</b></a><td>(<a href="https://doi.org/10.1215/00294527-2008-010" style="color: rgb(220,255,255)" target="_blank">Cantwell, 2008</a>)
+		<tr><td><a href="?n=3&v0=1&d0=y&v1=2&d1=n&v2=3&d2=n&N0=3&N1=1&N2=1&K0%3B0=1&K0%3B1=2&K0%3B2=3&K1%3B0=2&K1%3B1=2&K1%3B2=3&K2%3B0=3&K2%3B1=3&K2%3B2=3&A0%3B0=1&A0%3B1=1&A0%3B2=1&A1%3B0=1&A1%3B1=2&A1%3B2=2&A2%3B0=1&A2%3B1=2&A2%3B2=3&C0%3B0=1&C0%3B1=2&C0%3B2=3&C1%3B0=2&C1%3B1=2&C1%3B2=2&C2%3B0=2&C2%3B1=2&C2%3B2=2&description=MRS%5EP+%28Estrada-González%2C+2008%29"><b>MRS<sup><i>P</i></sup></b></a><td>(<a href="https://doi.org/10.1007/s11787-007-0024-9" style="color: rgb(220,255,255)" target="_blank">Estrada-González, 2008</a>)
+		<tr><td><a href="?n=14&v0=0&d0=n&v1=1&d1=n&v2=2&d2=n&v3=3&d3=n&v4=4&d4=y&v5=5&d5=y&v6=6&d6=y&v7=7&d7=y&v8=8&d8=y&v9=9&d9=y&v10=10&d10=y&v11=11&d11=y&v12=12&d12=y&v13=13&d13=y&description=14-valued+model+of+a+non-monotonic+restriction+of+Wansing+(2005)'s+logic+C.&N0=10&N1=6&N2=13&N3=3&N4=11&N5=5&N6=1&N7=8&N8=7&N9=9&N10=0&N11=4&N12=0&N13=2&K0%3B0=0&K0%3B1=0&K0%3B2=0&K0%3B3=0&K0%3B4=0&K0%3B5=0&K0%3B6=0&K0%3B7=0&K0%3B8=0&K0%3B9=0&K0%3B10=0&K0%3B11=0&K0%3B12=0&K0%3B13=0&K1%3B0=0&K1%3B1=1&K1%3B2=2&K1%3B3=1&K1%3B4=0&K1%3B5=1&K1%3B6=1&K1%3B7=2&K1%3B8=1&K1%3B9=2&K1%3B10=1&K1%3B11=1&K1%3B12=1&K1%3B13=1&K2%3B0=0&K2%3B1=2&K2%3B2=2&K2%3B3=2&K2%3B4=0&K2%3B5=2&K2%3B6=2&K2%3B7=2&K2%3B8=2&K2%3B9=2&K2%3B10=2&K2%3B11=2&K2%3B12=2&K2%3B13=2&K3%3B0=0&K3%3B1=1&K3%3B2=2&K3%3B3=3&K3%3B4=0&K3%3B5=1&K3%3B6=3&K3%3B7=2&K3%3B8=1&K3%3B9=2&K3%3B10=3&K3%3B11=1&K3%3B12=3&K3%3B13=3&K4%3B0=0&K4%3B1=0&K4%3B2=0&K4%3B3=0&K4%3B4=4&K4%3B5=4&K4%3B6=4&K4%3B7=4&K4%3B8=4&K4%3B9=4&K4%3B10=4&K4%3B11=4&K4%3B12=4&K4%3B13=4&K5%3B0=0&K5%3B1=1&K5%3B2=2&K5%3B3=1&K5%3B4=4&K5%3B5=5&K5%3B6=5&K5%3B7=7&K5%3B8=5&K5%3B9=7&K5%3B10=5&K5%3B11=5&K5%3B12=5&K5%3B13=5&K6%3B0=0&K6%3B1=1&K6%3B2=2&K6%3B3=3&K6%3B4=4&K6%3B5=5&K6%3B6=6&K6%3B7=7&K6%3B8=5&K6%3B9=7&K6%3B10=6&K6%3B11=5&K6%3B12=6&K6%3B13=6&K7%3B0=0&K7%3B1=2&K7%3B2=2&K7%3B3=2&K7%3B4=4&K7%3B5=7&K7%3B6=7&K7%3B7=7&K7%3B8=7&K7%3B9=7&K7%3B10=7&K7%3B11=7&K7%3B12=7&K7%3B13=7&K8%3B0=0&K8%3B1=1&K8%3B2=2&K8%3B3=1&K8%3B4=4&K8%3B5=5&K8%3B6=5&K8%3B7=7&K8%3B8=8&K8%3B9=9&K8%3B10=8&K8%3B11=8&K8%3B12=8&K8%3B13=8&K9%3B0=0&K9%3B1=2&K9%3B2=2&K9%3B3=2&K9%3B4=4&K9%3B5=7&K9%3B6=7&K9%3B7=7&K9%3B8=9&K9%3B9=9&K9%3B10=9&K9%3B11=9&K9%3B12=9&K9%3B13=9&K10%3B0=0&K10%3B1=1&K10%3B2=2&K10%3B3=3&K10%3B4=4&K10%3B5=5&K10%3B6=6&K10%3B7=7&K10%3B8=8&K10%3B9=9&K10%3B10=10&K10%3B11=11&K10%3B12=12&K10%3B13=13&K11%3B0=0&K11%3B1=1&K11%3B2=2&K11%3B3=1&K11%3B4=4&K11%3B5=5&K11%3B6=5&K11%3B7=7&K11%3B8=8&K11%3B9=9&K11%3B10=11&K11%3B11=11&K11%3B12=11&K11%3B13=8&K12%3B0=0&K12%3B1=1&K12%3B2=2&K12%3B3=3&K12%3B4=4&K12%3B5=5&K12%3B6=6&K12%3B7=7&K12%3B8=8&K12%3B9=9&K12%3B10=12&K12%3B11=11&K12%3B12=12&K12%3B13=13&K13%3B0=0&K13%3B1=1&K13%3B2=2&K13%3B3=3&K13%3B4=4&K13%3B5=5&K13%3B6=6&K13%3B7=7&K13%3B8=8&K13%3B9=9&K13%3B10=13&K13%3B11=8&K13%3B12=13&K13%3B13=13&A0%3B0=0&A0%3B1=1&A0%3B2=2&A0%3B3=3&A0%3B4=4&A0%3B5=5&A0%3B6=6&A0%3B7=7&A0%3B8=8&A0%3B9=9&A0%3B10=10&A0%3B11=11&A0%3B12=12&A0%3B13=13&A1%3B0=1&A1%3B1=1&A1%3B2=1&A1%3B3=3&A1%3B4=5&A1%3B5=5&A1%3B6=6&A1%3B7=5&A1%3B8=8&A1%3B9=8&A1%3B10=10&A1%3B11=11&A1%3B12=12&A1%3B13=13&A2%3B0=2&A2%3B1=1&A2%3B2=2&A2%3B3=3&A2%3B4=7&A2%3B5=5&A2%3B6=6&A2%3B7=7&A2%3B8=8&A2%3B9=9&A2%3B10=10&A2%3B11=11&A2%3B12=12&A2%3B13=13&A3%3B0=3&A3%3B1=3&A3%3B2=3&A3%3B3=3&A3%3B4=6&A3%3B5=6&A3%3B6=6&A3%3B7=6&A3%3B8=13&A3%3B9=13&A3%3B10=10&A3%3B11=10&A3%3B12=10&A3%3B13=13&A4%3B0=4&A4%3B1=5&A4%3B2=7&A4%3B3=6&A4%3B4=4&A4%3B5=5&A4%3B6=6&A4%3B7=7&A4%3B8=8&A4%3B9=9&A4%3B10=12&A4%3B11=11&A4%3B12=12&A4%3B13=13&A5%3B0=5&A5%3B1=5&A5%3B2=5&A5%3B3=6&A5%3B4=5&A5%3B5=5&A5%3B6=6&A5%3B7=5&A5%3B8=8&A5%3B9=8&A5%3B10=10&A5%3B11=11&A5%3B12=12&A5%3B13=13&A6%3B0=6&A6%3B1=6&A6%3B2=6&A6%3B3=6&A6%3B4=6&A6%3B5=6&A6%3B6=6&A6%3B7=6&A6%3B8=13&A6%3B9=13&A6%3B10=10&A6%3B11=10&A6%3B12=10&A6%3B13=13&A7%3B0=7&A7%3B1=5&A7%3B2=7&A7%3B3=6&A7%3B4=7&A7%3B5=5&A7%3B6=6&A7%3B7=7&A7%3B8=8&A7%3B9=9&A7%3B10=10&A7%3B11=11&A7%3B12=12&A7%3B13=13&A8%3B0=8&A8%3B1=8&A8%3B2=8&A8%3B3=13&A8%3B4=8&A8%3B5=8&A8%3B6=13&A8%3B7=8&A8%3B8=8&A8%3B9=8&A8%3B10=10&A8%3B11=11&A8%3B12=12&A8%3B13=13&A9%3B0=9&A9%3B1=8&A9%3B2=9&A9%3B3=13&A9%3B4=9&A9%3B5=8&A9%3B6=13&A9%3B7=9&A9%3B8=8&A9%3B9=9&A9%3B10=10&A9%3B11=11&A9%3B12=12&A9%3B13=13&A10%3B0=10&A10%3B1=10&A10%3B2=10&A10%3B3=10&A10%3B4=10&A10%3B5=10&A10%3B6=10&A10%3B7=10&A10%3B8=10&A10%3B9=10&A10%3B10=10&A10%3B11=10&A10%3B12=10&A10%3B13=10&A11%3B0=11&A11%3B1=11&A11%3B2=11&A11%3B3=10&A11%3B4=11&A11%3B5=11&A11%3B6=10&A11%3B7=11&A11%3B8=11&A11%3B9=11&A11%3B10=10&A11%3B11=11&A11%3B12=10&A11%3B13=10&A12%3B0=12&A12%3B1=12&A12%3B2=12&A12%3B3=12&A12%3B4=10&A12%3B5=12&A12%3B6=10&A12%3B7=12&A12%3B8=12&A12%3B9=12&A12%3B10=10&A12%3B11=10&A12%3B12=12&A12%3B13=10&A13%3B0=13&A13%3B1=13&A13%3B2=13&A13%3B3=13&A13%3B4=13&A13%3B5=13&A13%3B6=13&A13%3B7=13&A13%3B8=13&A13%3B9=13&A13%3B10=10&A13%3B11=10&A13%3B12=10&A13%3B13=13&C0%3B0=9&C0%3B1=9&C0%3B2=9&C0%3B3=9&C0%3B4=9&C0%3B5=9&C0%3B6=9&C0%3B7=9&C0%3B8=9&C0%3B9=9&C0%3B10=9&C0%3B11=9&C0%3B12=9&C0%3B13=9&C1%3B0=0&C1%3B1=9&C1%3B2=9&C1%3B3=9&C1%3B4=0&C1%3B5=9&C1%3B6=9&C1%3B7=9&C1%3B8=9&C1%3B9=9&C1%3B10=12&C1%3B11=10&C1%3B12=10&C1%3B13=9&C2%3B0=0&C2%3B1=9&C2%3B2=9&C2%3B3=9&C2%3B4=0&C2%3B5=9&C2%3B6=9&C2%3B7=9&C2%3B8=9&C2%3B9=9&C2%3B10=10&C2%3B11=10&C2%3B12=10&C2%3B13=9&C3%3B0=0&C3%3B1=9&C3%3B2=9&C3%3B3=9&C3%3B4=0&C3%3B5=9&C3%3B6=9&C3%3B7=9&C3%3B8=9&C3%3B9=9&C3%3B10=10&C3%3B11=12&C3%3B12=10&C3%3B13=9&C4%3B0=0&C4%3B1=1&C4%3B2=2&C4%3B3=3&C4%3B4=4&C4%3B5=5&C4%3B6=6&C4%3B7=7&C4%3B8=8&C4%3B9=9&C4%3B10=10&C4%3B11=11&C4%3B12=12&C4%3B13=13&C5%3B0=0&C5%3B1=1&C5%3B2=2&C5%3B3=3&C5%3B4=0&C5%3B5=5&C5%3B6=6&C5%3B7=7&C5%3B8=8&C5%3B9=9&C5%3B10=10&C5%3B11=10&C5%3B12=10&C5%3B13=13&C6%3B0=0&C6%3B1=1&C6%3B2=2&C6%3B3=3&C6%3B4=0&C6%3B5=5&C6%3B6=6&C6%3B7=7&C6%3B8=8&C6%3B9=9&C6%3B10=10&C6%3B11=10&C6%3B12=10&C6%3B13=13&C7%3B0=0&C7%3B1=1&C7%3B2=2&C7%3B3=3&C7%3B4=0&C7%3B5=5&C7%3B6=6&C7%3B7=7&C7%3B8=8&C7%3B9=9&C7%3B10=10&C7%3B11=10&C7%3B12=10&C7%3B13=13&C8%3B0=0&C8%3B1=3&C8%3B2=2&C8%3B3=3&C8%3B4=0&C8%3B5=3&C8%3B6=3&C8%3B7=2&C8%3B8=13&C8%3B9=9&C8%3B10=10&C8%3B11=10&C8%3B12=12&C8%3B13=13&C9%3B0=0&C9%3B1=3&C9%3B2=2&C9%3B3=3&C9%3B4=0&C9%3B5=3&C9%3B6=3&C9%3B7=2&C9%3B8=13&C9%3B9=9&C9%3B10=10&C9%3B11=10&C9%3B12=10&C9%3B13=13&C10%3B0=0&C10%3B1=3&C10%3B2=2&C10%3B3=3&C10%3B4=0&C10%3B5=3&C10%3B6=3&C10%3B7=2&C10%3B8=13&C10%3B9=9&C10%3B10=10&C10%3B11=10&C10%3B12=10&C10%3B13=13&C11%3B0=0&C11%3B1=3&C11%3B2=2&C11%3B3=3&C11%3B4=0&C11%3B5=3&C11%3B6=3&C11%3B7=2&C11%3B8=13&C11%3B9=9&C11%3B10=10&C11%3B11=10&C11%3B12=10&C11%3B13=13&C12%3B0=0&C12%3B1=3&C12%3B2=2&C12%3B3=3&C12%3B4=0&C12%3B5=3&C12%3B6=3&C12%3B7=2&C12%3B8=13&C12%3B9=9&C12%3B10=10&C12%3B11=10&C12%3B12=10&C12%3B13=13&C13%3B0=0&C13%3B1=3&C13%3B2=2&C13%3B3=3&C13%3B4=0&C13%3B5=3&C13%3B6=3&C13%3B7=2&C13%3B8=13&C13%3B9=9&C13%3B10=10&C13%3B11=10&C13%3B12=10&C13%3B13=13">Non-monotonic restriction of logic <b>C</b></a>
+		<tr><td><a href="?n=3&v0=Ω&d0=y&v1=∅&d1=n&v2=N%2FA&d2=n&description=-+This+logic+is+inspired+by+conditional+probability%0D%0A-+Ω+is+a+certain+event%2C+∅+is+an+impossible+event%0D%0A-+By+definition%2C+P%28B%7CA%29+%3D+P%28B%26A%29%2FP%28A%29%2C+so+if+A%3D∅%2C+that+yields+a+ZeroDivisionError%2C+hence+the+N%2FA+value&N0=∅&N1=Ω&N2=N%2FA&K0%3B0=Ω&K0%3B1=∅&K0%3B2=N%2FA&K1%3B0=∅&K1%3B1=∅&K1%3B2=N%2FA&K2%3B0=N%2FA&K2%3B1=N%2FA&K2%3B2=N%2FA&A0%3B0=Ω&A0%3B1=Ω&A0%3B2=N%2FA&A1%3B0=Ω&A1%3B1=∅&A1%3B2=N%2FA&A2%3B0=N%2FA&A2%3B1=N%2FA&A2%3B2=N%2FA&C0%3B0=Ω&C0%3B1=∅&C0%3B2=N%2FA&C1%3B0=N%2FA&C1%3B1=N%2FA&C1%3B2=N%2FA&C2%3B0=N%2FA&C2%3B1=N%2FA&C2%3B2=N%2FA">&Omega;&ndash;&varnothing; conditional probabilities</a>
+	  </table>
+	</li>
+  </ul>
+</nav>
+<table>
+<tr><td>
+<ul>
+<tr><td><form method='get'><b>Number of values :</b> <input type='number' value='<?=$n;?>' name='n' min='<?=$min_n;?>' max='<?=$max_n;?>'> <input type='submit' value='submit'></form>
+<tr><td><form method='get'><input type="hidden" name="n" value="<?=$n;?>"><b>Values :</b> <ul><?php
+for ($i = 0; $i < $n; $i++) {
+	if (in_array($v[$i], $designated)) {
+		print "\n	<li><input type='text' value='".$v[$i]."' name='v$i'><br>\n	designated ? <input type='radio' name='d$i' value='y' checked> yes / <input type='radio' name='d$i' value='n'> no";
+	} else {
+		print "\n	<li><input type='text' value='".$v[$i]."' name='v$i'><br>\n	designated ? <input type='radio' name='d$i' value='y'> yes / <input type='radio' name='d$i' value='n' checked> no";
+	}
+}
+?></ul>
+<?php if (!isset($_GET["v0"])) { ?>
+<b>Description :</b><br>
+<textarea name="description" style="width: 100%; height: 100px; font-family: Times New Roman"><?=$description;?></textarea><br>
+<?php } ?>
+<input type='submit' value='submit'></form>
 </table>
-<h2>Metasyntax</h2>
+<?php if (isset($_GET["v0"])) { ?>
+<form method="get">
+<input type="hidden" name="n" value="<?=$n;?>">
 <?php
-foreach ($sanitizedGET as $i => $j) {
-    print "<input type='hidden' name='$i' value='$j'>\n";
+for ($i = 0; $i < $n; $i++) {
+	print "<input type='hidden' name='v$i' value='".$_GET["v$i"]."'>\n";
+	print "<input type='hidden' name='d$i' value='".$_GET["d$i"]."'>\n";
 }
 ?>
-<table bordered cellspacing="0">
-<tr><td><b>Encoding</b>
-    <td><b>Name</b>
-    <td><b>Arity</b>
-<tr><td code>Entails
-    <td>Entailment (&vdash;)
-    <td>Binary (relation)
-<tr><td code>Comma
-    <td>Comma (,)
-    <td>Binary
-<tr><td code>Not
-    <td>"Not ..."
-    <td>Unary
-<tr><td code>Implies
-    <td>"If... then..."
-    <td>Binary
-<tr><td code>And
-    <td>"... and ..."
-    <td>Any arity
-<tr><td code>Or
-    <td>"... and/or ..."
-    <td>Any arity
+<table>
+<tr><td>
+<b>Description :</b><br>
+<textarea name="description" style="width: 100%; height: 100px; font-family: Times New Roman"><?=$description;?></textarea><br>
+<tr><td><b>Negation :
+		<table b cellspacing="0"><tr><td b><i>A</i><td b>&sim;<i>A</i><?php
+			for ($i = 0; $i < $n; $i++) {
+				print "\n		<tr><td b>".$v[$i]."<td><center><select name='N$i'>\n";
+				for ($j = 0; $j < $n; $j++) {
+					if ($v[$j] == $N[$v[$i]]) {
+						print "			<option value='".$v[$j]."' selected>".$v[$j]."\n";
+					} else {
+						print "			<option value='".$v[$j]."'>".$v[$j]."\n";
+					}
+				}
+			}
+		?>
+		</table>
+<tr><td><b>Conjunction :
+		<table cellspacing="0" b><tr><td b><i>A</i>&amp;<i>B</i><?php
+			for ($i = 0; $i < $n; $i++) {
+				print "<td b><i>B</i>=".$v[$i];
+			}
+			for ($i1 = 0; $i1 < $n; $i1++) {
+				print "\n<tr><td b><i>A</i>=".$v[$i1];
+				for ($i2 = 0; $i2 < $n; $i2++) {
+					print "<td><center><select name='K".strval($i1).";".strval($i2)."'>";
+					for ($j = 0; $j < $n; $j++) {
+						if ($v[$j] == $K[$v[$i1]][$v[$i2]]) {
+							print "			<option value='".$v[$j]."' selected>".$v[$j]."\n";
+						} else {
+							print "			<option value='".$v[$j]."'>".$v[$j]."\n";
+						}
+					}
+				}
+			}
+		?>
+		</table>
+<tr><td><b>Disjunction :
+		<table cellspacing="0" b><tr><td b><i>A</i>&or;<i>B</i><?php
+			for ($i = 0; $i < $n; $i++) {
+				print "<td b><i>B</i>=".$v[$i];
+			}
+			for ($i1 = 0; $i1 < $n; $i1++) {
+				print "\n<tr><td b><i>A</i>=".$v[$i1];
+				for ($i2 = 0; $i2 < $n; $i2++) {
+					print "<td><center><select name='A".strval($i1).";".strval($i2)."'>";
+					for ($j = 0; $j < $n; $j++) {
+						if ($v[$j] == $A[$v[$i1]][$v[$i2]]) {
+							print "			<option value='".$v[$j]."' selected>".$v[$j]."\n";
+						} else {
+							print "			<option value='".$v[$j]."'>".$v[$j]."\n";
+						}
+					}
+				}
+			}
+		?>
+		</table>
+<tr><td><b>Implication :
+		<table cellspacing="0" b><tr><td b><i>A</i>&rarr;<i>B</i><?php
+			for ($i = 0; $i < $n; $i++) {
+				print "<td b><i>B</i>=".$v[$i];
+			}
+			for ($i1 = 0; $i1 < $n; $i1++) {
+				print "\n<tr><td b><i>A</i>=".$v[$i1];
+				for ($i2 = 0; $i2 < $n; $i2++) {
+					print "<td><center><select name='C".strval($i1).";".strval($i2)."'>";
+					for ($j = 0; $j < $n; $j++) {
+						if ($v[$j] == $C[$v[$i1]][$v[$i2]]) {
+							print "			<option value='".$v[$j]."' selected>".$v[$j]."\n";
+						} else {
+							print "			<option value='".$v[$j]."'>".$v[$j]."\n";
+						}
+					}
+				}
+			}
+		?>
+		</table>
+<tr><td><input type='submit' value='submit'>
 </table>
+</form>
+<hr>
+<table cellspacing="20px">
+<tr><td colspan='2' align='center'>
 
-<h2>Syntax</h2>
-<table bordered cellspacing="0">
-<tr><td><b>Encoding</b>
-    <td><b>Name</b>
-    <td><b>Arity</b>
-<tr><td code>N
-    <td>Negation (~)
-    <td>Unary
-<tr><td code>C
-    <td>Implication (→)
-    <td>Binary
-<tr><td code>K
-    <td>Conjunction (&)
-    <td>Binary
-<tr><td code>A
-    <td>Disjunction (∨)
-    <td>Binary
-</table>
 
-<h2>Rules</h2>
+
 <?php
-$n = 1;
-while (isset($_GET["typ$n"])) {
-    $n++;
+if (isset($_GET["inf_nv"])) {
+?>
+<form method="get">
+<input type="hidden" name="n" value="<?=$n;?>">
+<?php
+for ($i = 0; $i < $n; $i++) {
+	print "<input type='hidden' name='v$i' value='".$_GET["v$i"]."'>\n";
+	print "<input type='hidden' name='d$i' value='".$_GET["d$i"]."'>\n";
 }
 ?>
-<form method="get" action="#And<?=max(1,$n-1);?>">
-<table bordered cellspacing="0" style="width: 80%">
-<tr><td align="center"><i><b>Variables</b><br><small>(separated by linebreaks)
-    <td align="center"><i><b>Code
-
+<input type="hidden" name="description" value="<?=$description;?>">
 <?php
-for ($i = 1; $i < $n; $i++) {
+for ($i = 0; $i < $n; $i++) {
+	for ($j = 0; $j < $n; $j++) {
+		print "<input type='hidden' name='N$i' value='".$_GET["N$i"]."'>\n";
+		print "<input type='hidden' name='C$i;$j' value='".$_GET["C$i;$j"]."'>\n";
+		print "<input type='hidden' name='K$i;$j' value='".$_GET["K$i;$j"]."'>\n";
+		print "<input type='hidden' name='A$i;$j' value='".$_GET["A$i;$j"]."'>\n";
+	}
+}
 ?>
+<center><b>Custom inference test</b></center>
+<hr>
+<b>Number of variables:</b> <input type="number" name="inf_nv" min="1" max="5" value="<?=$_GET["inf_nv"];?>"><br>
+<b>Number of premises:</b> <input type="number" name="inf_np" min="0" max="5" value="<?=$_GET["inf_np"];?>"><br>
+<b>Number of conclusions:</b> <input type="number" name="inf_nc" min="1" max="5" value="<?=$_GET["inf_nc"];?>"><br>
+<input type="submit" value="submit">
+</form><br><br>
+&bullet; WFF (well-formed formulas) are case-sensitive, but space-insensitive.<br>
+&bullet; <span class='wff'>A</span><?php
+for ($i = 1; $i < $_GET["inf_nv"]; $i++) {
+	print ", <span class='wff'>".['A','B','C','D','E'][$i]."</span>";
+}
+if ($_GET["inf_nv"] == 1) print " is a wff.";
+else print " are wff.";
+?><br>
+&bullet; If <i class='wff'>&alpha;</i> is a WFF, then so is <span class='wff'>not(<i>&alpha;</i>)</span>.<br>
+&bullet; If <i class='wff'>&alpha;</i> and <i class='wff'>&beta;</i> are WFF, then so is <span class='wff'>and(<i>&alpha;</i>, <i>&beta;</i>)</span>.<br>
+&bullet; If <i class='wff'>&alpha;</i> and <i class='wff'>&beta;</i> are WFF, then so is <span class='wff'>or(<i>&alpha;</i>, <i>&beta;</i>)</span>.<br>
+&bullet; If <i class='wff'>&alpha;</i> and <i class='wff'>&beta;</i> are WFF, then so is <span class='wff'>implies(<i>&alpha;</i>, <i>&beta;</i>)</span>.<br>
+<br>
 
-<tr><td colspan="2" style="text-align: center; border-bottom: 0pt">
-        $$<?php
-        eval("print ".processed($i).";");
-        ?>$$
-        Name: <input type="text" name="nam<?=$i;?>" value="<?=$sanitizedGET["nam$i"];?>">
-<tr><td style="width: 20%; text-align: center; border-right: 0pt; border-top: 0pt; border-bottom: 0pt">
-        <textarea name="var<?=$i;?>" style="width: 100%; height: 100pt"><?=$sanitizedGET["var$i"];?></textarea>
-    <td style="width: 80%; text-align: center; border-left: 0pt; border-top: 0pt; border-bottom: 0pt">
-        <textarea style="width: 100%; height: 100pt" name="txt<?=$i;?>" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+' '+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"><?=$sanitizedGET["txt$i"];?></textarea>
-<tr><td colspan="2" style="text-align: center; border-top: 0pt">
-<fieldset><legend><b><i>Type of rule:</i></b></legend>
-    <input type="radio" name="typ<?=$i;?>" value="And" id="And<?=$i;?>"<?=[" checked",""][array("And"=>0,"Or"=>1)[$sanitizedGET["typ$i"]]];?>> <label for="And<?=$i;?>">Universal</label><br>
-    <input type="radio" name="typ<?=$i;?>" value="Or" id="Or<?=$i;?>"<?=[""," checked"][array("And"=>0,"Or"=>1)[$sanitizedGET["typ$i"]]];?>> <label for="Or<?=$i;?>">Existential</label>
-</fieldset>
+<form method="get">
+<input type="hidden" name="n" value="<?=$n;?>">
+<?php
+for ($i = 0; $i < $n; $i++) {
+	print "<input type='hidden' name='v$i' value='".$_GET["v$i"]."'>\n";
+	print "<input type='hidden' name='d$i' value='".$_GET["d$i"]."'>\n";
+}
+?>
+<input type="hidden" name="description" value="<?=$description;?>">
+<?php
+for ($i = 0; $i < $n; $i++) {
+	for ($j = 0; $j < $n; $j++) {
+		print "<input type='hidden' name='N$i' value='".$N[$v[$i]]."'>\n";
+		print "<input type='hidden' name='C$i;$j' value='".$C[$v[$i]][$v[$j]]."'>\n";
+		print "<input type='hidden' name='K$i;$j' value='".$K[$v[$i]][$v[$j]]."'>\n";
+		print "<input type='hidden' name='A$i;$j' value='".$A[$v[$i]][$v[$j]]."'>\n";
+	}
+}
+?>
+<input type="hidden" name="inf_nv" value="<?=$_GET["inf_nv"];?>">
+<input type="hidden" name="inf_np" value="<?=$_GET["inf_np"];?>">
+<input type="hidden" name="inf_nc" value="<?=$_GET["inf_nc"];?>">
+<b>Premise(s):</b><br>
+<?php
+for ($i = 0; $i < $_GET["inf_np"]; $i++)
+	if (isset($_GET["inf_p$i"]))
+	print "<input type='text' name='inf_p$i' value='".$_GET["inf_p$i"]."'><br>\n";
+	else
+	print "<input type='text' name='inf_p$i'><br>\n";
+?><br>
+<b>Conclusion(s):</b><br>
+<?php
+for ($i = 0; $i < $_GET["inf_nc"]; $i++)
+	if (isset($_GET["inf_c$i"]))
+	print "<input type='text' name='inf_c$i' value='".$_GET["inf_c$i"]."'><br>\n";
+	else
+	print "<input type='text' name='inf_c$i'><br>\n";
+?>
+<input type="submit" value="submit">
 </form>
 
-<?php
+<pre><?php
+function latex_implies ($A, $B) {
+	return "($A\\to $B)";
 }
-
-if (!isset($sanitizedGET["sub"]) or ($sanitizedGET["sub"] == "+")) {
-?>
-<tr><td colspan="2" style="text-align: center; border-bottom: 0pt">
-        <?php if (!isset($_GET["txt1"])) { ?>$$\textbf{not}\left(()\vdash a\right)$$<?php } ?>
-        Name: <input type="text" name="nam<?=$n;?>"<?php if (!isset($_GET["txt1"])) { ?> value="Non-triviality"<?php } ?>>
-<tr><td style="width: 20%; text-align: center; border-top: 0pt; border-right: 0pt; border-bottom: 0pt">
-        <textarea name="var<?=$n;?>" style="width: 100%; height: 100pt"><?php if (!isset($_GET["txt1"])) { ?>a<?php } ?></textarea>
-    <td style="width: 80%; text-align: center; border-top: 0pt; border-left: 0pt; border-bottom: 0pt">
-        <textarea style="width: 100%; height: 100pt" name="txt<?=$n;?>" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+' '+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"><?php if (!isset($_GET["txt1"])) { ?>Not(Entails(Neutral,a))<?php } ?></textarea>
-<tr><td colspan="2" style="text-align: center; border-top: 0pt">
-<fieldset><legend><b><i>Type of rule:</i></b></legend>
-    <input type="radio" name="typ<?=$n;?>" value="And" id="And<?=$n;?>"<?php if (isset($_GET["txt1"])) { ?> checked<?php } ?>> <label for="And<?=$n;?>">Universal</label><br>
-    <input type="radio" name="typ<?=$n;?>" value="Or" id="Or<?=$n;?>"<?php if (!isset($_GET["txt1"])) { ?> checked<?php } ?>> <label for="Or<?=$n;?>">Existential</label>
-</fieldset>
+function latex_and ($A, $B) {
+	return "($A\\;\\&\\;$B)";
+}
+function latex_or ($A, $B) {
+	return "($A\\lor $B)";
+}
+function latex_not ($A) {
+	return "{\\sim}$A";
+}
+function latexer ($A) {
+	return str_replace(['lA','lB','lC','lD','lE'],['A','B','C','D','E'],$A);
+}
+function cond_implies ($A, $B) {
+	$new_A = str_replace(
+		['lA', 'lB', 'lC', 'lD', 'lE'],
+		["\$v0", "\$v1", "\$v2", "\$v3", "\$v4"],
+		$A
+	);
+	$new_B = str_replace(
+		['lA', 'lB', 'lC', 'lD', 'lE'],
+		["\$v0", "\$v1", "\$v2", "\$v3", "\$v4"],
+		$B
+	);
+	return "\$M[".$new_A."][".$new_B."]";
+}
+function cond_and ($A, $B) {
+	$new_A = str_replace(
+		['lA', 'lB', 'lC', 'lD', 'lE'],
+		["\$v0", "\$v1", "\$v2", "\$v3", "\$v4"],
+		$A
+	);
+	$new_B = str_replace(
+		['lA', 'lB', 'lC', 'lD', 'lE'],
+		["\$v0", "\$v1", "\$v2", "\$v3", "\$v4"],
+		$B
+	);
+	return "\$K[".$new_A."][".$new_B."]";
+}
+function cond_or ($A, $B) {
+	$new_A = str_replace(
+		['lA', 'lB', 'lC', 'lD', 'lE'],
+		["\$v0", "\$v1", "\$v2", "\$v3", "\$v4"],
+		$A
+	);
+	$new_B = str_replace(
+		['lA', 'lB', 'lC', 'lD', 'lE'],
+		["\$v0", "\$v1", "\$v2", "\$v3", "\$v4"],
+		$B
+	);
+	return "\$L[".$new_A."][".$new_B."]";
+}
+function cond_not ($A) {
+	$new_A = str_replace(
+		['lA', 'lB', 'lC', 'lD', 'lE'],
+		["\$v0", "\$v1", "\$v2", "\$v3", "\$v4"],
+		$A
+	);
+	return "\$N[".$new_A."]";
+}
+function conder ($expr) {
+	$new_expr = str_replace(
+		['lA', 'lB', 'lC', 'lD', 'lE', "\$L", "\$M"],
+		["\$v0", "\$v1", "\$v2", "\$v3", "\$v4", "\$A", "\$C"],
+		$expr
+	);
+	return $new_expr;
+}
+if (isset($_GET["inf_c0"])) {
+$prem = [];
+$conc = [];
+for ($i = 0; $i < $_GET["inf_np"]; $i++) {
+	$prem[count($prem)] = $_GET["inf_p$i"];
+	for ($j = 0; $j < $_GET["inf_nv"]; $j++) {
+		$prem[count($prem)-1] = str_replace (
+			['A','B','C','D','E'][$j],
+			['"lA"','"lB"','"lC"','"lD"','"lE"'][$j],
+			$prem[count($prem)-1]
+		);
+	}
+}
+for ($i = 0; $i < $_GET["inf_nc"]; $i++) {
+	$conc[count($conc)] = $_GET["inf_c$i"];
+	for ($j = 0; $j < $_GET["inf_nv"]; $j++) {
+		$conc[count($conc)-1] = str_replace (
+			['A','B','C','D','E'][$j],
+			['"lA"','"lB"','"lC"','"lD"','"lE"'][$j],
+			$conc[count($conc)-1]
+		);
+	}
+}
+function latex ($premarr, $concarr) {
+	$ret = "\$\$";
+	if ($premarr == []) {
+		$ret .= "\\overline{";
+	} else {
+		$ret .= "\\frac{";
+		eval("\$ret .= latexer(".str_replace (
+			["and","not","implies","or"],
+			["latex_and","latex_not","latex_implies","latex_or"],
+			$premarr[0]
+		).");");
+		for ($i = 1; $i < count($premarr); $i++)
+		eval("\$ret .= '\\quad ' . latexer(".str_replace (
+			["and","not","implies","or"],
+			["latex_and","latex_not","latex_implies","latex_or"],
+			$premarr[$i]
+		).");");
+		$ret .= "}{";
+	}
+	eval("\$ret .= latexer(".str_replace (
+		["and","not","implies","or"],
+		["latex_and","latex_not","latex_implies","latex_or"],
+		$concarr[0]
+	).");");
+	for ($i = 1; $i < count($concarr); $i++)
+	eval("\$ret .= '\\quad ' . latexer(".str_replace (
+		["and","not","implies","or"],
+		["latex_and","latex_not","latex_implies","latex_or"],
+		$concarr[$i]
+	).");");
+	$ret .= "}\$\$";
+	return $ret;
+}
+function cond ($premarr, $concarr) {
+	$ret = "";
+	if (count($premarr) >= 1) {
+		$ret .= "if (in_array(";
+		eval("\$ret .= conder(".str_replace (
+			["and","not","implies","or"],
+			["cond_and","cond_not","cond_implies","cond_or"],
+			$premarr[0]
+		).");");
+		$ret .= ", \$designated)";
+		for ($i = 1; $i < count($premarr); $i++) {
+			$ret .= " and in_array(";
+			eval("\$ret .= conder(".str_replace (
+				["and","not","implies","or"],
+				["cond_and","cond_not","cond_implies","cond_or"],
+				$premarr[$i]
+			).");");
+			$ret .= ", \$designated)";
+		}
+		$ret .= ")\n";
+	}
+	$ret .= "if (!in_array(";
+	eval("\$ret .= conder(".str_replace (
+		["and","not","implies","or"],
+		["cond_and","cond_not","cond_implies","cond_or"],
+		$concarr[0]
+	).");");
+	$ret .= ", \$designated)";
+	for ($i = 1; $i < count($concarr); $i++) {
+		$ret .= " and !in_array(";
+		eval("\$ret .= conder(".str_replace (
+			["and","not","implies","or"],
+			["cond_and","cond_not","cond_implies","cond_or"],
+			$concarr[$i]
+		).");");
+		$ret .= ", \$designated)";
+	}
+	$ret .= ")";
+	return $ret;
+}
+function loops ($num) {
+	$ret = "";
+	for ($i = 0; $i < $num; $i++) {
+		$ret .= "foreach (\$v as \$v$i)\n";
+	}
+	return $ret;
+}
+function counter_format ($num) {
+	$ret = "\"<i>A</i>=\".\$v0";
+	for ($i = 1; $i < $num; $i++) {
+		$ret .= ".\",<br>\\n<i>".['A','B','C','D','E'][$i]."</i>=\".\$v$i";
+	}
+	$ret .= ";";
+	return $ret;
+}
+print "<tr><td valign='top' colspan='2' align='center'><b><i>Custom inference
+<tr><td valign='top'>".latex($prem, $conc)."
+<td valign='center'>";
+eval("\$bool = True;
+\$counter = '<hr>\n';
+".loops($_GET["inf_nv"]).cond($prem, $conc)." {
+	\$bool = False;
+	\$counter .= ".counter_format($_GET["inf_nv"])."
+	\$counter .= '<hr>\n';
+}
+print \"<b>Valid?</b> \";
+if (\$bool) {
+	print \"Yes!\";
+} else {
+	print \"Nope.<br>\\n<b>All counter-examples:</b><br>\\n\$counter\";
+}");
+}
+?></pre>
+<?php } else { ?>
+<form method="get">
+<center><b>Custom inference test</b></center>
+<input type="hidden" name="n" value="<?=$n;?>">
 <?php
+for ($i = 0; $i < $n; $i++) {
+	print "<input type='hidden' name='v$i' value='".$_GET["v$i"]."'>\n";
+	print "<input type='hidden' name='d$i' value='".$_GET["d$i"]."'>\n";
 }
 ?>
-
+<input type="hidden" name="description" value="<?=$description;?>">
+<?php
+for ($i = 0; $i < $n; $i++) {
+	for ($j = 0; $j < $n; $j++) {
+		print "<input type='hidden' name='N$i' value='".$N[$v[$i]]."'>\n";
+		print "<input type='hidden' name='C$i;$j' value='".$C[$v[$i]][$v[$j]]."'>\n";
+		print "<input type='hidden' name='K$i;$j' value='".$K[$v[$i]][$v[$j]]."'>\n";
+		print "<input type='hidden' name='A$i;$j' value='".$A[$v[$i]][$v[$j]]."'>\n";
+	}
+}
+?>
+<hr>
+<b>Number of variables:</b> <input type="number" name="inf_nv" min="1" max="5"><br>
+<b>Number of premises:</b> <input type="number" name="inf_np" min="0" max="5"><br>
+<b>Number of conclusions:</b> <input type="number" name="inf_nc" min="1" max="5"><br>
+<input type="submit" value="submit">
 </form>
-
-<tr>
-<td colspan="2" align="center">
-<input type="checkbox" name="vsp"<?php
-if (isset($_GET["vsp"])) {
-    if ($_GET["vsp"]) print " checked";
-}
-?> id="vsp"> <label for="vsp">Toggle variable sharing?<br><small>(<a href="https://dx.doi.org/10.1007/s10849-026-09454-2" target="_blank">Rozek &amp; Tedder, 2026</a>)</small></label><br>
-<input name="sub" type="submit" value="+">&emsp;<input name="sub" type="submit" value="Submit">
+<?php } ?>
 </table>
 
-<td valign="center" style="height: 90%; width: 50%" align="left">
-<textarea readonly style="width:90%; height:90%">
-from z3 import *
-from itertools import product
-from time import time
 
-found = False
-size = 1
 
-while not found :
-    
-    start = time()
-    
-    V = list(range(size))
-    inV = lambda x : And(x >= 0, x < size)
-    
-    Entails = Function("Entails", IntSort(), IntSort(), BoolSort())
-    Neutral = Int("Neutral")
-    Comma = Function("Comma", IntSort(), IntSort(), IntSort())
-    C = Function("C", IntSort(), IntSort(), IntSort())
-    N = Function("N", IntSort(), IntSort())
-    K = Function("K", IntSort(), IntSort(), IntSort())
-    A = Function("A", IntSort(), IntSort(), IntSort())
-    <?php
-    if (isset($_GET["vsp"]) and $_GET["vsp"]) {
-    ?>isA = Function("isA", IntSort(), BoolSort()) # for VSP
-    isB = Function("isB", IntSort(), BoolSort()) # for VSP
-    <?php
-    }
-    ?>
-    
-    s = Solver()
-    
-    # Stability
-    s.add(inV(Neutral))
-    s.add(And([
-        inV(N(p))
-        for p in V
-    ]))
-    s.add(And([
-        And (
-            inV(Comma(p,q)),
-            inV(C(p,q)),
-            inV(K(p,q)),
-            inV(A(p,q))
-        )
-        for p, q in product(*([V]*2))
-    ]))
-    
-    <?php
-    if (isset($_GET["vsp"]) and $_GET["vsp"]) {
-    ?># VSP
-    for a in V:
-        s.add(Implies(isA(a), isA(N(a))))
-        s.add(Implies(isB(a), isB(N(a))))
-        for b in V:
-            s.add(Implies(And(isA(a), isA(b)), isA(C(a, b))))
-            s.add(Implies(And(isA(a), isA(b)), isA(K(a, b))))
-            s.add(Implies(And(isA(a), isA(b)), isA(A(a, b))))
-            s.add(Implies(And(isB(a), isB(b)), isB(C(a, b))))
-            s.add(Implies(And(isB(a), isB(b)), isB(K(a, b))))
-            s.add(Implies(And(isB(a), isB(b)), isB(A(a, b))))
-    
-    s.add(Or([isA(i) != isB(i) for i in V]))
-    s.add(And([Not(And(isA(i), isB(i))) for i in V]))
-    s.add(And([
-        Implies(
-            And(isA(a), isB(b)),
-            Not(Entails(Neutral, C(a, b)))
-        )
-        for a, b in product(*([V]*2))
-    ]))
-    s.add(Or([isA(i) for i in V]))
-    s.add(Or([isB(i) for i in V]))
-    
-    <?php
-    }
-    ?># For ordering's sake
-    
-    s.add(And([ # Undesignated values before designated ones
-            Implies(
-                And(
-                    Not(Entails(Neutral, a)),
-                    Entails(Neutral, b)
-                ),
-                a < b
-            )
-            for a, b in product(*([V]*2))
-        ]))
-    s.add(And([ # Gaps after "false" values
-            Implies(
-                And(
-                    Entails(Neutral, N(a)),
-                    Not(Entails(Neutral, N(b))),
-                    Entails(Neutral, a),
-                    Entails(Neutral, b),
-                ),
-                a < b
-            )
-            for a, b in product(*([V]*2))
-        ]))
-    s.add(And([ # Gluts before "true" values
-            Implies(
-                And(
-                    Entails(Neutral, N(a)),
-                    Not(Entails(Neutral, N(b))),
-                    Not(Entails(Neutral, a)),
-                    Not(Entails(Neutral, b)),
-                ),
-                a < b
-            )
-            for a, b in product(*([V]*2))
-        ]))
-    s.add(And([ # Boths and Neithers in the middle :3
-            Implies(
-                And(
-                    a == N(a),
-                    b != N(b),
-                    Entails(Neutral,a) == Entails(Neutral,b)
-                ),
-                And(
-                    Implies(
-                        Not(Entails(Neutral,a)),
-                        b <= a
-                    ),
-                    Implies(
-                        Entails(Neutral,a),
-                        a <= b
-                    )
-                )
-            )
-            for a, b in product(*([V]*2))
-        ]))
-    s.add(And([ # Neutral = inf(V^+) under integer ordering
-            Implies(
-                Entails(Neutral, a),
-                Neutral <= a
-            )
-            for a in V
-        ]))
-    
-    # Rules
-    
-    <?php
-    for ($i = 1; $i < $n; $i++) {
-    ?>s.add(<?=$sanitizedGET["typ$i"];?>([
-            <?=str_replace("\n","\n            ",$sanitizedGET["txt$i"]);?>
-            <?php
-            $arr = explode("\n", str_replace("\r","",$sanitizedGET["var$i"]));
-            if (str_replace(["\r","\n",""],'',$sanitizedGET["var$i"]) != '') {
-            ?>
-            
-            for <?=implode(', ', $arr);?> in <?php
-                if (count($arr) == 1) {
-                    print "V";
-                } else {
-                    print "product(*([V]*".count($arr)."))";
-                }
-            }
-            ?>
-            
-        ]))
-    
-    <?php
-    }
-    ?>
-    
-    # Solving and display
-    
-    print(f"Solving at size {size}...")
-    
-    if s.check() == sat :
-        
-        end = time()
-        
-        print(f"SAT at size {size}")
-        print(f"Solved in {end-start} seconds")
-        m = s.model()
-    
-        print("\ninf(V^+) under integer ordering: ", m.eval(Neutral))
-    
-        print("\nEntailment:")
-        print('⊢','|',*[a for a in V],sep='\t')
-        print('----','+---',*['----' for a in V],sep='\t')
-        for a in V :
-            print(a,'|',*[m.eval(Entails(a,b)) for b in V],sep="\t")
-    
-        print("\nComma:")
-        print(',','|',*[a for a in V],sep='\t')
-        print('----','+---',*['----' for a in V],sep='\t')
-        for a in V :
-            print(a,'|',*[m.eval(Comma(a,b)) for b in V],sep="\t")
-        
-        print("\nNegation:")
-        for a in V :
-            print(f"~{a}",'|',m.eval(N(a)),sep="\t")
-        
-        print("\nImplication:")
-        print('→','|',*[a for a in V],sep='\t')
-        print('----','+---',*['----' for a in V],sep='\t')
-        for a in V :
-            print(a,'|',*[m.eval(C(a,b)) for b in V],sep="\t")
-        
-        print("\nConjunction:")
-        print('&','|',*[a for a in V],sep='\t')
-        print('----','+---',*['----' for a in V],sep='\t')
-        for a in V :
-            print(a,'|',*[m.eval(K(a,b)) for b in V],sep="\t")
-        
-        print("\nDisjunction:")
-        print('∨','|',*[a for a in V],sep='\t')
-        print('----','+---',*['----' for a in V],sep='\t')
-        for a in V :
-            print(a,'|',*[m.eval(A(a,b)) for b in V],sep="\t")
-                
-        print("\nMVLPG link")
-        
-        print(f"https://alexandrae.fr/mvlpg.php?n={size}", end='')
-        for i in range(size) :
-            if m.eval(Entails(Neutral, i)) :
-                print(f"&v{i}={i}&d{i}=y",end='')
-            else :
-                print(f"&v{i}={i}&d{i}=n",end='')
-        
-        for a in V :
-            print(f"&N{a}=", m.eval(N(a)), sep='', end='')
-        
-        for a in V :
-            for b in V :
-                print(f"&K{a};{b}=", m.eval(K(a,b)), sep='', end='')
-    
-        for a in V :
-            for b in V :
-                print(f"&A{a};{b}=", m.eval(A(a,b)), sep='', end='')
-    
-        for a in V :
-            for b in V :
-                print(f"&C{a};{b}=", m.eval(C(a,b)), sep='', end='')
-    
-        found = True
-    
-    else :
-        
-        end = time()
-        
-        print(f"UNSAT at size {size}")
-        print(f"Solved in {end-start} seconds\n")
-        
-        size += 1
-</textarea>
+
+
+
+
+
+<hr>
+<table cellspacing="20px">
+
+<tr><td colspan='2' align='center'><b>Inference tests' results</b>
+<hr>
+
+<tr><td colspan='2' align='center'><i><b>Double negation
+
+<tr><td valign='top'>$$\frac A{{\sim}{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (in_array($v[$i], $designated)) {
+			if (!in_array($N[$N[$v[$i]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\frac{{\sim}{\sim}A}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (in_array($N[$N[$v[$i]]], $designated)) {
+			if (!in_array($v[$i], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\overline{A\to{\sim}{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($C[$v[$i]][$N[$N[$v[$i]]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\overline{{\sim}{\sim}A\to A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($C[$N[$N[$v[$i]]]][$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Self-negation
+
+<tr><td valign='top'>$$\frac A{{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (in_array($v[$i], $designated)) {
+			if (!in_array($N[$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\frac{{\sim}A}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (in_array($N[$v[$i]], $designated)) {
+			if (!in_array($v[$i], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td valign='top'>$$\overline{A\to{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($C[$v[$i]][$N[$v[$i]]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td valign='top'>$$\overline{{\sim}A\to A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($C[$N[$v[$i]]][$v[$i]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><hr>
+
+<tr><td colspan='2' align='center'><i><b>Idempotency of &amp;
+<tr><td valign='top'>$$\frac A{A\;\&\;A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (in_array($v[$i], $designated)) {
+			if (!in_array($K[$v[$i]][$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td valign='top'>$$\frac{A\;\&\;A}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (in_array($K[$v[$i]][$v[$i]], $designated)) {
+			if (!in_array($v[$i], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td valign='top'>$$\overline{A\to(A\;\&\;A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($C[$v[$i]][$K[$v[$i]][$v[$i]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td valign='top'>$$\overline{(A\;\&\;A)\to A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($C[$K[$v[$i]][$v[$i]]][$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><i><b>Law of noncontradiction
+<tr><td valign='top'>$$\overline{{\sim}(A\;\&\;{\sim}A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($N[$K[$v[$i]][$N[$v[$i]]]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{{\sim}({\sim}A\;\&\;A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($N[$K[$N[$v[$i]]][$v[$i]]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>&amp; intro.
+<tr><td valign='top'>$$\frac{A\quad B}{A\;\&\;B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($v[$i], $designated) and in_array($v[$j], $designated)) {
+				if (!in_array($K[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Simplification, &amp; elim.
+<tr><td valign='top'>$$\frac{A\;\&\;B}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($K[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($v[$i], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\frac{A\;\&\;B}B$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($K[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($v[$j], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\overline{(A\;\&\;B)\to A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$K[$v[$i]][$v[$j]]][$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\overline{(A\;\&\;B)\to B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$K[$v[$i]][$v[$j]]][$v[$j]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Symmetry of &amp;
+<tr><td valign='top'>$$\frac{A\;\&\;B}{B\;\&\;A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($K[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($K[$v[$j]][$v[$i]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{(A\;\&\;B)\to(B\;\&\;A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$K[$v[$i]][$v[$j]]][$K[$v[$j]][$v[$i]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><i><b>Ex contradictione quodlibet
+<tr><td valign='top'>$$\frac{A\quad{\sim}A}B$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($v[$i], $designated) and in_array($N[$v[$i]], $designated)) {
+				if (!in_array($v[$j], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\frac{A\;\&\;{\sim}A}B$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($K[$v[$i]][$N[$v[$i]]], $designated)) {
+				if (!in_array($v[$j], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td valign='top'>$$\frac{{\sim}A\;\&\;A}B$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($K[$N[$v[$i]]][$v[$i]], $designated)) {
+				if (!in_array($v[$j], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\overline{(A\;\&\;{\sim}A)\to B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$K[$v[$i]][$N[$v[$i]]]][$v[$j]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\overline{({\sim}A\;\&\;A)\to B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$K[$N[$v[$i]]][$v[$i]]][$v[$j]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Associativity of &amp;
+<tr><td valign='top'>$$\frac{(A\;\&\;B)\;\&\;C}{A\;\&\;(B\;\&\;C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($K[$K[$v[$i]][$v[$j]]][$v[$k]], $designated))
+			if (!in_array($K[$v[$i]][$K[$v[$j]][$v[$k]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\;\&\;(B\;\&\;C)}{(A\;\&\;B)\;\&\;C}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($K[$v[$i]][$K[$v[$j]][$v[$k]]], $designated))
+			if (!in_array($K[$K[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+
+<tr><td colspan='2' align='center'><hr>
+<tr><td colspan='2' align='center'><i><b>Idempotency of &or;
+<tr><td valign='top'>$$\frac A{A\lor A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (in_array($v[$i], $designated)) {
+			if (!in_array($A[$v[$i]][$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\frac{A\lor A}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (in_array($A[$v[$i]][$v[$i]], $designated)) {
+			if (!in_array($v[$i], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td valign='top'>$$\overline{A\to(A\lor A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($C[$v[$i]][$A[$v[$i]][$v[$i]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td valign='top'>$$\overline{(A\lor A)\to A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($C[$A[$v[$i]][$v[$i]]][$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><i><b>Law of excluded middle
+<tr><td valign='top'>$$\overline{A\lor{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($A[$v[$i]][$N[$v[$i]]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{{\sim}A\lor A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($A[$N[$v[$i]]][$v[$i]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{A\to(B\lor{\sim}B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++)
+		if (!in_array($C[$v[$i]][$A[$v[$j]][$N[$v[$j]]]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{A\to({\sim}B\lor B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++)
+		if (!in_array($C[$v[$i]][$A[$N[$v[$j]]][$v[$j]]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Addition, &or; intro.
+<tr><td valign='top'>$$\frac A{A\lor B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($v[$i], $designated)) {
+				if (!in_array($A[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\frac B{A\lor B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($v[$j], $designated)) {
+				if (!in_array($A[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\overline{A\to(A\lor B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$v[$i]][$A[$v[$i]][$v[$j]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{B\to(A\lor B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$v[$j]][$A[$v[$i]][$v[$j]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Exclusive &or; intro.
+<tr><td valign='top'>$$\frac{A\quad{\sim}B}{A\lor B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($v[$i], $designated) and in_array($N[$v[$j]], $designated)) {
+				if (!in_array($A[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}A\quad B}{A\lor B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$v[$i]], $designated) and in_array($v[$j], $designated)) {
+				if (!in_array($A[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><i><b>Affirming a disjunct, exclusive &or; elim.
+<tr><td valign='top'>$$\frac{A\lor B\quad A}{{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($v[$i], $designated)) {
+				if (!in_array($N[$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\lor B\quad B}{{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($v[$j], $designated)) {
+				if (!in_array($N[$v[$i]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><i><b>Dual nd &or; elim.
+<tr><td valign='top'>$$\frac{A\lor B}{A\quad B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($v[$i], $designated) and !in_array($v[$j], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Symmetry of &or;
+<tr><td valign='top'>$$\frac{A\lor B}{B\lor A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($A[$v[$j]][$v[$i]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{(A\lor B)\to(B\lor A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$A[$v[$i]][$v[$j]]][$A[$v[$j]][$v[$i]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Disjunctive syllogism
+<tr><td valign='top'>$$\frac{A\lor B\quad{\sim}A}B$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($N[$v[$i]], $designated)) {
+				if (!in_array($v[$j], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\lor B\quad{\sim}B}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($N[$v[$j]], $designated)) {
+				if (!in_array($v[$i], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Disjunctive syllogism (standard implication form)
+<tr><td valign='top'>$$\frac{{\sim}A\lor B\quad A}B$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$N[$v[$i]]][$v[$j]], $designated) and in_array($v[$i], $designated)) {
+				if (!in_array($v[$j], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\lor{\sim}B\quad B}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$v[$i]][$N[$v[$j]]], $designated) and in_array($v[$j], $designated)) {
+				if (!in_array($v[$i], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>&or; elim. (with conditionals)
+<tr><td valign='top'>$$\frac{A\lor B\quad A\to C\quad B\to C}C$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++) {
+				if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($C[$v[$i]][$v[$k]], $designated) and in_array($C[$v[$j]][$v[$k]], $designated)) {
+					if (!in_array($v[$k], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+					}
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><i><b>Associativity of &or;
+<tr><td valign='top'>$$\frac{(A\lor B)\lor C}{A\lor(B\lor C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($A[$A[$v[$i]][$v[$j]]][$v[$k]], $designated))
+			if (!in_array($A[$v[$i]][$A[$v[$j]][$v[$k]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\lor(B\lor C)}{(A\lor B)\lor C}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($A[$v[$i]][$A[$v[$j]][$v[$k]]], $designated))
+			if (!in_array($A[$A[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><i><b>Constructive dilemma
+<tr><td valign='top'>$$\frac{A\lor B\quad A\to C\quad B\to D}{C\lor D}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++) {
+				for ($l = 0; $l < $n; $l++)
+				if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($C[$v[$i]][$v[$k]], $designated) and in_array($C[$v[$j]][$v[$l]], $designated)) {
+					if (!in_array($A[$v[$k]][$v[$l]], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k].",<br>\n<i>D</i>=".$v[$l];
+					}
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\lor B\quad A\to C\quad B\to D}{D\lor C}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++) {
+				for ($l = 0; $l < $n; $l++)
+				if (in_array($A[$v[$i]][$v[$j]], $designated) and in_array($C[$v[$i]][$v[$k]], $designated) and in_array($C[$v[$j]][$v[$l]], $designated)) {
+					if (!in_array($A[$v[$l]][$v[$k]], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k].",<br>\n<i>D</i>=".$v[$l];
+					}
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Destructive dilemma
+<tr><td valign='top'>$$\frac{A\to C\quad B\to D\quad{\sim}C\lor{\sim}D}{{\sim}A\lor{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++) {
+				for ($l = 0; $l < $n; $l++)
+				if (in_array($C[$v[$i]][$v[$k]], $designated) and in_array($C[$v[$j]][$v[$l]], $designated) and in_array($A[$N[$v[$k]]][$N[$v[$l]]], $designated)) {
+					if (!in_array($A[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k].",<br>\n<i>D</i>=".$v[$l];
+					}
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\to C\quad B\to D\quad{\sim}C\lor{\sim}D}{{\sim}B\lor{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++) {
+				for ($l = 0; $l < $n; $l++)
+				if (in_array($C[$v[$i]][$v[$k]], $designated) and in_array($C[$v[$j]][$v[$l]], $designated) and in_array($A[$N[$v[$k]]][$N[$v[$l]]], $designated)) {
+					if (!in_array($A[$N[$v[$j]]][$N[$v[$i]]], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k].",<br>\n<i>D</i>=".$v[$l];
+					}
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><hr>
+<tr><td colspan='2' align='center'><i><b>De Morgan's laws
+<tr><td valign='top'>$$\frac{{\sim}(A\;\&\;B)}{{\sim}A\lor{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$K[$v[$i]][$v[$j]]], $designated)) {
+				if (!in_array($A[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}A\lor{\sim}B}{{\sim}(A\;\&\;B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
+				if (!in_array($N[$K[$v[$i]][$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}(A\lor B)}{{\sim}A\;\&\;{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$A[$v[$i]][$v[$j]]], $designated)) {
+				if (!in_array($K[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}A\;\&\;{\sim}B}{{\sim}(A\lor B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($K[$N[$v[$i]]][$N[$v[$j]]], $designated)) {
+				if (!in_array($N[$A[$v[$i]][$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Distributivity
+<tr><td valign='top'>$$\frac{A\;\&\;(B\lor C)}{(A\;\&\;B)\lor(A\;\&\;C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($K[$v[$i]][$A[$v[$j]][$v[$k]]], $designated))
+			if (!in_array($A[$K[$v[$i]][$v[$j]]][$K[$v[$i]][$v[$k]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\lor(B\;\&\;C)}{(A\lor B)\;\&\;(A\lor C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($A[$v[$i]][$K[$v[$j]][$v[$k]]], $designated))
+			if (!in_array($K[$A[$v[$i]][$v[$j]]][$A[$v[$i]][$v[$k]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{(B\lor C)\;\&\;A}{(B\;\&\;A)\lor(C\;\&\;A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($K[$A[$v[$j]][$v[$k]]][$v[$i]], $designated))
+			if (!in_array($A[$K[$v[$j]][$v[$i]]][$K[$v[$k]][$v[$i]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{(B\;\&\;C)\lor A}{(B\lor A)\;\&\;(C\lor A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($A[$K[$v[$j]][$v[$k]]][$v[$i]], $designated))
+			if (!in_array($K[$A[$v[$j]][$v[$i]]][$A[$v[$k]][$v[$i]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{(A\;\&\;B)\lor(A\;\&\;C)}{A\;\&\;(B\lor C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($A[$K[$v[$i]][$v[$j]]][$K[$v[$i]][$v[$k]]], $designated))
+			if (!in_array($K[$v[$i]][$A[$v[$j]][$v[$k]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{(A\lor B)\;\&\;(A\lor C)}{A\lor(B\;\&\;C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($K[$A[$v[$i]][$v[$j]]][$A[$v[$i]][$v[$k]]], $designated))
+			if (!in_array($A[$v[$i]][$K[$v[$j]][$v[$k]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{(B\;\&\;A)\lor(C\;\&\;A)}{(B\lor C)\;\&\;A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($A[$K[$v[$j]][$v[$i]]][$K[$v[$k]][$v[$i]]], $designated))
+			if (!in_array($K[$A[$v[$j]][$v[$k]]][$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{(B\lor A)\;\&\;(C\lor A)}{(B\;\&\;C)\lor A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($K[$A[$v[$j]][$v[$i]]][$A[$v[$k]][$v[$i]]], $designated))
+			if (!in_array($A[$K[$v[$j]][$v[$k]]][$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><hr>
+<tr><td colspan='2' align='center'><i><b>Reflexivity of &rarr;
+<tr><td valign='top'>$$\overline{A\to A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($C[$v[$i]][$v[$i]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Irreflexivity of &rarr;
+<tr><td valign='top'>$$\overline{{\sim}(A\to A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($N[$C[$v[$i]][$v[$i]]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Aristotle's theses
+<tr><td valign='top'>$$\overline{{\sim}(A\to{\sim}A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($N[$C[$v[$i]][$N[$v[$i]]]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\overline{{\sim}({\sim}A\to A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		if (!in_array($N[$C[$N[$v[$i]]][$v[$i]]], $designated)) {
+			$bool = False;
+			$counter = "<i>A</i>=".$v[$i];
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Modus ponens, &rarr; elim.
+<tr><td valign='top'>$$\frac{A\to B\quad A}B$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated) and in_array($v[$i], $designated)) {
+				if (!in_array($v[$j], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Modus tollens
+<tr><td valign='top'>$$\frac{A\to B\quad{\sim}B}{{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated) and in_array($N[$v[$j]], $designated)) {
+				if (!in_array($N[$v[$i]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Positive paradox
+<tr><td valign='top'>$$\overline{B\to(A\to B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$v[$j]][$C[$v[$i]][$v[$j]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Vacuous truth
+<tr><td valign='top'>$$\overline{{\sim}A\to(A\to B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$N[$v[$i]]][$C[$v[$i]][$v[$j]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Contrapositive
+<tr><td valign='top'>$$\frac{{\sim}B\to{\sim}A}{A\to B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$N[$v[$j]]][$N[$v[$i]]], $designated)) {
+				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\frac{A\to B}{{\sim}B\to{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($C[$N[$v[$j]]][$N[$v[$i]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Symmetry of &rarr;
+<tr><td valign='top'>$$\frac{A\to B}{B\to A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($C[$v[$j]][$v[$i]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{(A\to B)\to(B\to A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$C[$v[$i]][$v[$j]]][$C[$v[$j]][$v[$i]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><b><i>Conjunctive conditional
+<tr><td valign='top'>$$\frac{A\quad B}{A\to B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($v[$i], $designated) and in_array($v[$j], $designated)) {
+				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\to B}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($v[$i], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\to B}B$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($v[$j], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><i><b>Standard conditional
+<tr><td valign='top'>$$\frac{A\to B}{{\sim}A\lor B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($A[$N[$v[$i]]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\to B}{B\lor{\sim}A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($A[$v[$j]][$N[$v[$i]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}A\lor B}{A\to B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$N[$v[$i]]][$v[$j]], $designated)) {
+				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{B\lor{\sim}A}{A\to B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($A[$v[$j]][$N[$v[$i]]], $designated)) {
+				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\to B}{{\sim}(A\;\&\;{\sim}B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($N[$K[$v[$i]][$N[$v[$j]]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\to B}{{\sim}({\sim}B\;\&\;A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($N[$K[$N[$v[$j]]][$v[$i]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}(A\;\&\;{\sim}B)}{A\to B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$K[$v[$i]][$N[$v[$j]]]], $designated)) {
+				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}({\sim}B\;\&\;A)}{A\to B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$K[$N[$v[$j]]][$v[$i]]], $designated)) {
+				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><i><b>Standard conditional negation
+<tr><td valign='top'>$$\frac{{\sim}(A\to B)}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+				if (!in_array($v[$i], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}(A\to B)}{{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+				if (!in_array($N[$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{{\sim}(A\to B)}{A\;\&\;{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+				if (!in_array($K[$v[$i]][$N[$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\;\&\;{\sim}B}{{\sim}(A\to B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($K[$v[$i]][$N[$v[$j]]], $designated)) {
+				if (!in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\quad{\sim}B}{{\sim}(A\to B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($v[$i], $designated) and in_array($N[$v[$j]], $designated)) {
+				if (!in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Associativity of &rarr;
+<tr><td valign='top'>$$\frac{(A\to B)\to C}{A\to(B\to C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($C[$C[$v[$i]][$v[$j]]][$v[$k]], $designated))
+			if (!in_array($C[$v[$i]][$C[$v[$j]][$v[$k]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\to(B\to C)}{(A\to B)\to C}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++)
+			if (in_array($C[$v[$i]][$C[$v[$j]][$v[$k]]], $designated))
+			if (!in_array($C[$C[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Boethius's theses
+<tr><td valign='top'>$$\overline{(A\to B)\to{\sim}(A\to{\sim}B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$C[$v[$i]][$v[$j]]][$N[$C[$v[$i]][$N[$v[$j]]]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\overline{(A\to{\sim}B)\to{\sim}(A\to B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$C[$v[$i]][$N[$v[$j]]]][$N[$C[$v[$i]][$v[$j]]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Boethius's theses (rule form)
+<tr><td valign='top'>$$\frac{A\to B}{{\sim}(A\to{\sim}B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($N[$C[$v[$i]][$N[$v[$j]]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\frac{A\to{\sim}B}{{\sim}(A\to B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$N[$v[$j]]], $designated)) {
+				if (!in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Reciprocal Boethius's theses
+<tr><td valign='top'>$$\overline{{\sim}(A\to{\sim}B)\to(A\to B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$N[$C[$v[$i]][$N[$v[$j]]]]][$C[$v[$i]][$v[$j]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\overline{{\sim}(A\to B)\to(A\to{\sim}B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$N[$C[$v[$i]][$v[$j]]]][$C[$v[$i]][$N[$v[$j]]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><i><b>Reciprocal Boethius's theses (rule form)
+<tr><td valign='top'>$$\frac{{\sim}(A\to{\sim}B)}{A\to B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$C[$v[$i]][$N[$v[$j]]]], $designated)) {
+				if (!in_array($C[$v[$i]][$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td valign='top'>$$\frac{{\sim}(A\to B)}{A\to{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($N[$C[$v[$i]][$v[$j]]], $designated)) {
+				if (!in_array($C[$v[$i]][$N[$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Peirce's law
+<tr><td valign='top'>$$\overline{((A\to B)\to A)\to A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$C[$C[$v[$i]][$v[$j]]][$v[$i]]][$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Axiom of relativity
+<tr><td valign='top'>$$\overline{((A\to B)\to B)\to A}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($C[$C[$C[$v[$i]][$v[$j]]][$v[$j]]][$v[$i]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Absorption
+<tr><td valign='top'>$$\frac{A\to B}{A\to(A\;\&\;B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($C[$v[$i]][$K[$v[$i]][$v[$j]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{A\to B}{A\to(B\;\&\;A)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+				if (!in_array($C[$v[$i]][$K[$v[$j]][$v[$i]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+	
+<tr><td colspan='2' align='center'><i><b>Abelard's theses
+<tr><td valign='top'>$$\overline{{\sim}((A\to B)\;\&\;({\sim}A\to B))}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($N[$K[$C[$v[$i]][$v[$j]]][$C[$N[$v[$i]]][$v[$j]]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{{\sim}(({\sim}A\to B)\;\&\;(A\to B))}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($N[$K[$C[$N[$v[$i]]][$v[$j]]][$C[$v[$i]][$v[$j]]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{{\sim}((A\to B)\;\&\;(A\to{\sim}B))}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($N[$K[$C[$v[$i]][$v[$j]]][$C[$v[$i]][$N[$v[$j]]]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{{\sim}((A\to{\sim}B)\;\&\;(A\to B))}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (!in_array($N[$K[$C[$v[$i]][$N[$v[$j]]]][$C[$v[$i]][$v[$j]]]], $designated)) {
+				$bool = False;
+				$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Exportation/importation (currying)
+<tr><td valign='top'>$$\frac{A\to(B\to C)}{(A\;\&\;B)\to C}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++) {
+				if (in_array($C[$v[$i]][$C[$v[$j]][$v[$k]]], $designated)) {
+					if (!in_array($C[$K[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+					}
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\frac{(A\;\&\;B)\to C}{A\to(B\to C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++) {
+				if (in_array($C[$K[$v[$i]][$v[$j]]][$v[$k]], $designated)) {
+					if (!in_array($C[$v[$i]][$C[$v[$j]][$v[$k]]], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+					}
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{(A\to(B\to C))\to((A\;\&\;B)\to C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++) {
+				if (!in_array($C[$C[$v[$i]][$C[$v[$j]][$v[$k]]]][$C[$K[$v[$i]][$v[$j]]][$v[$k]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{((A\;\&\;B)\to C)\to(A\to(B\to C))}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++) {
+				if (!in_array($C[$C[$K[$v[$i]][$v[$j]]][$v[$k]]][$C[$v[$i]][$C[$v[$j]][$v[$k]]]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Hypothetical syllogism
+<tr><td valign='top'>$$\frac{A\to B\quad B\to C}{A\to C}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $k < $n; $k++) {
+				if (in_array($C[$v[$i]][$v[$j]], $designated) and in_array($C[$v[$j]][$v[$k]], $designated)) {
+					if (!in_array($C[$v[$i]][$v[$k]], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j].",<br>\n<i>C</i>=".$v[$k];
+					}
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><b><i>Affirming the consequent
+<tr><td valign='top'>$$\frac{A\to B\quad B}A$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated) and in_array($v[$j], $designated)) {
+				if (!in_array($v[$i], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><b><i>Negating the antecedent
+<tr><td valign='top'>$$\frac{A\to B\quad{\sim}A}{{\sim}B}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			if (in_array($C[$v[$i]][$v[$j]], $designated) and in_array($N[$v[$i]], $designated)) {
+				if (!in_array($N[$v[$j]], $designated)) {
+					$bool = False;
+					$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td colspan='2' align='center'><hr>
+
+</table>
+
+<?php }} ?>
