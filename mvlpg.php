@@ -2195,94 +2195,6 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
-<tr><td colspan='2' align='center'><i><b>Prefixing
-<tr><td valign='top'>$$\frac{A\to B}{(C\to A)\to (C\to B)}$$
-	<td valign='center'><?php
-	$bool = True;
-	for ($i = 0; $i < $n; $i++) {
-		for ($j = 0; $j < $n; $j++) {
-			for ($k = 0; $j < $n; $j++) {
-				if (in_array($C[$v[$i]][$v[$j]], $designated)) {
-					if (!in_array($C[$C[$v[$k]][$v[$i]]][$C[$v[$k]][$v[$j]]], $designated)) {
-						$bool = False;
-						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
-					}
-				}
-			}
-		}
-	}
-	print "<b>Valid?</b> ";
-	if ($bool) {
-		print "Yes!";
-	} else {
-		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
-	}
-	?>
-<tr><td valign='top'>$$\overline{(A\to B)\to((C\to A)\to (C\to B))}$$
-	<td valign='center'><?php
-	$bool = True;
-	for ($i = 0; $i < $n; $i++) {
-		for ($j = 0; $j < $n; $j++) {
-			for ($k = 0; $j < $n; $j++) {
-				if (!in_array($C[$C[$v[$i]][$v[$j]]][$C[$C[$v[$k]][$v[$i]]][$C[$v[$k]][$v[$j]]]], $designated)) {
-						$bool = False;
-						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
-				}
-			}
-		}
-	}
-	print "<b>Valid?</b> ";
-	if ($bool) {
-		print "Yes!";
-	} else {
-		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
-	}
-	?>
-
-<tr><td colspan='2' align='center'><i><b>Suffixing
-<tr><td valign='top'>$$\frac{A\to B}{(B\to C)\to (A\to C)}$$
-	<td valign='center'><?php
-	$bool = True;
-	for ($i = 0; $i < $n; $i++) {
-		for ($j = 0; $j < $n; $j++) {
-			for ($k = 0; $j < $n; $j++) {
-				if (in_array($C[$v[$i]][$v[$j]], $designated)) {
-					if (!in_array($C[$C[$v[$j]][$v[$k]]][$C[$v[$i]][$v[$k]]], $designated)) {
-						$bool = False;
-						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
-					}
-				}
-			}
-		}
-	}
-	print "<b>Valid?</b> ";
-	if ($bool) {
-		print "Yes!";
-	} else {
-		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
-	}
-	?>
-<tr><td valign='top'>$$\overline{(A\to B)\to((B\to C)\to (A\to C))}$$
-	<td valign='center'><?php
-	$bool = True;
-	for ($i = 0; $i < $n; $i++) {
-		for ($j = 0; $j < $n; $j++) {
-			for ($k = 0; $j < $n; $j++) {
-				if (!in_array($C[$C[$v[$i]][$v[$j]]][$C[$C[$v[$j]][$v[$k]]][$C[$v[$i]][$v[$k]]]], $designated)) {
-						$bool = False;
-						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
-				}
-			}
-		}
-	}
-	print "<b>Valid?</b> ";
-	if ($bool) {
-		print "Yes!";
-	} else {
-		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
-	}
-	?>
-
 <tr><td colspan='2' align='center'><i><b>Positive paradox
 <tr><td valign='top'>$$\overline{B\to(A\to B)}$$
 	<td valign='center'><?php
@@ -3094,6 +3006,94 @@ for ($i = 0; $i < $n; $i++) {
 	}
 	?>
 
+
+<tr><td colspan='2' align='center'><i><b>Prefixing
+<tr><td valign='top'>$$\frac{A\to B}{(C\to A)\to (C\to B)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $j < $n; $j++) {
+				if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+					if (!in_array($C[$C[$v[$k]][$v[$i]]][$C[$v[$k]][$v[$j]]], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+					}
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{(A\to B)\to((C\to A)\to (C\to B))}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $j < $n; $j++) {
+				if (!in_array($C[$C[$v[$i]][$v[$j]]][$C[$C[$v[$k]][$v[$i]]][$C[$v[$k]][$v[$j]]]], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+
+<tr><td colspan='2' align='center'><i><b>Suffixing
+<tr><td valign='top'>$$\frac{A\to B}{(B\to C)\to (A\to C)}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $j < $n; $j++) {
+				if (in_array($C[$v[$i]][$v[$j]], $designated)) {
+					if (!in_array($C[$C[$v[$j]][$v[$k]]][$C[$v[$i]][$v[$k]]], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+					}
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
+<tr><td valign='top'>$$\overline{(A\to B)\to((B\to C)\to (A\to C))}$$
+	<td valign='center'><?php
+	$bool = True;
+	for ($i = 0; $i < $n; $i++) {
+		for ($j = 0; $j < $n; $j++) {
+			for ($k = 0; $j < $n; $j++) {
+				if (!in_array($C[$C[$v[$i]][$v[$j]]][$C[$C[$v[$j]][$v[$k]]][$C[$v[$i]][$v[$k]]]], $designated)) {
+						$bool = False;
+						$counter = "<i>A</i>=".$v[$i].",<br>\n<i>B</i>=".$v[$j];
+				}
+			}
+		}
+	}
+	print "<b>Valid?</b> ";
+	if ($bool) {
+		print "Yes!";
+	} else {
+		print "Nope.<br>\n<b>Here's a counter-example:</b><br>\n$counter";
+	}
+	?>
 <tr><td colspan='2' align='center'><i><b>Exportation/importation (currying)
 <tr><td valign='top'>$$\frac{A\to(B\to C)}{(A\;\&\;B)\to C}$$
 	<td valign='center'><?php
