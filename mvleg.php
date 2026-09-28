@@ -54,6 +54,9 @@ function K ($a, $b) {
 function A ($a, $b) {
     return "($a\\vee $b)";
 }
+function EQUALS ($a, $b) {
+    return "\\left($a=$b\\right)";
+}
 $sanitizedGET = [];
 foreach ($_GET as $i => $j) {
     $sanitizedGET[htmlentities($i)] = htmlentities($j);
@@ -72,8 +75,8 @@ function processed ($i) {
         }
         $variablesWithDollarSigns[$aa] = "\"".$bb."\"";
     }
-    $test = str_replace($variables,$variablesWithDollarSigns,str_replace(["Entails","Comma","Implies","And","Or","Not","Neutral"],["ENTAILS","COMMA","IMPLIES","METAAND","METAOR","METANOT","\"()\""],$sanitizedGET["txt$i"]));
-    if (str_replace($variablesWithDollarSigns,"",str_replace([" ","ENTAILS","COMMA","IMPLIES","METAAND","METAOR","METANOT","\"()\"","(",")","C","K","N","A"," ","\r","\n",","],"",$test)) == "") {
+    $test = str_replace($variables,$variablesWithDollarSigns,str_replace(["Entails","Comma","Implies","And","Or","Not","Equals","Neutral"],["ENTAILS","COMMA","IMPLIES","METAAND","METAOR","METANOT","EQUALS","\"()\""],$sanitizedGET["txt$i"]));
+    if (str_replace($variablesWithDollarSigns,"",str_replace([" ","ENTAILS","COMMA","IMPLIES","METAAND","METAOR","METANOT","EQUALS","\"()\"","(",")","C","K","N","A"," ","\r","\n",","],"",$test)) == "") {
         return $test;
     } else {
         print "<meta http-equiv='refresh' content='0; mvleg.php'>";
@@ -127,6 +130,9 @@ foreach ($sanitizedGET as $i => $j) {
 <tr><td code>Or
     <td>"... and/or ..."
     <td>Any arity
+<tr><td code>Equals
+    <td>"... = ..."
+    <td>Binary
 </table>
 
 <h2>Syntax</h2>
@@ -221,6 +227,8 @@ from time import time
 
 found = False
 size = 1
+
+Equals = lambda x, y : x == y
 
 while not found :
     
