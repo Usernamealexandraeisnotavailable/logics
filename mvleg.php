@@ -57,6 +57,9 @@ function A ($a, $b) {
 function EQUALS ($a, $b) {
     return "\\left($a=$b\\right)";
 }
+function DESIGNATED ($a) {
+    return "\\vdash $a";
+}
 $sanitizedGET = [];
 foreach ($_GET as $i => $j) {
     $sanitizedGET[htmlentities($i)] = htmlentities($j);
@@ -75,8 +78,8 @@ function processed ($i) {
         }
         $variablesWithDollarSigns[$aa] = "\"".$bb."\"";
     }
-    $test = str_replace($variables,$variablesWithDollarSigns,str_replace(["Entails","Comma","Implies","And","Or","Not","Equals","Neutral"],["ENTAILS","COMMA","IMPLIES","METAAND","METAOR","METANOT","EQUALS","\"()\""],$sanitizedGET["txt$i"]));
-    if (str_replace($variablesWithDollarSigns,"",str_replace([" ","ENTAILS","COMMA","IMPLIES","METAAND","METAOR","METANOT","EQUALS","\"()\"","(",")","C","K","N","A"," ","\r","\n",","],"",$test)) == "") {
+    $test = str_replace($variables,$variablesWithDollarSigns,str_replace(["Entails","Comma","Implies","And","Or","Not","Equals","Neutral","Designated"],["ENTAILS","COMMA","IMPLIES","METAAND","METAOR","METANOT","EQUALS","\"()\"","DESIGNATED"],$sanitizedGET["txt$i"]));
+    if (str_replace($variablesWithDollarSigns,"",str_replace([" ","ENTAILS","COMMA","IMPLIES","METAAND","METAOR","METANOT","EQUALS","DESIGNATED","\"()\"","(",")","C","K","N","A"," ","\r","\n",",",'0','1','2','3','4','5','6','7','8','9'],"",$test)) == "") {
         return $test;
     } else {
         print "<meta http-equiv='refresh' content='0; mvleg.php'>";
@@ -93,7 +96,7 @@ function processed ($i) {
 Install Python on <a href="https://www.python.org" target="_blank" code>https://www.python.org</a><br>
 To install PIP, follow instructions from <a href="https://pip.pypa.io/" target="_blank" code>https://pip.pypa.io/</a><br>
 To install Z3, follow instructions from <a href="https://pypi.org/project/z3-solver/" target="_blank" code>https://pypi.org/project/z3-solver/</a><br>
-<i>(Source code <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvleg.php" target="_blank">here</a> &bullet; Some basic (sub)structurality <a href="?nam1=Non-triviality&var1=a&txt1=Not%28Entails%28Neutral%2Ca%29%29&typ1=Or&nam2=Associativity&var2=g%0D%0Ad%0D%0Ae%0D%0Aa&txt2=And%28%0D%0A+Implies%28%0D%0A++Entails%28Comma%28g%2CComma%28d%2Ce%29%29%2Ca%29%2C%0D%0A++Entails%28Comma%28Comma%28g%2Cd%29%2Ce%29%2Ca%29%0D%0A+%29%2C%0D%0A+Implies%28%0D%0A++Entails%28Comma%28Comma%28g%2Cd%29%2Ce%29%2Ca%29%2C%0D%0A++Entails%28Comma%28g%2CComma%28d%2Ce%29%29%2Ca%29%0D%0A+%29%0D%0A%29&typ2=And&nam3=Left+neutrality&var3=g%0D%0Aa&txt3=And%28%0D%0A+Implies%28%0D%0A++Entails%28Comma%28Neutral%2Cg%29%2Ca%29%2C%0D%0A++Entails%28g%2Ca%29%0D%0A+%29%2C%0D%0A+Implies%28%0D%0A++Entails%28g%2Ca%29%2C%0D%0A++Entails%28Comma%28Neutral%2Cg%29%2Ca%29%0D%0A+%29%0D%0A%29&typ3=And&nam4=Axiom+rule&var4=a&txt4=Entails%28a%2Ca%29&typ4=And&nam5=Cut+rule&var5=g%0D%0Ad%0D%0Aa%0D%0Ab&txt5=Implies%28%0D%0A+And%28%0D%0A++Entails%28g%2Ca%29%2C%0D%0A++Entails%28Comma%28d%2Ca%29%2Cb%29%0D%0A+%29%2C%0D%0A+Entails%28Comma%28g%2Cd%29%2Cb%29%0D%0A%29&typ5=And&nam6=Permutation+rule&var6=g%0D%0Ad%0D%0Aa&txt6=Implies%28%0D%0A+Entails%28Comma%28g%2Cd%29%2Ca%29%2C%0D%0A+Entails%28Comma%28d%2Cg%29%2Ca%29%0D%0A%29&typ6=And&nam7=Contraction+rule&var7=g%0D%0Aa%0D%0Ab&txt7=Implies%28%0D%0A+Entails%28Comma%28g%2CComma%28a%2Ca%29%29%2Cb%29%2C%0D%0A+Entails%28Comma%28g%2Ca%29%2Cb%29%0D%0A%29&typ7=And&nam8=Weakening+rule&var8=g%0D%0Aa%0D%0Ab&txt8=Implies%28%0D%0A+Entails%28g%2Cb%29%2C%0D%0A+Entails%28Comma%28g%2Ca%29%2Cb%29%0D%0A%29&typ8=And&sub=Submit#And8">here</a>)</i>
+<i>(Source code <a href="https://github.com/Usernamealexandraeisnotavailable/logics/blob/main/mvleg.php" target="_blank">here</a> &bullet; Some basic (sub)structurality <a href="?nam1=Non-triviality&var1=a&txt1=Not(Designated(a))&typ1=Or&nam2=Associativity&var2=g%0D%0Ad%0D%0Ae%0D%0Aa&txt2=And(%0D%0A+Implies(%0D%0A++Entails(Comma(g%2CComma(d%2Ce))%2Ca)%2C%0D%0A++Entails(Comma(Comma(g%2Cd)%2Ce)%2Ca)%0D%0A+)%2C%0D%0A+Implies(%0D%0A++Entails(Comma(Comma(g%2Cd)%2Ce)%2Ca)%2C%0D%0A++Entails(Comma(g%2CComma(d%2Ce))%2Ca)%0D%0A+)%0D%0A)&typ2=And&nam3=Left+neutrality&var3=g%0D%0Aa&txt3=And(%0D%0A+Implies(%0D%0A++Entails(Comma(Neutral%2Cg)%2Ca)%2C%0D%0A++Entails(g%2Ca)%0D%0A+)%2C%0D%0A+Implies(%0D%0A++Entails(g%2Ca)%2C%0D%0A++Entails(Comma(Neutral%2Cg)%2Ca)%0D%0A+)%0D%0A)&typ3=And&nam4=Axiom+rule&var4=a&txt4=Entails(a%2Ca)&typ4=And&nam5=Cut+rule&var5=g%0D%0Ad%0D%0Aa%0D%0Ab&txt5=Implies(%0D%0A+And(%0D%0A++Entails(g%2Ca)%2C%0D%0A++Entails(Comma(d%2Ca)%2Cb)%0D%0A+)%2C%0D%0A+Entails(Comma(g%2Cd)%2Cb)%0D%0A)&typ5=And&nam6=Permutation+rule&var6=g%0D%0Ad%0D%0Aa&txt6=Implies(%0D%0A+Entails(Comma(g%2Cd)%2Ca)%2C%0D%0A+Entails(Comma(d%2Cg)%2Ca)%0D%0A)&typ6=And&nam7=Contraction+rule&var7=g%0D%0Aa%0D%0Ab&txt7=Implies(%0D%0A+Entails(Comma(g%2CComma(a%2Ca))%2Cb)%2C%0D%0A+Entails(Comma(g%2Ca)%2Cb)%0D%0A)&typ7=And&nam8=Weakening+rule&var8=g%0D%0Aa%0D%0Ab&txt8=Implies(%0D%0A+Entails(g%2Cb)%2C%0D%0A+Entails(Comma(g%2Ca)%2Cb)%0D%0A)&typ8=And&sub=Submit">here</a>)</i>
 
 <tr style="height: 70%">
 <td style="height: 90%; width: 50%" valign="top" align="center">
@@ -227,8 +230,24 @@ from time import time
 
 found = False
 size = 1
+    
+Entails = Function("Entails", IntSort(), IntSort(), BoolSort())
+Neutral = Int("Neutral")
+Comma = Function("Comma", IntSort(), IntSort(), IntSort())
+C = Function("C", IntSort(), IntSort(), IntSort())
+N = Function("N", IntSort(), IntSort())
+K = Function("K", IntSort(), IntSort(), IntSort())
+A = Function("A", IntSort(), IntSort(), IntSort())
+<?php
+if (isset($_GET["vsp"]) and $_GET["vsp"]) {
+?>isA = Function("isA", IntSort(), BoolSort()) # for VSP
+isB = Function("isB", IntSort(), BoolSort()) # for VSP
+<?php
+}
+?>
 
 Equals = lambda x, y : x == y
+Designated = lambda x : Entails(Neutral, x)
 
 while not found :
     
@@ -236,21 +255,6 @@ while not found :
     
     V = list(range(size))
     inV = lambda x : And(x >= 0, x < size)
-    
-    Entails = Function("Entails", IntSort(), IntSort(), BoolSort())
-    Neutral = Int("Neutral")
-    Comma = Function("Comma", IntSort(), IntSort(), IntSort())
-    C = Function("C", IntSort(), IntSort(), IntSort())
-    N = Function("N", IntSort(), IntSort())
-    K = Function("K", IntSort(), IntSort(), IntSort())
-    A = Function("A", IntSort(), IntSort(), IntSort())
-    <?php
-    if (isset($_GET["vsp"]) and $_GET["vsp"]) {
-    ?>isA = Function("isA", IntSort(), BoolSort()) # for VSP
-    isB = Function("isB", IntSort(), BoolSort()) # for VSP
-    <?php
-    }
-    ?>
     
     s = Solver()
     
