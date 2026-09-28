@@ -34,10 +34,10 @@ function IMPLIES ($a, $b) {
     return '\frac{'.$a.'}{'.$b.'}';
 }
 function METAAND (...$args) {
-    return "\\left(".implode('\quad\textbf{ and }\quad ',$args)."\\right)";
+    return "\\left(".implode('\textbf{ and }',$args)."\\right)";
 }
 function METAOR ($a, $b) {
-    return "\\left(".implode('\quad\textbf{ or }\quad ',$args)."\\right)";
+    return "\\left(".implode('\textbf{ or }',$args)."\\right)";
 }
 function METANOT ($a) {
     return "\\textbf{not}\\left($a\\right)";
@@ -55,7 +55,7 @@ function A ($a, $b) {
     return "($a\\vee $b)";
 }
 function EQUALS ($a, $b) {
-    return "\\left($a=$b\\right)";
+    return "\\left($a\textbf{ equals }$b\\right)";
 }
 function DESIGNATED ($a) {
     return "\\vdash $a";
