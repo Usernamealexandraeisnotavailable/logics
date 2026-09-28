@@ -305,10 +305,10 @@ while not found :
     s.add(And([ # Gaps after "false" values
             Implies(
                 And(
+                    Not(Entails(Neutral, a)),
+                    Not(Entails(Neutral, b)),
                     Entails(Neutral, N(a)),
                     Not(Entails(Neutral, N(b))),
-                    Entails(Neutral, a),
-                    Entails(Neutral, b),
                 ),
                 a < b
             )
@@ -317,32 +317,12 @@ while not found :
     s.add(And([ # Gluts before "true" values
             Implies(
                 And(
+                    Entails(Neutral, a),
+                    Entails(Neutral, b),
                     Entails(Neutral, N(a)),
                     Not(Entails(Neutral, N(b))),
-                    Not(Entails(Neutral, a)),
-                    Not(Entails(Neutral, b)),
                 ),
                 a < b
-            )
-            for a, b in product(*([V]*2))
-        ]))
-    s.add(And([ # Boths and Neithers in the middle :3
-            Implies(
-                And(
-                    a == N(a),
-                    b != N(b),
-                    Entails(Neutral,a) == Entails(Neutral,b)
-                ),
-                And(
-                    Implies(
-                        Not(Entails(Neutral,a)),
-                        b <= a
-                    ),
-                    Implies(
-                        Entails(Neutral,a),
-                        a <= b
-                    )
-                )
             )
             for a, b in product(*([V]*2))
         ]))
