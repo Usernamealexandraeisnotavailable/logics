@@ -36,7 +36,7 @@ function IMPLIES ($a, $b) {
 function METAAND (...$args) {
     return "\\left(".implode('\textbf{ and }',$args)."\\right)";
 }
-function METAOR ($a, $b) {
+function METAOR (...$args) {
     return "\\left(".implode('\textbf{ or }',$args)."\\right)";
 }
 function METANOT ($a) {
